@@ -1,0 +1,8 @@
+build/
+node_modules/
+venv/
+
+shell.nix 
+
+schema.json
+generated.yaml

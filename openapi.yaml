@@ -1,0 +1,914 @@
+openapi: 3.1.0
+info:
+  title: Juju Client API
+  summary: Next generation Juju client API .
+  description: |
+    Next generation Juju client API .
+  # termsOfService: http://swagger.io/terms/
+  contact:
+    email: jon.seager@canonical.com
+  license:
+    name: AGPL 3.0
+    url: https://www.gnu.org/licenses/agpl-3.0.en.html
+  version: "1.0"
+externalDocs:
+  description: Find out more about Juju
+  url: http://juju.is/docs
+servers:
+  - url: https://localhost:17777/api/v1
+
+tags:
+  - name: application
+    description: Manage Juju applications
+    externalDocs:
+      description: Find out more
+      url: https://juju.is/docs/olm/manage-applications
+  - name: model
+    description: Manage Juju models
+    externalDocs:
+      description: Find out more about
+      url: https://juju.is/docs/olm/manage-models
+
+paths:
+  /models:
+    get:
+      tags:
+        - model
+      summary: List models
+      description: |
+        Returns the models that the specified user has access to in the current server.
+        
+        Controller admins (superuser) can list models for any user. 
+        
+        Other users can only ask about their own models.
+      operationId: listModels
+      parameters:
+        - $ref: '#/components/parameters/tagsParam'
+      requestBody:
+        description: List of entities
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Entities"
+        required: true
+      responses:
+        "200":
+          description: List of models the specified user has access to.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserModelList"
+  /model:
+    post:
+      tags:
+        - model
+      summary: Create a new model
+      description: Creates a new model using the account and model config specified in the args.
+      operationId: createModel
+      requestBody:
+        description: Model creation arguments
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ModelCreateArgs"
+        required: true
+      responses:
+        "200":
+          description: Model created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ModelInfo"
+components:
+  schemas:
+    ChangeModelCredentialParams:
+      type: object
+      properties:
+        credential-tag:
+          type: string
+        model-tag:
+          type: string
+      additionalProperties: false
+      required:
+        - model-tag
+        - credential-tag
+    ChangeModelCredentialsParams:
+      type: object
+      properties:
+        model-credentials:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChangeModelCredentialParams'
+      additionalProperties: false
+      required:
+        - model-credentials
+    DestroyModelParams:
+      type: object
+      properties:
+        destroy-storage:
+          type: boolean
+        force:
+          type: boolean
+        max-wait:
+          type: integer
+        model-tag:
+          type: string
+        timeout:
+          type: integer
+      additionalProperties: false
+      required:
+        - model-tag
+    DestroyModelsParams:
+      type: object
+      properties:
+        models:
+          type: array
+          items:
+            $ref: '#/components/schemas/DestroyModelParams'
+      additionalProperties: false
+      required:
+        - models
+    DumpModelRequest:
+      type: object
+      properties:
+        entities:
+          type: array
+          items:
+            $ref: '#/components/schemas/Entity'
+        simplified:
+          type: boolean
+      additionalProperties: false
+      required:
+        - entities
+        - simplified
+    Entities:
+      type: object
+      properties:
+        entities:
+          type: array
+          items:
+            $ref: '#/components/schemas/Entity'
+      additionalProperties: false
+      required:
+        - entities
+    Entity:
+      type: object
+      properties:
+        tag:
+          type: string
+      additionalProperties: false
+      required:
+        - tag
+    EntityStatus:
+      type: object
+      properties:
+        data:
+          type: object
+          patternProperties:
+            .*:
+              type: object
+              additionalProperties: true
+        info:
+          type: string
+        since:
+          type: string
+          format: date-time
+        status:
+          type: string
+      additionalProperties: false
+      required:
+        - status
+        - info
+        - since
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        info:
+          type: object
+          patternProperties:
+            .*:
+              type: object
+              additionalProperties: true
+        message:
+          type: string
+      additionalProperties: false
+      required:
+        - message
+        - code
+    ErrorResult:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+      additionalProperties: false
+    ErrorResults:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorResult'
+      additionalProperties: false
+      required:
+        - results
+    MachineHardware:
+      type: object
+      properties:
+        arch:
+          type: string
+        availability-zone:
+          type: string
+        cores:
+          type: integer
+        cpu-power:
+          type: integer
+        mem:
+          type: integer
+        root-disk:
+          type: integer
+        tags:
+          type: array
+          items:
+            type: string
+        virt-type:
+          type: string
+      additionalProperties: false
+    MapResult:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+        result:
+          type: object
+          patternProperties:
+            .*:
+              type: object
+              additionalProperties: true
+      additionalProperties: false
+      required:
+        - result
+    MapResults:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/MapResult'
+      additionalProperties: false
+      required:
+        - results
+    Model:
+      type: object
+      properties:
+        name:
+          type: string
+        owner-tag:
+          type: string
+        type:
+          type: string
+        uuid:
+          type: string
+      additionalProperties: false
+      required:
+        - name
+        - uuid
+        - type
+        - owner-tag
+    ModelApplicationInfo:
+      type: object
+      properties:
+        name:
+          type: string
+      additionalProperties: false
+      required:
+        - name
+    ModelCreateArgs:
+      type: object
+      properties:
+        cloud-tag:
+          type: string
+        config:
+          type: object
+          patternProperties:
+            .*:
+              type: object
+              additionalProperties: true
+        credential:
+          type: string
+        name:
+          type: string
+        owner-tag:
+          type: string
+        region:
+          type: string
+      additionalProperties: false
+      required:
+        - name
+        - owner-tag
+    ModelDefaultValues:
+      type: object
+      properties:
+        cloud-region:
+          type: string
+        cloud-tag:
+          type: string
+        config:
+          type: object
+          patternProperties:
+            .*:
+              type: object
+              additionalProperties: true
+      additionalProperties: false
+      required:
+        - config
+    ModelDefaults:
+      type: object
+      properties:
+        controller:
+          type: object
+          additionalProperties: true
+        default:
+          type: object
+          additionalProperties: true
+        regions:
+          type: array
+          items:
+            $ref: '#/components/schemas/RegionDefaults'
+      additionalProperties: false
+    ModelDefaultsResult:
+      type: object
+      properties:
+        config:
+          type: object
+          patternProperties:
+            .*:
+              $ref: '#/components/schemas/ModelDefaults'
+        error:
+          $ref: '#/components/schemas/Error'
+      additionalProperties: false
+      required:
+        - config
+    ModelDefaultsResults:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ModelDefaultsResult'
+      additionalProperties: false
+      required:
+        - results
+    ModelEntityCount:
+      type: object
+      properties:
+        count:
+          type: integer
+        entity:
+          type: string
+      additionalProperties: false
+      required:
+        - entity
+        - count
+    ModelFilesystemInfo:
+      type: object
+      properties:
+        detachable:
+          type: boolean
+        id:
+          type: string
+        message:
+          type: string
+        provider-id:
+          type: string
+        status:
+          type: string
+      additionalProperties: false
+      required:
+        - id
+    ModelInfo:
+      type: object
+      properties:
+        agent-version:
+          $ref: '#/components/schemas/Number'
+        cloud-credential-tag:
+          type: string
+        cloud-credential-validity:
+          type: boolean
+        cloud-region:
+          type: string
+        cloud-tag:
+          type: string
+        controller-uuid:
+          type: string
+        default-base:
+          type: string
+        default-series:
+          type: string
+        is-controller:
+          type: boolean
+        life:
+          type: string
+        machines:
+          type: array
+          items:
+            $ref: '#/components/schemas/ModelMachineInfo'
+        migration:
+          $ref: '#/components/schemas/ModelMigrationStatus'
+        name:
+          type: string
+        owner-tag:
+          type: string
+        provider-type:
+          type: string
+        secret-backends:
+          type: array
+          items:
+            $ref: '#/components/schemas/SecretBackendResult'
+        sla:
+          $ref: '#/components/schemas/ModelSLAInfo'
+        status:
+          $ref: '#/components/schemas/EntityStatus'
+        supported-features:
+          type: array
+          items:
+            $ref: '#/components/schemas/SupportedFeature'
+        type:
+          type: string
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/ModelUserInfo'
+        uuid:
+          type: string
+      additionalProperties: false
+      required:
+        - name
+        - type
+        - uuid
+        - controller-uuid
+        - is-controller
+        - cloud-tag
+        - owner-tag
+        - life
+        - users
+        - machines
+        - secret-backends
+        - sla
+        - agent-version
+    ModelInfoResult:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+        result:
+          $ref: '#/components/schemas/ModelInfo'
+      additionalProperties: false
+    ModelInfoResults:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ModelInfoResult'
+      additionalProperties: false
+      required:
+        - results
+    ModelMachineInfo:
+      type: object
+      properties:
+        display-name:
+          type: string
+        ha-primary:
+          type: boolean
+        hardware:
+          $ref: '#/components/schemas/MachineHardware'
+        has-vote:
+          type: boolean
+        id:
+          type: string
+        instance-id:
+          type: string
+        message:
+          type: string
+        status:
+          type: string
+        wants-vote:
+          type: boolean
+      additionalProperties: false
+      required:
+        - id
+    ModelMigrationStatus:
+      type: object
+      properties:
+        end:
+          type: string
+          format: date-time
+        start:
+          type: string
+          format: date-time
+        status:
+          type: string
+      additionalProperties: false
+      required:
+        - status
+        - start
+    ModelSLAInfo:
+      type: object
+      properties:
+        level:
+          type: string
+        owner:
+          type: string
+      additionalProperties: false
+      required:
+        - level
+        - owner
+    ModelStatus:
+      type: object
+      properties:
+        application-count:
+          type: integer
+        applications:
+          type: array
+          items:
+            $ref: '#/components/schemas/ModelApplicationInfo'
+        error:
+          $ref: '#/components/schemas/Error'
+        filesystems:
+          type: array
+          items:
+            $ref: '#/components/schemas/ModelFilesystemInfo'
+        hosted-machine-count:
+          type: integer
+        life:
+          type: string
+        machines:
+          type: array
+          items:
+            $ref: '#/components/schemas/ModelMachineInfo'
+        model-tag:
+          type: string
+        owner-tag:
+          type: string
+        type:
+          type: string
+        unit-count:
+          type: integer
+        volumes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ModelVolumeInfo'
+      additionalProperties: false
+      required:
+        - model-tag
+        - life
+        - type
+        - hosted-machine-count
+        - application-count
+        - unit-count
+        - owner-tag
+    ModelStatusResults:
+      type: object
+      properties:
+        models:
+          type: array
+          items:
+            $ref: '#/components/schemas/ModelStatus'
+      additionalProperties: false
+      required:
+        - models
+    ModelSummariesRequest:
+      type: object
+      properties:
+        all:
+          type: boolean
+        user-tag:
+          type: string
+      additionalProperties: false
+      required:
+        - user-tag
+    ModelSummary:
+      type: object
+      properties:
+        agent-version:
+          $ref: '#/components/schemas/Number'
+        cloud-credential-tag:
+          type: string
+        cloud-region:
+          type: string
+        cloud-tag:
+          type: string
+        controller-uuid:
+          type: string
+        counts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ModelEntityCount'
+        default-series:
+          type: string
+        is-controller:
+          type: boolean
+        last-connection:
+          type: string
+          format: date-time
+        life:
+          type: string
+        migration:
+          $ref: '#/components/schemas/ModelMigrationStatus'
+        name:
+          type: string
+        owner-tag:
+          type: string
+        provider-type:
+          type: string
+        sla:
+          $ref: '#/components/schemas/ModelSLAInfo'
+        status:
+          $ref: '#/components/schemas/EntityStatus'
+        type:
+          type: string
+        user-access:
+          type: string
+        uuid:
+          type: string
+      additionalProperties: false
+      required:
+        - name
+        - uuid
+        - type
+        - controller-uuid
+        - is-controller
+        - cloud-tag
+        - owner-tag
+        - life
+        - user-access
+        - last-connection
+        - counts
+        - sla
+        - agent-version
+    ModelSummaryResult:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+        result:
+          $ref: '#/components/schemas/ModelSummary'
+      additionalProperties: false
+    ModelSummaryResults:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ModelSummaryResult'
+      additionalProperties: false
+      required:
+        - results
+    ModelUnsetKeys:
+      type: object
+      properties:
+        cloud-region:
+          type: string
+        cloud-tag:
+          type: string
+        keys:
+          type: array
+          items:
+            type: string
+      additionalProperties: false
+      required:
+        - keys
+    ModelUserInfo:
+      type: object
+      properties:
+        access:
+          type: string
+        display-name:
+          type: string
+        last-connection:
+          type: string
+          format: date-time
+        model-tag:
+          type: string
+        user:
+          type: string
+      additionalProperties: false
+      required:
+        - model-tag
+        - user
+        - display-name
+        - last-connection
+        - access
+    ModelVolumeInfo:
+      type: object
+      properties:
+        detachable:
+          type: boolean
+        id:
+          type: string
+        message:
+          type: string
+        provider-id:
+          type: string
+        status:
+          type: string
+      additionalProperties: false
+      required:
+        - id
+    ModifyModelAccess:
+      type: object
+      properties:
+        access:
+          type: string
+        action:
+          type: string
+        model-tag:
+          type: string
+        user-tag:
+          type: string
+      additionalProperties: false
+      required:
+        - user-tag
+        - action
+        - access
+        - model-tag
+    ModifyModelAccessRequest:
+      type: object
+      properties:
+        changes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ModifyModelAccess'
+      additionalProperties: false
+      required:
+        - changes
+    Number:
+      type: object
+      properties:
+        Build:
+          type: integer
+        Major:
+          type: integer
+        Minor:
+          type: integer
+        Patch:
+          type: integer
+        Tag:
+          type: string
+      additionalProperties: false
+      required:
+        - Major
+        - Minor
+        - Tag
+        - Patch
+        - Build
+    RegionDefaults:
+      type: object
+      properties:
+        region-name:
+          type: string
+        value:
+          type: object
+          additionalProperties: true
+      additionalProperties: false
+      required:
+        - region-name
+        - value
+    SecretBackend:
+      type: object
+      properties:
+        backend-type:
+          type: string
+        config:
+          type: object
+          patternProperties:
+            .*:
+              type: object
+              additionalProperties: true
+        name:
+          type: string
+        token-rotate-interval:
+          type: integer
+      additionalProperties: false
+      required:
+        - name
+        - backend-type
+        - config
+    SecretBackendResult:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+        id:
+          type: string
+        message:
+          type: string
+        num-secrets:
+          type: integer
+        result:
+          $ref: '#/components/schemas/SecretBackend'
+        status:
+          type: string
+      additionalProperties: false
+      required:
+        - result
+        - id
+        - num-secrets
+        - status
+    SetModelDefaults:
+      type: object
+      properties:
+        config:
+          type: array
+          items:
+            $ref: '#/components/schemas/ModelDefaultValues'
+      additionalProperties: false
+      required:
+        - config
+    StringResult:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+        result:
+          type: string
+      additionalProperties: false
+      required:
+        - result
+    StringResults:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/StringResult'
+      additionalProperties: false
+      required:
+        - results
+    SupportedFeature:
+      type: object
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+        version:
+          type: string
+      additionalProperties: false
+      required:
+        - name
+        - description
+    UnsetModelDefaults:
+      type: object
+      properties:
+        keys:
+          type: array
+          items:
+            $ref: '#/components/schemas/ModelUnsetKeys'
+      additionalProperties: false
+      required:
+        - keys
+    UserModel:
+      type: object
+      properties:
+        last-connection:
+          type: string
+          format: date-time
+        model:
+          $ref: '#/components/schemas/Model'
+      additionalProperties: false
+      required:
+        - model
+        - last-connection
+    UserModelList:
+      type: object
+      properties:
+        user-models:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserModel'
+      additionalProperties: false
+      required:
+        - user-models
+
+  parameters:
+    tagsParam:
+      name: tags
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+  # Use this to describe re-usable request bodies
+  requestBodies: {}
+    # Pet:
+    #   description: Pet object that needs to be added to the store
+    #   content:
+    #     application/json:
+    #       schema:
+    #         $ref: "#/components/schemas/Pet"
+    #     application/xml:
+    #       schema:
+    #         $ref: "#/components/schemas/Pet"
