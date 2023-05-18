@@ -4,6 +4,6 @@
     "generate-spec": "npx widdershins ./openapi.yaml -o site/index.html.md",
     "generate-converted-spec": "npx widdershins ./schemas/generated.yaml -o site/generated.html.md",
     "serve": "docker run --rm -v $(pwd)/build:/srv/slate/build -v $(pwd)/site:/srv/slate/site -p4567:4567 slatedocs/slate serve",
-    "build": "docker run --rm -v $(pwd)/build:/srv/slate/build -v $(pwd)/site:/srv/slate/site -p4567:4567 slatedocs/slate build"
+    "build": "docker run --rm -v $(pwd)/build:/srv/slate/build -v $(pwd)/site:/srv/slate/site slatedocs/slate build"
   }
 }
