@@ -14,18 +14,22 @@ Assuming you have a working NodeJS and Python environment set up:
 git clone https://github.com/jnsgruk/juju-api
 cd juju-api
 
-# Generate a naive OpenAPI spec from the Juju client facade schema
-python3 tools/convert-juju-facade -i schemas/client-schemas.json -o generated.yaml
-
-# Generate MD from the new, and the generated OpenAPI specs
-npm run generate
-
 # Serve the site(s) using Docker
 npm run serve
 ```
 
 You can now see the newly designed spec at https://localhost:4567/ and the generated spec at
 https://localhost:4567/generated.html
+
+## Updating the schemas/sites
+
+```shell
+# Generate a naive OpenAPI spec from the Juju client facade schema
+python3 tools/convert-juju-facade -i schemas/client-schemas.json -o schemas/generated.yaml
+
+# Generate MD from the new, and the generated OpenAPI specs
+npm run generate
+```
 
 ## Generating Juju schema files
 
