@@ -1,5 +1,7 @@
 # Juju REST API
 
+> This is very much speculative, and a work in progress!
+
 This repository serves to assist with a WIP design for a new RESTful Juju client API.
 
 The existing API surface for Juju is rather large, and the aim here is to design a new client API,
