@@ -725,12 +725,12 @@ components:
   
   
   # Use this section to define reusable objects
-  callbacks: {}
-  examples: {}
-  headers: {}
-  links: {}
-  pathItems: {}
-  requestBodies: {}
-  responses: {}
-  securitySchemes: {}
+  # callbacks: {}
+  # examples: {}
+  # headers: {}
+  # links: {}
+  # pathItems: {}
+  # requestBodies: {}
+  # responses: {}
+  # securitySchemes: {}
 
