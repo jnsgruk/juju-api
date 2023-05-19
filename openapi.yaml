@@ -1,9 +1,26 @@
 openapi: 3.1.0
 info:
-  title: Juju Client API
-  summary: Next generation Juju client API .
+  title: "[Draft] Juju Client API"
+  summary: Next generation Juju client API draft.
   description: |
-    Next generation Juju client API .
+    This specification represents early but ongoing design work for a next-generation, RESTful Juju
+    client API. It **should not** be used as reference for any currently released version of Juju,
+    and is unlikely to be implemented until some time in 2024.
+
+    The source code for this page, and the OpenAPI specification can be found on
+    [Github](https://github.com/jnsgruk/juju-api). You can also find a progress tracker that
+    indicates which of the prior facade calls have been covered by this design.
+
+    The [OpenAPI Spec](https://github.com/jnsgruk/juju-api/blob/main/openapi.yaml) can be entered
+    directly into the [Swagger Editor](https://editor-next.swagger.io/) for a slightly different
+    experience when exploring the API if preferable.
+
+    In addition to the new design, there is a [naive
+    conversion](https://jnsgruk.github.io/juju-api/generated.html) of the existing Juju facade
+    schema available. This was generated from the upstream
+    [schema.json](https://github.com/juju/juju/blob/3.3/apiserver/facades/schema.json) and is used
+    solely for the purposes of reference, and enables existing schemas to be easily reused during
+    the design on the new API where appropriate.
   # termsOfService: http://swagger.io/terms/
   contact:
     email: jon.seager@canonical.com
