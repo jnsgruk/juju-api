@@ -8,30 +8,26 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    container:
-      image: slatedocs/slate
-      env: 
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - name: Install dependencies
-        run: |
-          apt-get update
-          apt-get install -y git
-
       - name: Checkout
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
       
+      - name: Setup Node
+        uses: actions/setup-node@v3
+      
+      - name: Generate HTML pages from OpenAPI spec
+        run: |
+          npm run generate
+      
       - name: Build the site
         run: |
-          cd /srv/slate
-          cp -rv $GITHUB_WORKSPACE/site/. /srv/slate/source/
-          ./slate.sh -v build
+          npm run build
       
       - name: Deploy to Github Pages
         uses: peaceiris/actions-gh-pages@v3
         if: github.ref == 'refs/heads/main'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: /srv/slate/build
+          publish_dir: ./build
