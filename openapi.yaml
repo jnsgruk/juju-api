@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: "[Draft] Juju Client API"
+  title: "Juju Client API"
   summary: Next generation Juju client API draft.
   description: |
     This specification represents early but ongoing design work for a next-generation, RESTful Juju

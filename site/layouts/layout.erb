@@ -41,7 +41,7 @@ under the License.
     <title><%= current_page.data.title || "API Documentation" %></title>
 
     <style media="screen">
-      <%= Rouge::Themes::MonokaiSublimeSlate.render(:scope => '.highlight') %>
+      <%= Rouge::Themes::Base16.mode(:dark).render(:scope => '.highlight') %>
     </style>
     <style media="print">
       * {
