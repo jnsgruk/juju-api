@@ -60,7 +60,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/ModelDetail"
         "404":
-          $ref: "#/components/responses/Error"
+          description: Model not found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
     
     delete:
       tags:
@@ -79,7 +83,11 @@ paths:
         "200":
           description: Model deleted.
         "404":
-          $ref: "#/components/responses/Error"
+          description: Model not found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
 
   /model/{name}/status:
     get:
@@ -99,7 +107,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/ModelStatus"
         "404":
-          $ref: "#/components/responses/Error"
+          description: Model not found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
 
   /models:
     get:
