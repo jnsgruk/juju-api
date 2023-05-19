@@ -354,17 +354,23 @@ components:
       type: object
       properties:
         cloud-tag:
+          description: Identifier of the cloud on which to create the model.
           type: string
         config:
+          description: The configuration of the new model.
           type: object
           additionalProperties: true
         credential:
+          description: The credential to use when creating the new model.
           type: string
         name:
+          description: The name of the new model.
           type: string
         owner-tag:
+          description: Identifier of the owner of the new model
           type: string
         region:
+          description: Identifier of the cloud region in which to create the model.
           type: string
       additionalProperties: false
       required:
