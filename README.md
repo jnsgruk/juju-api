@@ -47,6 +47,28 @@ cd juju/generate/schemagen
 go run schemagen.go -admin-facades -facade-group client ./schemas/client-schemas.json
 ```
 
+### Renamed Schemas
+
+While transitioning some of the existing models, it made sense (to me at least!) to rename the
+following models:
+
+- `Model` -> `ModelSummary`
+- `ModelMachineInfo` -> `ModelMachine`
+- `ModelSummary` -> `Model`
+- `ModelInfo` -> `ModelDetail`
+- `Number` -> `Version`
+- `SetModelDefaults` -> `NewModelDefaults`
+
+### Review Notes
+
+- [ ] `ModelFilesystemInfo` and `ModelVolumeInfo` have the same fields
+  - Created `ModelStorageAttributes` and made the existing schemas inherit for now
+- [ ] `Model` has a `status` attribute which _was_ an `EntityStatus` - changed to `ModelStatus`
+- [ ] Quite a significant change to the model defaults update
+  - No longer using two separate endpoints
+  - Now one single endpoint that takes cloud/region as (optional) query params
+  - Request body contains an object with {set: {}, unset: {}}
+
 ### Progress
 
 This table tracks progress through the redesign of the Juju client API:
@@ -267,22 +289,3 @@ This table tracks progress through the redesign of the Juju client API:
 | UserManager          | ResetPassword                   |                             |
 | UserManager          | SetPassword                     |                             |
 | UserManager          | UserInfo                        |                             |
-
-### Renamed Schemas
-
-- `Model` -> `ModelSummary`
-- `ModelMachineInfo` -> `ModelMachine`
-- `ModelSummary` -> `Model`
-- `ModelInfo` -> `ModelDetail`
-- `Number` -> `Version`
-- `SetModelDefaults` -> `NewModelDefaults`
-
-### Review Notes
-
-- [ ] `ModelFilesystemInfo` and `ModelVolumeInfo` have the same fields
-  - Created `ModelStorageAttributes` and made the existing schemas inherit for now
-- [ ] `Model` has a `status` attribute which _was_ an `EntityStatus` - changed to `ModelStatus`
-- [ ] Quite a significant change to the model defaults update
-  - No longer using two separate endpoints
-  - Now one single endpoint that takes cloud/region as (optional) query params
-  - Request body contains an object with {set: {}, unset: {}}
