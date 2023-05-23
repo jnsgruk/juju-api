@@ -330,8 +330,6 @@ components:
             type: string
           sla:
             $ref: '#/components/schemas/ModelSLAInfo'
-          status:
-            $ref: '#/components/schemas/ModelStatus'
           user-access:
             type: string
         additionalProperties: false
