@@ -215,7 +215,7 @@ paths:
 
         Model default configuration settings are specific to the cloud on which the model is
         deployed. If the controller hosts more than one cloud, the cloud (and optionally region)
-        must be specified
+        must be specified.
       operationId: updateModelDefaults
       parameters:
         - name: cloud
@@ -235,7 +235,7 @@ paths:
             items:
               type: string
       requestBody:
-        description: An object describing those model details to set or unset
+        description: An object describing those model defaults to set or unset.
         content:
           application/json:
             schema:
@@ -641,17 +641,11 @@ components:
       - config
     ModelDefaultsUpdate:
       type: object
-      properties:
-        set:
-          description: Key/value pairs representing model defaults to set for the specified cloud.
-          type: object
-        unset:
-          description: Key/value pairs representing model defaults to unset for the specified cloud.
-          type: object
+      description: |
+        An object representing the model defaults to update. Keys represent the model defaults to
+        set, and values represent the desired values. The 'unset' a model default, its value
+        should be set to `null`.
       additionalProperties: false
-      required:
-        - set
-        - unset
     SupportedFeature:
       type: object
       properties:
