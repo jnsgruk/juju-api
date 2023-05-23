@@ -176,10 +176,16 @@ paths:
       responses:
         "201":
           description: Model created.
+          headers:
+            Location:
+              schema:
+                type: string
+                format: uri
+              description: The location of the newly created model.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ModelDetail"
+                $ref: "#/components/schemas/ModelSummary"
   
   /models/defaults:
     get:
