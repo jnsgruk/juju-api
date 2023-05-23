@@ -439,13 +439,13 @@ curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/model/<span c
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"owner-tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"owner"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"agent-version"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-  </span><span class="nl">"cloud-credential-tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"cloud-credential"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"cloud-region"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"cloud-tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"cloud"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"controller-uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"counts"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
   </span><span class="nl">"default-series"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
@@ -454,7 +454,6 @@ curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/model/<span c
   </span><span class="nl">"migration"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="nl">"provider-type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"sla"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="nl">"user-access"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"cloud-credential-validity"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
   </span><span class="nl">"default-base"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
@@ -707,8 +706,8 @@ curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/model/<span c
   </span><span class="nl">"hosted-machine-count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"life"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"machines"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-  </span><span class="nl">"model-tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"owner-tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"model"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"owner"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"unit-count"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"volumes"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
@@ -894,12 +893,10 @@ This operation does not require authentication
 <div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://localhost:17777/api/v1/models</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">localhost:17777</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
-<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl <span class="nt">-X</span> POST https://localhost:17777/api/v1/models <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
-  <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span>
+  <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">package</span> <span class="n">main</span>
 
@@ -912,7 +909,6 @@ curl <span class="nt">-X</span> POST https://localhost:17777/api/v1/models <span
 
     <span class="n">headers</span> <span class="o">:=</span> <span class="k">map</span><span class="p">[</span><span class="kt">string</span><span class="p">][]</span><span class="kt">string</span><span class="p">{</span>
         <span class="s">"Content-Type"</span><span class="o">:</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">"application/json"</span><span class="p">},</span>
-        <span class="s">"Accept"</span><span class="o">:</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">"application/json"</span><span class="p">},</span>
     <span class="p">}</span>
 
     <span class="n">data</span> <span class="o">:=</span> <span class="n">bytes</span><span class="o">.</span><span class="n">NewBuffer</span><span class="p">([]</span><span class="kt">byte</span><span class="p">{</span><span class="n">jsonReq</span><span class="p">})</span>
@@ -926,8 +922,7 @@ curl <span class="nt">-X</span> POST https://localhost:17777/api/v1/models <span
 
 </code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span><span class="p">,</span>
-  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">}</span>
 
 <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://localhost:17777/api/v1/models'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
@@ -945,11 +940,11 @@ curl <span class="nt">-X</span> POST https://localhost:17777/api/v1/models <span
 <p>Body parameter</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"cloud-tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"cloud"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"config"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="nl">"credential"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"owner-tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"owner"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"region"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
@@ -973,38 +968,6 @@ curl <span class="nt">-X</span> POST https://localhost:17777/api/v1/models <span
 </tr>
 </tbody></table>
 
-<blockquote>
-<p>Example responses</p>
-
-<p>201 Response</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"owner-tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"agent-version"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-  </span><span class="nl">"cloud-credential-tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"cloud-region"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"cloud-tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"controller-uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"counts"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-  </span><span class="nl">"default-series"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"is-controller"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"life"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"migration"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-  </span><span class="nl">"provider-type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"sla"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-  </span><span class="nl">"user-access"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"cloud-credential-validity"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"default-base"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"machines"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-  </span><span class="nl">"secret-backends"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-  </span><span class="nl">"supported-features"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-  </span><span class="nl">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
 <h3 id="createmodel-responses">Responses</h3>
 
 <table><thead>
@@ -1019,7 +982,25 @@ curl <span class="nt">-X</span> POST https://localhost:17777/api/v1/models <span
 <td>201</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.2">Created</a></td>
 <td>Model created.</td>
-<td><a href="#schemamodeldetail">ModelDetail</a></td>
+<td>None</td>
+</tr>
+</tbody></table>
+<h3 id='response-headers'>Response Headers</h3>
+<table><thead>
+<tr>
+<th>Status</th>
+<th>Header</th>
+<th>Type</th>
+<th>Format</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>201</td>
+<td>Location</td>
+<td>string</td>
+<td></td>
+<td>The location of the newly created model.</td>
 </tr>
 </tbody></table>
 
@@ -1186,15 +1167,12 @@ curl <span class="nt">-X</span> PATCH https://localhost:17777/api/v1/models/defa
 
 <p>Model default configuration settings are specific to the cloud on which the model is
 deployed. If the controller hosts more than one cloud, the cloud (and optionally region)
-must be specified</p>
+must be specified.</p>
 
 <blockquote>
 <p>Body parameter</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"set"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-  </span><span class="nl">"unset"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
-</span><span class="p">}</span><span class="w">
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{}</span><span class="w">
 </span></code></pre></div>
 <h3 id="updatemodeldefaults-parameters">Parameters</h3>
 
@@ -1226,7 +1204,7 @@ must be specified</p>
 <td>body</td>
 <td><a href="#schemamodeldefaultsupdate">ModelDefaultsUpdate</a></td>
 <td>true</td>
-<td>An object describing those model details to set or unset</td>
+<td>An object describing those model defaults to set or unset.</td>
 </tr>
 </tbody></table>
 
@@ -1406,13 +1384,13 @@ This operation does not require authentication
 <a id="tocSmodel"></a>
 <a id="tocsmodel"></a></p>
 <div class="highlight"><pre class="highlight yaml tab-yaml"><code><span class="na">name</span><span class="pi">:</span> <span class="s">string</span>
-<span class="na">owner-tag</span><span class="pi">:</span> <span class="s">string</span>
+<span class="na">owner</span><span class="pi">:</span> <span class="s">string</span>
 <span class="na">type</span><span class="pi">:</span> <span class="s">string</span>
 <span class="na">uuid</span><span class="pi">:</span> <span class="s">string</span>
 <span class="na">agent-version</span><span class="pi">:</span> <span class="pi">{}</span>
-<span class="na">cloud-credential-tag</span><span class="pi">:</span> <span class="s">string</span>
+<span class="na">cloud-credential</span><span class="pi">:</span> <span class="s">string</span>
 <span class="na">cloud-region</span><span class="pi">:</span> <span class="s">string</span>
-<span class="na">cloud-tag</span><span class="pi">:</span> <span class="s">string</span>
+<span class="na">cloud</span><span class="pi">:</span> <span class="s">string</span>
 <span class="na">controller-uuid</span><span class="pi">:</span> <span class="s">string</span>
 <span class="na">counts</span><span class="pi">:</span> <span class="pi">[]</span>
 <span class="na">default-series</span><span class="pi">:</span> <span class="s">string</span>
@@ -1421,7 +1399,6 @@ This operation does not require authentication
 <span class="na">migration</span><span class="pi">:</span> <span class="pi">{}</span>
 <span class="na">provider-type</span><span class="pi">:</span> <span class="s">string</span>
 <span class="na">sla</span><span class="pi">:</span> <span class="pi">{}</span>
-<span class="na">status</span><span class="pi">:</span> <span class="pi">{}</span>
 <span class="na">user-access</span><span class="pi">:</span> <span class="s">string</span>
 
 </code></pre></div>
@@ -1473,11 +1450,11 @@ This operation does not require authentication
 <td>none</td>
 </tr>
 <tr>
-<td>» cloud-credential-tag</td>
+<td>» cloud-credential</td>
 <td>string</td>
 <td>false</td>
 <td>none</td>
-<td>none</td>
+<td>Identifier for the model&#39;s cloud credential.</td>
 </tr>
 <tr>
 <td>» cloud-region</td>
@@ -1487,11 +1464,11 @@ This operation does not require authentication
 <td>none</td>
 </tr>
 <tr>
-<td>» cloud-tag</td>
+<td>» cloud</td>
 <td>string</td>
 <td>true</td>
 <td>none</td>
-<td>none</td>
+<td>Identifier for the model&#39;s cloud.</td>
 </tr>
 <tr>
 <td>» controller-uuid</td>
@@ -1550,13 +1527,6 @@ This operation does not require authentication
 <td>none</td>
 </tr>
 <tr>
-<td>» status</td>
-<td><a href="#schemamodelstatus">ModelStatus</a></td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
 <td>» user-access</td>
 <td>string</td>
 <td>true</td>
@@ -1602,11 +1572,11 @@ This operation does not require authentication
 <a id="schema_ModelCreateArgs"></a>
 <a id="tocSmodelcreateargs"></a>
 <a id="tocsmodelcreateargs"></a></p>
-<div class="highlight"><pre class="highlight yaml tab-yaml"><code><span class="na">cloud-tag</span><span class="pi">:</span> <span class="s">string</span>
+<div class="highlight"><pre class="highlight yaml tab-yaml"><code><span class="na">cloud</span><span class="pi">:</span> <span class="s">string</span>
 <span class="na">config</span><span class="pi">:</span> <span class="pi">{}</span>
 <span class="na">credential</span><span class="pi">:</span> <span class="s">string</span>
 <span class="na">name</span><span class="pi">:</span> <span class="s">string</span>
-<span class="na">owner-tag</span><span class="pi">:</span> <span class="s">string</span>
+<span class="na">owner</span><span class="pi">:</span> <span class="s">string</span>
 <span class="na">region</span><span class="pi">:</span> <span class="s">string</span>
 
 </code></pre></div><h3 id='properties-5'>Properties</h3>
@@ -1620,7 +1590,7 @@ This operation does not require authentication
 </tr>
 </thead><tbody>
 <tr>
-<td>cloud-tag</td>
+<td>cloud</td>
 <td>string</td>
 <td>false</td>
 <td>none</td>
@@ -1648,11 +1618,11 @@ This operation does not require authentication
 <td>The name of the new model.</td>
 </tr>
 <tr>
-<td>owner-tag</td>
+<td>owner</td>
 <td>string</td>
 <td>true</td>
 <td>none</td>
-<td>Identifier of the owner of the new model</td>
+<td>Identifier of the owner of the new model.</td>
 </tr>
 <tr>
 <td>region</td>
@@ -1750,13 +1720,13 @@ This operation does not require authentication
 <a id="tocSmodeldetail"></a>
 <a id="tocsmodeldetail"></a></p>
 <div class="highlight"><pre class="highlight yaml tab-yaml"><code><span class="na">name</span><span class="pi">:</span> <span class="s">string</span>
-<span class="na">owner-tag</span><span class="pi">:</span> <span class="s">string</span>
+<span class="na">owner</span><span class="pi">:</span> <span class="s">string</span>
 <span class="na">type</span><span class="pi">:</span> <span class="s">string</span>
 <span class="na">uuid</span><span class="pi">:</span> <span class="s">string</span>
 <span class="na">agent-version</span><span class="pi">:</span> <span class="pi">{}</span>
-<span class="na">cloud-credential-tag</span><span class="pi">:</span> <span class="s">string</span>
+<span class="na">cloud-credential</span><span class="pi">:</span> <span class="s">string</span>
 <span class="na">cloud-region</span><span class="pi">:</span> <span class="s">string</span>
-<span class="na">cloud-tag</span><span class="pi">:</span> <span class="s">string</span>
+<span class="na">cloud</span><span class="pi">:</span> <span class="s">string</span>
 <span class="na">controller-uuid</span><span class="pi">:</span> <span class="s">string</span>
 <span class="na">counts</span><span class="pi">:</span> <span class="pi">[]</span>
 <span class="na">default-series</span><span class="pi">:</span> <span class="s">string</span>
@@ -1765,7 +1735,6 @@ This operation does not require authentication
 <span class="na">migration</span><span class="pi">:</span> <span class="pi">{}</span>
 <span class="na">provider-type</span><span class="pi">:</span> <span class="s">string</span>
 <span class="na">sla</span><span class="pi">:</span> <span class="pi">{}</span>
-<span class="na">status</span><span class="pi">:</span> <span class="pi">{}</span>
 <span class="na">user-access</span><span class="pi">:</span> <span class="s">string</span>
 <span class="na">cloud-credential-validity</span><span class="pi">:</span> <span class="no">true</span>
 <span class="na">default-base</span><span class="pi">:</span> <span class="s">string</span>
@@ -2107,8 +2076,8 @@ This operation does not require authentication
 <span class="na">hosted-machine-count</span><span class="pi">:</span> <span class="m">0</span>
 <span class="na">life</span><span class="pi">:</span> <span class="s">string</span>
 <span class="na">machines</span><span class="pi">:</span> <span class="pi">[]</span>
-<span class="na">model-tag</span><span class="pi">:</span> <span class="s">string</span>
-<span class="na">owner-tag</span><span class="pi">:</span> <span class="s">string</span>
+<span class="na">model</span><span class="pi">:</span> <span class="s">string</span>
+<span class="na">owner</span><span class="pi">:</span> <span class="s">string</span>
 <span class="na">type</span><span class="pi">:</span> <span class="s">string</span>
 <span class="na">unit-count</span><span class="pi">:</span> <span class="m">0</span>
 <span class="na">volumes</span><span class="pi">:</span> <span class="pi">[]</span>
@@ -2173,18 +2142,18 @@ This operation does not require authentication
 <td>none</td>
 </tr>
 <tr>
-<td>model-tag</td>
+<td>model</td>
 <td>string</td>
 <td>true</td>
 <td>none</td>
-<td>none</td>
+<td>Identifier of the model.</td>
 </tr>
 <tr>
-<td>owner-tag</td>
+<td>owner</td>
 <td>string</td>
 <td>true</td>
 <td>none</td>
-<td>none</td>
+<td>Identifier of the model&#39;s owner.</td>
 </tr>
 <tr>
 <td>type</td>
@@ -2279,7 +2248,7 @@ This operation does not require authentication
 <a id="tocSmodelsummary"></a>
 <a id="tocsmodelsummary"></a></p>
 <div class="highlight"><pre class="highlight yaml tab-yaml"><code><span class="na">name</span><span class="pi">:</span> <span class="s">string</span>
-<span class="na">owner-tag</span><span class="pi">:</span> <span class="s">string</span>
+<span class="na">owner</span><span class="pi">:</span> <span class="s">string</span>
 <span class="na">type</span><span class="pi">:</span> <span class="s">string</span>
 <span class="na">uuid</span><span class="pi">:</span> <span class="s">string</span>
 
@@ -2303,11 +2272,11 @@ This operation does not require authentication
 <td>none</td>
 </tr>
 <tr>
-<td>owner-tag</td>
+<td>owner</td>
 <td>string</td>
 <td>true</td>
 <td>none</td>
-<td>none</td>
+<td>Identifier of the model&#39;s owner.</td>
 </tr>
 <tr>
 <td>type</td>
@@ -2336,7 +2305,7 @@ This operation does not require authentication
 <div class="highlight"><pre class="highlight yaml tab-yaml"><code><span class="na">access</span><span class="pi">:</span> <span class="s">string</span>
 <span class="na">display-name</span><span class="pi">:</span> <span class="s">string</span>
 <span class="na">last-connection</span><span class="pi">:</span> <span class="s">2019-08-24T14:15:22Z</span>
-<span class="na">model-tag</span><span class="pi">:</span> <span class="s">string</span>
+<span class="na">model</span><span class="pi">:</span> <span class="s">string</span>
 <span class="na">user</span><span class="pi">:</span> <span class="s">string</span>
 
 </code></pre></div><h3 id='properties-17'>Properties</h3>
@@ -2371,11 +2340,11 @@ This operation does not require authentication
 <td>none</td>
 </tr>
 <tr>
-<td>model-tag</td>
+<td>model</td>
 <td>string</td>
 <td>true</td>
 <td>none</td>
-<td>none</td>
+<td>Identifier of the model.</td>
 </tr>
 <tr>
 <td>user</td>
@@ -2503,34 +2472,14 @@ This operation does not require authentication
 <a id="schema_ModelDefaultsUpdate"></a>
 <a id="tocSmodeldefaultsupdate"></a>
 <a id="tocsmodeldefaultsupdate"></a></p>
-<div class="highlight"><pre class="highlight yaml tab-yaml"><code><span class="na">set</span><span class="pi">:</span> <span class="pi">{}</span>
-<span class="na">unset</span><span class="pi">:</span> <span class="pi">{}</span>
+<div class="highlight"><pre class="highlight yaml tab-yaml"><code><span class="pi">{}</span>
 
-</code></pre></div><h3 id='properties-21'>Properties</h3>
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Restrictions</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>set</td>
-<td>object</td>
-<td>true</td>
-<td>none</td>
-<td>Key/value pairs representing model defaults to set for the specified cloud.</td>
-</tr>
-<tr>
-<td>unset</td>
-<td>object</td>
-<td>true</td>
-<td>none</td>
-<td>Key/value pairs representing model defaults to unset for the specified cloud.</td>
-</tr>
-</tbody></table>
+</code></pre></div>
+<p>An object representing the model defaults to update. Keys represent the model defaults to
+set, and values represent the desired values. The &#39;unset&#39; a model default, its value
+should be set to <code>null</code>.</p>
+<h3 id='properties-21'>Properties</h3>
+<p><em>None</em></p>
 
 <h2 id="tocS_SupportedFeature">SupportedFeature</h2>
 
