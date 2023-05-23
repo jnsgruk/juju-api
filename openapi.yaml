@@ -304,11 +304,13 @@ components:
         properties:
           agent-version:
             $ref: '#/components/schemas/Version'
-          cloud-credential-tag:
+          cloud-credential:
+            description: Identifier for the model's cloud credential.
             type: string
           cloud-region:
             type: string
-          cloud-tag:
+          cloud:
+            description: Identifier for the model's cloud.
             type: string
           controller-uuid:
             type: string
@@ -336,7 +338,7 @@ components:
         required:
         - controller-uuid
         - is-controller
-        - cloud-tag
+        - cloud
         - life
         - user-access
         - counts
@@ -353,7 +355,7 @@ components:
     ModelCreateArgs:
       type: object
       properties:
-        cloud-tag:
+        cloud:
           description: Identifier of the cloud on which to create the model.
           type: string
         config:
@@ -366,8 +368,8 @@ components:
         name:
           description: The name of the new model.
           type: string
-        owner-tag:
-          description: Identifier of the owner of the new model
+        owner:
+          description: Identifier of the owner of the new model.
           type: string
         region:
           description: Identifier of the cloud region in which to create the model.
@@ -375,7 +377,7 @@ components:
       additionalProperties: false
       required:
       - name
-      - owner-tag
+      - owner
     ModelDefaultsList:
       description: A list of model defaults for the specified clouds
       type: object
@@ -522,9 +524,11 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ModelMachine'
-        model-tag:
+        model:
+          description: Identifier of the model.
           type: string
-        owner-tag:
+        owner:
+          description: Identifier of the model's owner.
           type: string
         type:
           type: string
@@ -536,13 +540,13 @@ components:
             $ref: '#/components/schemas/ModelVolumeInfo'
       additionalProperties: false
       required:
-      - model-tag
+      - model
       - life
       - type
       - hosted-machine-count
       - application-count
       - unit-count
-      - owner-tag
+      - owner
     ModelStorageAttributes:
       type: object
       properties:
@@ -565,7 +569,8 @@ components:
       properties:
         name:
           type: string
-        owner-tag:
+        owner:
+          description: Identifier of the model's owner.
           type: string
         type:
           type: string
@@ -576,7 +581,7 @@ components:
       - name
       - uuid
       - type
-      - owner-tag
+      - owner
     ModelUserInfo:
       type: object
       properties:
@@ -587,13 +592,14 @@ components:
         last-connection:
           type: string
           format: date-time
-        model-tag:
+        model:
+          description: Identifier of the model.
           type: string
         user:
           type: string
       additionalProperties: false
       required:
-      - model-tag
+      - model
       - user
       - display-name
       - last-connection
