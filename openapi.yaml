@@ -112,6 +112,121 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+  
+  /model/{name}/access:
+    get:
+      tags:
+        - model
+      summary: List of user permissions for model.
+      description: |
+        Return a list of objects that describe the level of permissions granted over the model
+        to users on the controller.
+      operationId: getModelAccess
+      parameters:
+        - $ref: "#/components/parameters/ModelName"
+      responses:
+        "200":
+          description: List of model access controls
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ModelAccessList"
+        "404":
+          description: Model not found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: Unauthorised to view model access controls.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    patch:
+      tags:
+        - model
+      summary: Change the model access granted to users.
+      description: |
+        Update the level of model access that is granted to specific users.
+      operationId: updateModelAccess
+      parameters:
+        - $ref: "#/components/parameters/ModelName"
+      requestBody:
+        description: An object describing the changes to model access controls.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ModelAccessUpdateList"
+        required: true
+      responses:
+        "200":
+          description: Updated list of model access controls
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ModelAccessList"
+        "400":
+          description: Malformed access update request.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: Model not found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: Unauthorised to update model access controls.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  
+  /model/{name}/credential:
+    patch:
+      tags:
+        - model
+      summary: Change the credential related to the model.
+      description: |
+        Update the underlying cloud credential that's associated with the model.
+      operationId: updateModelCredential
+      parameters:
+        - $ref: "#/components/parameters/ModelName"
+      requestBody:
+        description: An object containing the identifier of the new cloud credential.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ModelCredential"
+        required: true
+      responses:
+        "200":
+          description: Updated list of model access controls
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ModelDetail"
+        "400":
+          description: Malformed credential update request.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: Model not found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: Unauthorised to update model credential.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
 
   /models:
     get:
@@ -348,6 +463,60 @@ components:
         - counts
         - sla
         - agent-version
+    ModelAccess:
+      type: object
+      properties:
+        access:
+          description: Level of access granted to the specified user.
+          type: string
+          enum:
+              - read
+              - write
+              - admin
+        user:
+          description: Identifier of the user to whom permissions apply.
+          type: string
+      additionalProperties: false
+      required:
+      - access
+      - user
+    ModelAccessList:
+      type: object
+      properties:
+        permissions:
+          description: List of granted permissions to the model.
+          type: array
+          items:
+            $ref: '#/components/schemas/ModelAccess'
+      additionalProperties: false
+      required:
+      - permissions
+    ModelAccessUpdate:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/ModelAccess'
+      - type: object
+        properties:
+          action:
+            description: Whether to 'grant' or 'revoke' the given permission for the specified user.
+            type: string
+            enum:
+                - grant
+                - revoke
+        required:
+        - action
+      additionalProperties: false
+    ModelAccessUpdateList:
+      type: object
+      properties:
+        permissions:
+          description: List of model access updates.
+          type: array
+          items:
+            $ref: '#/components/schemas/ModelAccessUpdate'
+      additionalProperties: false
+      required:
+      - permissions
     ModelApplicationInfo:
       type: object
       properties:
@@ -382,6 +551,15 @@ components:
       required:
       - name
       - owner
+    ModelCredential:
+      type: object
+      properties:
+        cloud-credential:
+          description: Identifier of the cloud credential.
+          type: string
+      additionalProperties: false
+      required:
+      - cloud-credential
     ModelDefaultsList:
       description: A list of model defaults for the specified clouds
       type: object
