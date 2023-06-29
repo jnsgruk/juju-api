@@ -218,10 +218,10 @@
                     <a href="#getmodelstatus" class="toc-h2 toc-link" data-title="getModelStatus">getModelStatus</a>
                   </li>
                   <li>
-                    <a href="#getmodelaccess" class="toc-h2 toc-link" data-title="getModelAccess">getModelAccess</a>
+                    <a href="#getmodeluseraccess" class="toc-h2 toc-link" data-title="getModelUserAccess">getModelUserAccess</a>
                   </li>
                   <li>
-                    <a href="#updatemodelaccess" class="toc-h2 toc-link" data-title="updateModelAccess">updateModelAccess</a>
+                    <a href="#updatemodeluseraccess" class="toc-h2 toc-link" data-title="updateModelUserAccess">updateModelUserAccess</a>
                   </li>
                   <li>
                     <a href="#updatemodelcredential" class="toc-h2 toc-link" data-title="updateModelCredential">updateModelCredential</a>
@@ -241,8 +241,43 @@
               </ul>
           </li>
           <li>
+            <a href="#juju-client-api-cloud" class="toc-h1 toc-link" data-title="cloud">cloud</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#listclouds" class="toc-h2 toc-link" data-title="listClouds">listClouds</a>
+                  </li>
+                  <li>
+                    <a href="#addcloud" class="toc-h2 toc-link" data-title="addCloud">addCloud</a>
+                  </li>
+                  <li>
+                    <a href="#listsupportedclouds" class="toc-h2 toc-link" data-title="listSupportedClouds">listSupportedClouds</a>
+                  </li>
+                  <li>
+                    <a href="#getcloud" class="toc-h2 toc-link" data-title="getCloud">getCloud</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#schemas" class="toc-h1 toc-link" data-title="Schemas">Schemas</a>
               <ul class="toc-list-h2">
+                  <li>
+                    <a href="#tocS_Cloud" class="toc-h2 toc-link" data-title="Cloud">Cloud</a>
+                  </li>
+                  <li>
+                    <a href="#tocS_CloudDetail" class="toc-h2 toc-link" data-title="CloudDetail">CloudDetail</a>
+                  </li>
+                  <li>
+                    <a href="#tocS_CloudList" class="toc-h2 toc-link" data-title="CloudList">CloudList</a>
+                  </li>
+                  <li>
+                    <a href="#tocS_CloudRegion" class="toc-h2 toc-link" data-title="CloudRegion">CloudRegion</a>
+                  </li>
+                  <li>
+                    <a href="#tocS_CloudUser" class="toc-h2 toc-link" data-title="CloudUser">CloudUser</a>
+                  </li>
+                  <li>
+                    <a href="#tocS_CloudUserAccess" class="toc-h2 toc-link" data-title="CloudUserAccess">CloudUserAccess</a>
+                  </li>
                   <li>
                     <a href="#tocS_Error" class="toc-h2 toc-link" data-title="Error">Error</a>
                   </li>
@@ -253,16 +288,16 @@
                     <a href="#tocS_Model" class="toc-h2 toc-link" data-title="Model">Model</a>
                   </li>
                   <li>
-                    <a href="#tocS_ModelAccess" class="toc-h2 toc-link" data-title="ModelAccess">ModelAccess</a>
+                    <a href="#tocS_ModelUserAccess" class="toc-h2 toc-link" data-title="ModelUserAccess">ModelUserAccess</a>
                   </li>
                   <li>
-                    <a href="#tocS_ModelAccessList" class="toc-h2 toc-link" data-title="ModelAccessList">ModelAccessList</a>
+                    <a href="#tocS_ModelUserAccessList" class="toc-h2 toc-link" data-title="ModelUserAccessList">ModelUserAccessList</a>
                   </li>
                   <li>
-                    <a href="#tocS_ModelAccessUpdate" class="toc-h2 toc-link" data-title="ModelAccessUpdate">ModelAccessUpdate</a>
+                    <a href="#tocS_ModelUserAccessUpdate" class="toc-h2 toc-link" data-title="ModelUserAccessUpdate">ModelUserAccessUpdate</a>
                   </li>
                   <li>
-                    <a href="#tocS_ModelAccessUpdateList" class="toc-h2 toc-link" data-title="ModelAccessUpdateList">ModelAccessUpdateList</a>
+                    <a href="#tocS_ModelUserAccessUpdateList" class="toc-h2 toc-link" data-title="ModelUserAccessUpdateList">ModelUserAccessUpdateList</a>
                   </li>
                   <li>
                     <a href="#tocS_ModelApplicationInfo" class="toc-h2 toc-link" data-title="ModelApplicationInfo">ModelApplicationInfo</a>
@@ -325,10 +360,16 @@
                     <a href="#tocS_SupportedFeature" class="toc-h2 toc-link" data-title="SupportedFeature">SupportedFeature</a>
                   </li>
                   <li>
+                    <a href="#tocS_UserCloud" class="toc-h2 toc-link" data-title="UserCloud">UserCloud</a>
+                  </li>
+                  <li>
                     <a href="#tocS_UserModel" class="toc-h2 toc-link" data-title="UserModel">UserModel</a>
                   </li>
                   <li>
                     <a href="#tocS_UserModelList" class="toc-h2 toc-link" data-title="UserModelList">UserModelList</a>
+                  </li>
+                  <li>
+                    <a href="#tocS_UserCloudList" class="toc-h2 toc-link" data-title="UserCloudList">UserCloudList</a>
                   </li>
                   <li>
                     <a href="#tocS_Version" class="toc-h2 toc-link" data-title="Version">Version</a>
@@ -478,7 +519,6 @@ curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/model/<span c
   </span><span class="nl">"migration"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="nl">"provider-type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"sla"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-  </span><span class="nl">"user-access"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"cloud-credential-validity"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
   </span><span class="nl">"default-base"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"machines"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
@@ -504,9 +544,21 @@ curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/model/<span c
 <td><a href="#schemamodeldetail">ModelDetail</a></td>
 </tr>
 <tr>
-<td>404</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.4">Not Found</a></td>
-<td>Model not found.</td>
+<td>400</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
+<td>Bad request.</td>
+<td><a href="#schemaerror">Error</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>Forbidden.</td>
+<td><a href="#schemaerror">Error</a></td>
+</tr>
+<tr>
+<td>500</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.1">Internal Server Error</a></td>
+<td>Internal server error.</td>
 <td><a href="#schemaerror">Error</a></td>
 </tr>
 </tbody></table>
@@ -610,12 +662,12 @@ curl <span class="nt">-X</span> DELETE https://localhost:17777/api/v1/model/<spa
 <blockquote>
 <p>Example responses</p>
 
-<p>404 Response</p>
+<p>200 Response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"info"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Success"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"status_code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sync"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <h3 id="deletemodel-responses">Responses</h3>
@@ -631,14 +683,62 @@ curl <span class="nt">-X</span> DELETE https://localhost:17777/api/v1/model/<spa
 <tr>
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
-<td>Model deleted.</td>
-<td>None</td>
+<td>Empty sync response.</td>
+<td>Inline</td>
 </tr>
 <tr>
-<td>404</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.4">Not Found</a></td>
-<td>Model not found.</td>
+<td>400</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
+<td>Bad request.</td>
 <td><a href="#schemaerror">Error</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>Forbidden.</td>
+<td><a href="#schemaerror">Error</a></td>
+</tr>
+<tr>
+<td>500</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.1">Internal Server Error</a></td>
+<td>Internal server error.</td>
+<td><a href="#schemaerror">Error</a></td>
+</tr>
+</tbody></table>
+
+<h3 id="deletemodel-responseschema">Response Schema</h3>
+
+<p>Status Code <strong>200</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>» status</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» status_code</td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» type</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
 </tr>
 </tbody></table>
 
@@ -754,9 +854,21 @@ curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/model/<span c
 <td><a href="#schemamodelstatus">ModelStatus</a></td>
 </tr>
 <tr>
-<td>404</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.4">Not Found</a></td>
-<td>Model not found.</td>
+<td>400</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
+<td>Bad request.</td>
+<td><a href="#schemaerror">Error</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>Forbidden.</td>
+<td><a href="#schemaerror">Error</a></td>
+</tr>
+<tr>
+<td>500</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.1">Internal Server Error</a></td>
+<td>Internal server error.</td>
 <td><a href="#schemaerror">Error</a></td>
 </tr>
 </tbody></table>
@@ -764,8 +876,8 @@ curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/model/<span c
 <aside class="success">
 This operation does not require authentication
 </aside>
-<h2 id='getmodelaccess'>getModelAccess</h2>
-<p><a id="opIdgetModelAccess"></a></p>
+<h2 id='getmodeluseraccess'>getModelUserAccess</h2>
+<p><a id="opIdgetModelUserAccess"></a></p>
 
 <blockquote>
 <p>Code samples</p>
@@ -817,7 +929,7 @@ curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/model/<span c
 <p>Return a list of objects that describe the level of permissions granted over the model
 to users on the controller.</p>
 
-<h3 id="getmodelaccess-parameters">Parameters</h3>
+<h3 id="getmodeluseraccess-parameters">Parameters</h3>
 
 <table><thead>
 <tr>
@@ -846,7 +958,7 @@ to users on the controller.</p>
   </span><span class="nl">"permissions"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<h3 id="getmodelaccess-responses">Responses</h3>
+<h3 id="getmodeluseraccess-responses">Responses</h3>
 
 <table><thead>
 <tr>
@@ -860,18 +972,24 @@ to users on the controller.</p>
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>List of model access controls</td>
-<td><a href="#schemamodelaccesslist">ModelAccessList</a></td>
+<td><a href="#schemamodeluseraccesslist">ModelUserAccessList</a></td>
 </tr>
 <tr>
-<td>401</td>
-<td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
-<td>Unauthorised to view model access controls.</td>
+<td>400</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
+<td>Bad request.</td>
 <td><a href="#schemaerror">Error</a></td>
 </tr>
 <tr>
-<td>404</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.4">Not Found</a></td>
-<td>Model not found.</td>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>Forbidden.</td>
+<td><a href="#schemaerror">Error</a></td>
+</tr>
+<tr>
+<td>500</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.1">Internal Server Error</a></td>
+<td>Internal server error.</td>
 <td><a href="#schemaerror">Error</a></td>
 </tr>
 </tbody></table>
@@ -879,8 +997,8 @@ to users on the controller.</p>
 <aside class="success">
 This operation does not require authentication
 </aside>
-<h2 id='updatemodelaccess'>updateModelAccess</h2>
-<p><a id="opIdupdateModelAccess"></a></p>
+<h2 id='updatemodeluseraccess'>updateModelUserAccess</h2>
+<p><a id="opIdupdateModelUserAccess"></a></p>
 
 <blockquote>
 <p>Code samples</p>
@@ -942,7 +1060,7 @@ curl <span class="nt">-X</span> PATCH https://localhost:17777/api/v1/model/<span
   </span><span class="nl">"permissions"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<h3 id="updatemodelaccess-parameters">Parameters</h3>
+<h3 id="updatemodeluseraccess-parameters">Parameters</h3>
 
 <table><thead>
 <tr>
@@ -963,7 +1081,7 @@ curl <span class="nt">-X</span> PATCH https://localhost:17777/api/v1/model/<span
 <tr>
 <td>body</td>
 <td>body</td>
-<td><a href="#schemamodelaccessupdatelist">ModelAccessUpdateList</a></td>
+<td><a href="#schemamodeluseraccessupdatelist">ModelUserAccessUpdateList</a></td>
 <td>true</td>
 <td>An object describing the changes to model access controls.</td>
 </tr>
@@ -975,10 +1093,12 @@ curl <span class="nt">-X</span> PATCH https://localhost:17777/api/v1/model/<span
 <p>200 Response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"permissions"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Success"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"status_code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sync"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<h3 id="updatemodelaccess-responses">Responses</h3>
+<h3 id="updatemodeluseraccess-responses">Responses</h3>
 
 <table><thead>
 <tr>
@@ -991,26 +1111,62 @@ curl <span class="nt">-X</span> PATCH https://localhost:17777/api/v1/model/<span
 <tr>
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
-<td>Updated list of model access controls</td>
-<td><a href="#schemamodelaccesslist">ModelAccessList</a></td>
+<td>Empty sync response.</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>400</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
-<td>Malformed access update request.</td>
+<td>Bad request.</td>
 <td><a href="#schemaerror">Error</a></td>
 </tr>
 <tr>
-<td>401</td>
-<td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
-<td>Unauthorised to update model access controls.</td>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>Forbidden.</td>
 <td><a href="#schemaerror">Error</a></td>
 </tr>
 <tr>
-<td>404</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.4">Not Found</a></td>
-<td>Model not found.</td>
+<td>500</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.1">Internal Server Error</a></td>
+<td>Internal server error.</td>
 <td><a href="#schemaerror">Error</a></td>
+</tr>
+</tbody></table>
+
+<h3 id="updatemodeluseraccess-responseschema">Response Schema</h3>
+
+<p>Status Code <strong>200</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>» status</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» status_code</td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» type</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
 </tr>
 </tbody></table>
 
@@ -1113,29 +1269,9 @@ curl <span class="nt">-X</span> PATCH https://localhost:17777/api/v1/model/<span
 <p>200 Response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"owner"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"agent-version"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-  </span><span class="nl">"cloud-credential"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"cloud-region"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"cloud"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"controller-uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"counts"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-  </span><span class="nl">"default-series"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"is-controller"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"life"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"migration"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-  </span><span class="nl">"provider-type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"sla"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
-  </span><span class="nl">"user-access"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"cloud-credential-validity"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"default-base"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"machines"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-  </span><span class="nl">"secret-backends"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-  </span><span class="nl">"supported-features"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-  </span><span class="nl">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Success"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"status_code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sync"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <h3 id="updatemodelcredential-responses">Responses</h3>
@@ -1151,26 +1287,62 @@ curl <span class="nt">-X</span> PATCH https://localhost:17777/api/v1/model/<span
 <tr>
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
-<td>Updated list of model access controls</td>
-<td><a href="#schemamodeldetail">ModelDetail</a></td>
+<td>Empty sync response.</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>400</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
-<td>Malformed credential update request.</td>
+<td>Bad request.</td>
 <td><a href="#schemaerror">Error</a></td>
 </tr>
 <tr>
-<td>401</td>
-<td><a href="https://tools.ietf.org/html/rfc7235#section-3.1">Unauthorized</a></td>
-<td>Unauthorised to update model credential.</td>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>Forbidden.</td>
 <td><a href="#schemaerror">Error</a></td>
 </tr>
 <tr>
-<td>404</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.4">Not Found</a></td>
-<td>Model not found.</td>
+<td>500</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.1">Internal Server Error</a></td>
+<td>Internal server error.</td>
 <td><a href="#schemaerror">Error</a></td>
+</tr>
+</tbody></table>
+
+<h3 id="updatemodelcredential-responseschema">Response Schema</h3>
+
+<p>Status Code <strong>200</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>» status</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» status_code</td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» type</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
 </tr>
 </tbody></table>
 
@@ -1245,25 +1417,25 @@ curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/models <span 
 </tr>
 </thead><tbody>
 <tr>
-<td>user</td>
-<td>query</td>
-<td>string</td>
-<td>false</td>
-<td>The user to list models for (administrative users only)</td>
-</tr>
-<tr>
 <td>all</td>
 <td>query</td>
 <td>string</td>
 <td>false</td>
-<td>Lists all models, regardless of user accessibility (administrative users only)</td>
+<td>List all instances of entity, irrespective of user.</td>
 </tr>
 <tr>
 <td>detailed</td>
 <td>query</td>
 <td>string</td>
 <td>false</td>
-<td>Return detailed model summaries with more information.</td>
+<td>Return detailed information about requested entity.</td>
+</tr>
+<tr>
+<td>user</td>
+<td>query</td>
+<td>string</td>
+<td>false</td>
+<td>Identifier of a user on the controller.</td>
 </tr>
 </tbody></table>
 <h4 id='enumerated-values'>Enumerated Values</h4>
@@ -1297,7 +1469,7 @@ curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/models <span 
 <p>200 Response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"user-models"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+  </span><span class="nl">"models"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <h3 id="listmodels-responses">Responses</h3>
@@ -1315,6 +1487,24 @@ curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/models <span 
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>List of models the specified user has access to.</td>
 <td><a href="#schemausermodellist">UserModelList</a></td>
+</tr>
+<tr>
+<td>400</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
+<td>Bad request.</td>
+<td><a href="#schemaerror">Error</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>Forbidden.</td>
+<td><a href="#schemaerror">Error</a></td>
+</tr>
+<tr>
+<td>500</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.1">Internal Server Error</a></td>
+<td>Internal server error.</td>
+<td><a href="#schemaerror">Error</a></td>
 </tr>
 </tbody></table>
 
@@ -1412,13 +1602,12 @@ curl <span class="nt">-X</span> POST https://localhost:17777/api/v1/models <span
 <blockquote>
 <p>Example responses</p>
 
-<p>201 Response</p>
+<p>200 Response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"owner"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Success"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"status_code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sync"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <h3 id="createmodel-responses">Responses</h3>
@@ -1432,10 +1621,64 @@ curl <span class="nt">-X</span> POST https://localhost:17777/api/v1/models <span
 </tr>
 </thead><tbody>
 <tr>
-<td>201</td>
-<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.2">Created</a></td>
-<td>Model created.</td>
-<td><a href="#schemamodelsummary">ModelSummary</a></td>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>Entity created response</td>
+<td>Inline</td>
+</tr>
+<tr>
+<td>400</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
+<td>Bad request.</td>
+<td><a href="#schemaerror">Error</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>Forbidden.</td>
+<td><a href="#schemaerror">Error</a></td>
+</tr>
+<tr>
+<td>500</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.1">Internal Server Error</a></td>
+<td>Internal server error.</td>
+<td><a href="#schemaerror">Error</a></td>
+</tr>
+</tbody></table>
+
+<h3 id="createmodel-responseschema">Response Schema</h3>
+
+<p>Status Code <strong>200</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>» status</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» status_code</td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» type</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
 </tr>
 </tbody></table>
 <h3 id='response-headers'>Response Headers</h3>
@@ -1449,11 +1692,11 @@ curl <span class="nt">-X</span> POST https://localhost:17777/api/v1/models <span
 </tr>
 </thead><tbody>
 <tr>
-<td>201</td>
+<td>200</td>
 <td>Location</td>
 <td>string</td>
 <td>uri</td>
-<td>The location of the newly created model.</td>
+<td>The location of the newly created entity.</td>
 </tr>
 </tbody></table>
 
@@ -1556,6 +1799,24 @@ curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/models/defaul
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>List of model defaults for the specified clouds.</td>
 <td><a href="#schemamodeldefaultslist">ModelDefaultsList</a></td>
+</tr>
+<tr>
+<td>400</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
+<td>Bad request.</td>
+<td><a href="#schemaerror">Error</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>Forbidden.</td>
+<td><a href="#schemaerror">Error</a></td>
+</tr>
+<tr>
+<td>500</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.1">Internal Server Error</a></td>
+<td>Internal server error.</td>
+<td><a href="#schemaerror">Error</a></td>
 </tr>
 </tbody></table>
 
@@ -1667,7 +1928,9 @@ must be specified.</p>
 <p>200 Response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"model-defaults"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Success"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"status_code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sync"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <h3 id="updatemodeldefaults-responses">Responses</h3>
@@ -1683,34 +1946,33 @@ must be specified.</p>
 <tr>
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
-<td>List of model defaults for the specified cloud.</td>
-<td><a href="#schemamodeldefaultslist">ModelDefaultsList</a></td>
+<td>Empty sync response.</td>
+<td>Inline</td>
 </tr>
 <tr>
 <td>400</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
-<td>Controller hosts more than one cloud but no cloud was specified.</td>
+<td>Bad request.</td>
+<td><a href="#schemaerror">Error</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>Forbidden.</td>
+<td><a href="#schemaerror">Error</a></td>
+</tr>
+<tr>
+<td>500</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.1">Internal Server Error</a></td>
+<td>Internal server error.</td>
 <td><a href="#schemaerror">Error</a></td>
 </tr>
 </tbody></table>
 
-<aside class="success">
-This operation does not require authentication
-</aside>
-<h1 id='schemas'>Schemas</h1>
-<h2 id="tocS_Error">Error</h2>
+<h3 id="updatemodeldefaults-responseschema">Response Schema</h3>
 
-<!-- backwards compatibility -->
+<p>Status Code <strong>200</strong></p>
 
-<p><a id="schemaerror"></a>
-<a id="schema_Error"></a>
-<a id="tocSerror"></a>
-<a id="tocserror"></a></p>
-<div class="highlight"><pre class="highlight yaml tab-yaml"><code><span class="na">code</span><span class="pi">:</span> <span class="s">string</span>
-<span class="na">info</span><span class="pi">:</span> <span class="pi">{}</span>
-<span class="na">message</span><span class="pi">:</span> <span class="s">string</span>
-
-</code></pre></div><h3 id='properties'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1721,21 +1983,1082 @@ This operation does not require authentication
 </tr>
 </thead><tbody>
 <tr>
-<td>code</td>
+<td>» status</td>
 <td>string</td>
-<td>true</td>
+<td>false</td>
 <td>none</td>
 <td>none</td>
 </tr>
 <tr>
-<td>info</td>
+<td>» status_code</td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» type</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+<h1 id="juju-client-api-cloud">cloud</h1>
+
+<p>Manage Juju clouds</p>
+
+<p><a href="https://juju.is/docs/olm/manage-clouds">Find out more about Juju clouds.</a></p>
+<h2 id='listclouds'>listClouds</h2>
+<p><a id="opIdlistClouds"></a></p>
+
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://localhost:17777/api/v1/clouds</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:17777</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
+curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/clouds <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">package</span> <span class="n">main</span>
+
+<span class="k">import</span> <span class="p">(</span>
+       <span class="s">"bytes"</span>
+       <span class="s">"net/http"</span>
+<span class="p">)</span>
+
+<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="n">headers</span> <span class="o">:=</span> <span class="k">map</span><span class="p">[</span><span class="kt">string</span><span class="p">][]</span><span class="kt">string</span><span class="p">{</span>
+        <span class="s">"Accept"</span><span class="o">:</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">"application/json"</span><span class="p">},</span>
+    <span class="p">}</span>
+
+    <span class="n">data</span> <span class="o">:=</span> <span class="n">bytes</span><span class="o">.</span><span class="n">NewBuffer</span><span class="p">([]</span><span class="kt">byte</span><span class="p">{</span><span class="n">jsonReq</span><span class="p">})</span>
+    <span class="n">req</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="s">"https://localhost:17777/api/v1/clouds"</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+    <span class="n">req</span><span class="o">.</span><span class="n">Header</span> <span class="o">=</span> <span class="n">headers</span>
+
+    <span class="n">client</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="n">http</span><span class="o">.</span><span class="n">Client</span><span class="p">{}</span>
+    <span class="n">resp</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">client</span><span class="o">.</span><span class="n">Do</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
+    <span class="c">// ...</span>
+<span class="p">}</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://localhost:17777/api/v1/clouds'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
+
+</code></pre></div>
+<p><code>GET /clouds</code></p>
+
+<p><em>Get clouds that specified user has access to.</em></p>
+
+<p>Returns clouds that the specified user has access to. Controller admins (superuser) can
+list clouds for any user. Other users can only ask about their own clouds.</p>
+
+<h3 id="listclouds-parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>detailed</td>
+<td>query</td>
+<td>string</td>
+<td>false</td>
+<td>Return detailed information about requested entity.</td>
+</tr>
+<tr>
+<td>all</td>
+<td>query</td>
+<td>string</td>
+<td>false</td>
+<td>List all instances of entity, irrespective of user.</td>
+</tr>
+<tr>
+<td>user</td>
+<td>query</td>
+<td>string</td>
+<td>false</td>
+<td>Identifier of a user on the controller.</td>
+</tr>
+</tbody></table>
+<h4 id='enumerated-values-2'>Enumerated Values</h4>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>detailed</td>
+<td>true</td>
+</tr>
+<tr>
+<td>detailed</td>
+<td>false</td>
+</tr>
+<tr>
+<td>all</td>
+<td>true</td>
+</tr>
+<tr>
+<td>all</td>
+<td>false</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Example responses</p>
+
+<p>200 Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"clouds"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<h3 id="listclouds-responses">Responses</h3>
+
+<table><thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>List of supported clouds.</td>
+<td><a href="#schemausercloudlist">UserCloudList</a></td>
+</tr>
+<tr>
+<td>400</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
+<td>Bad request.</td>
+<td><a href="#schemaerror">Error</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>Forbidden.</td>
+<td><a href="#schemaerror">Error</a></td>
+</tr>
+<tr>
+<td>500</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.1">Internal Server Error</a></td>
+<td>Internal server error.</td>
+<td><a href="#schemaerror">Error</a></td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+<h2 id='addcloud'>addCloud</h2>
+<p><a id="opIdaddCloud"></a></p>
+
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">POST</span> <span class="nn">https://localhost:17777/api/v1/clouds</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:17777</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
+curl <span class="nt">-X</span> POST https://localhost:17777/api/v1/clouds <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">package</span> <span class="n">main</span>
+
+<span class="k">import</span> <span class="p">(</span>
+       <span class="s">"bytes"</span>
+       <span class="s">"net/http"</span>
+<span class="p">)</span>
+
+<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="n">headers</span> <span class="o">:=</span> <span class="k">map</span><span class="p">[</span><span class="kt">string</span><span class="p">][]</span><span class="kt">string</span><span class="p">{</span>
+        <span class="s">"Content-Type"</span><span class="o">:</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">"application/json"</span><span class="p">},</span>
+        <span class="s">"Accept"</span><span class="o">:</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">"application/json"</span><span class="p">},</span>
+    <span class="p">}</span>
+
+    <span class="n">data</span> <span class="o">:=</span> <span class="n">bytes</span><span class="o">.</span><span class="n">NewBuffer</span><span class="p">([]</span><span class="kt">byte</span><span class="p">{</span><span class="n">jsonReq</span><span class="p">})</span>
+    <span class="n">req</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"POST"</span><span class="p">,</span> <span class="s">"https://localhost:17777/api/v1/clouds"</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+    <span class="n">req</span><span class="o">.</span><span class="n">Header</span> <span class="o">=</span> <span class="n">headers</span>
+
+    <span class="n">client</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="n">http</span><span class="o">.</span><span class="n">Client</span><span class="p">{}</span>
+    <span class="n">resp</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">client</span><span class="o">.</span><span class="n">Do</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
+    <span class="c">// ...</span>
+<span class="p">}</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/json'</span><span class="p">,</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://localhost:17777/api/v1/clouds'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
+
+</code></pre></div>
+<p><code>POST /clouds</code></p>
+
+<p><em>Adds a new cloud.</em></p>
+
+<p>Adds a new cloud, different from the one managed by the controller.</p>
+
+<blockquote>
+<p>Body parameter</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"endpoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"identity-endpoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"storage-endpoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"config"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="nl">"auth-types"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nl">"regions"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nl">"ca-certificates"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nl">"host-cloud-region"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"is-controller-cloud"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"skip-tls-verify"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<h3 id="addcloud-parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>force</td>
+<td>query</td>
+<td>boolean</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>body</td>
+<td>body</td>
+<td><a href="#schemaclouddetail">CloudDetail</a></td>
+<td>true</td>
+<td>Cloud creation parameters.</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Example responses</p>
+
+<p>200 Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Success"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"status_code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sync"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<h3 id="addcloud-responses">Responses</h3>
+
+<table><thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>Entity created response</td>
+<td>Inline</td>
+</tr>
+<tr>
+<td>400</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
+<td>Bad request.</td>
+<td><a href="#schemaerror">Error</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>Forbidden.</td>
+<td><a href="#schemaerror">Error</a></td>
+</tr>
+<tr>
+<td>500</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.1">Internal Server Error</a></td>
+<td>Internal server error.</td>
+<td><a href="#schemaerror">Error</a></td>
+</tr>
+</tbody></table>
+
+<h3 id="addcloud-responseschema">Response Schema</h3>
+
+<p>Status Code <strong>200</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>» status</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» status_code</td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» type</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody></table>
+<h3 id='response-headers-2'>Response Headers</h3>
+<table><thead>
+<tr>
+<th>Status</th>
+<th>Header</th>
+<th>Type</th>
+<th>Format</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>Location</td>
+<td>string</td>
+<td>uri</td>
+<td>The location of the newly created entity.</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+<h2 id='listsupportedclouds'>listSupportedClouds</h2>
+<p><a id="opIdlistSupportedClouds"></a></p>
+
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://localhost:17777/api/v1/clouds/supported</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:17777</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
+curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/clouds/supported <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">package</span> <span class="n">main</span>
+
+<span class="k">import</span> <span class="p">(</span>
+       <span class="s">"bytes"</span>
+       <span class="s">"net/http"</span>
+<span class="p">)</span>
+
+<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="n">headers</span> <span class="o">:=</span> <span class="k">map</span><span class="p">[</span><span class="kt">string</span><span class="p">][]</span><span class="kt">string</span><span class="p">{</span>
+        <span class="s">"Accept"</span><span class="o">:</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">"application/json"</span><span class="p">},</span>
+    <span class="p">}</span>
+
+    <span class="n">data</span> <span class="o">:=</span> <span class="n">bytes</span><span class="o">.</span><span class="n">NewBuffer</span><span class="p">([]</span><span class="kt">byte</span><span class="p">{</span><span class="n">jsonReq</span><span class="p">})</span>
+    <span class="n">req</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="s">"https://localhost:17777/api/v1/clouds/supported"</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+    <span class="n">req</span><span class="o">.</span><span class="n">Header</span> <span class="o">=</span> <span class="n">headers</span>
+
+    <span class="n">client</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="n">http</span><span class="o">.</span><span class="n">Client</span><span class="p">{}</span>
+    <span class="n">resp</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">client</span><span class="o">.</span><span class="n">Do</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
+    <span class="c">// ...</span>
+<span class="p">}</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://localhost:17777/api/v1/clouds/supported'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
+
+</code></pre></div>
+<p><code>GET /clouds/supported</code></p>
+
+<p><em>Get supported clouds.</em></p>
+
+<p>Returns the definitions of all clouds supported by the controller that the logged in
+user can see.</p>
+
+<blockquote>
+<p>Example responses</p>
+
+<p>200 Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"clouds"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<h3 id="listsupportedclouds-responses">Responses</h3>
+
+<table><thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>List of supported clouds.</td>
+<td><a href="#schemacloudlist">CloudList</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>Forbidden.</td>
+<td><a href="#schemaerror">Error</a></td>
+</tr>
+<tr>
+<td>500</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.1">Internal Server Error</a></td>
+<td>Internal server error.</td>
+<td><a href="#schemaerror">Error</a></td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+<h2 id='getcloud'>getCloud</h2>
+<p><a id="opIdgetCloud"></a></p>
+
+<blockquote>
+<p>Code samples</p>
+</blockquote>
+<div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://localhost:17777/api/v1/cloud/{name}</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">localhost:17777</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
+curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/cloud/<span class="o">{</span>name<span class="o">}</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">package</span> <span class="n">main</span>
+
+<span class="k">import</span> <span class="p">(</span>
+       <span class="s">"bytes"</span>
+       <span class="s">"net/http"</span>
+<span class="p">)</span>
+
+<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="n">headers</span> <span class="o">:=</span> <span class="k">map</span><span class="p">[</span><span class="kt">string</span><span class="p">][]</span><span class="kt">string</span><span class="p">{</span>
+        <span class="s">"Accept"</span><span class="o">:</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">"application/json"</span><span class="p">},</span>
+    <span class="p">}</span>
+
+    <span class="n">data</span> <span class="o">:=</span> <span class="n">bytes</span><span class="o">.</span><span class="n">NewBuffer</span><span class="p">([]</span><span class="kt">byte</span><span class="p">{</span><span class="n">jsonReq</span><span class="p">})</span>
+    <span class="n">req</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="s">"https://localhost:17777/api/v1/cloud/{name}"</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+    <span class="n">req</span><span class="o">.</span><span class="n">Header</span> <span class="o">=</span> <span class="n">headers</span>
+
+    <span class="n">client</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="n">http</span><span class="o">.</span><span class="n">Client</span><span class="p">{}</span>
+    <span class="n">resp</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">client</span><span class="o">.</span><span class="n">Do</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
+    <span class="c">// ...</span>
+<span class="p">}</span>
+
+</code></pre></div><div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://localhost:17777/api/v1/cloud/{name}'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
+
+</code></pre></div>
+<p><code>GET /cloud/{name}</code></p>
+
+<p><em>Get a specific cloud.</em></p>
+
+<p>Returns detailed information about a given cloud</p>
+
+<h3 id="getcloud-parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>In</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>path</td>
+<td>string</td>
+<td>true</td>
+<td>The name of a cloud in the controller.</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Example responses</p>
+
+<p>200 Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"endpoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"identity-endpoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"storage-endpoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"config"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+  </span><span class="nl">"auth-types"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nl">"regions"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nl">"ca-certificates"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nl">"host-cloud-region"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"is-controller-cloud"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"skip-tls-verify"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<h3 id="getcloud-responses">Responses</h3>
+
+<table><thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
+<td>Detailed information about the requested cloud.</td>
+<td><a href="#schemaclouddetail">CloudDetail</a></td>
+</tr>
+<tr>
+<td>400</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
+<td>Bad request.</td>
+<td><a href="#schemaerror">Error</a></td>
+</tr>
+<tr>
+<td>403</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.3">Forbidden</a></td>
+<td>Forbidden.</td>
+<td><a href="#schemaerror">Error</a></td>
+</tr>
+<tr>
+<td>500</td>
+<td><a href="https://tools.ietf.org/html/rfc7231#section-6.6.1">Internal Server Error</a></td>
+<td>Internal server error.</td>
+<td><a href="#schemaerror">Error</a></td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+<h1 id='schemas'>Schemas</h1>
+<h2 id="tocS_Cloud">Cloud</h2>
+
+<!-- backwards compatibility -->
+
+<p><a id="schemacloud"></a>
+<a id="schema_Cloud"></a>
+<a id="tocScloud"></a>
+<a id="tocscloud"></a></p>
+<div class="highlight"><pre class="highlight yaml tab-yaml"><code><span class="na">endpoint</span><span class="pi">:</span> <span class="s">string</span>
+<span class="na">identity-endpoint</span><span class="pi">:</span> <span class="s">string</span>
+<span class="na">name</span><span class="pi">:</span> <span class="s">string</span>
+<span class="na">storage-endpoint</span><span class="pi">:</span> <span class="s">string</span>
+<span class="na">config</span><span class="pi">:</span> <span class="pi">{}</span>
+<span class="na">auth-types</span><span class="pi">:</span> <span class="pi">[]</span>
+<span class="na">regions</span><span class="pi">:</span> <span class="pi">[]</span>
+<span class="na">type</span><span class="pi">:</span> <span class="s">string</span>
+<span class="na">users</span><span class="pi">:</span> <span class="pi">[]</span>
+
+</code></pre></div><h3 id='properties'>Properties</h3>
+<p>allOf</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td><a href="#schemacloudregion">CloudRegion</a></td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody></table>
+
+<p>and</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><em>anonymous</em></td>
 <td>object</td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
 </tr>
 <tr>
-<td>message</td>
+<td>» auth-types</td>
+<td>[string]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» regions</td>
+<td>[<a href="#schemacloudregion">CloudRegion</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» type</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» users</td>
+<td>[<a href="#schemaclouduser">CloudUser</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody></table>
+
+<h2 id="tocS_CloudDetail">CloudDetail</h2>
+
+<!-- backwards compatibility -->
+
+<p><a id="schemaclouddetail"></a>
+<a id="schema_CloudDetail"></a>
+<a id="tocSclouddetail"></a>
+<a id="tocsclouddetail"></a></p>
+<div class="highlight"><pre class="highlight yaml tab-yaml"><code><span class="na">endpoint</span><span class="pi">:</span> <span class="s">string</span>
+<span class="na">identity-endpoint</span><span class="pi">:</span> <span class="s">string</span>
+<span class="na">name</span><span class="pi">:</span> <span class="s">string</span>
+<span class="na">storage-endpoint</span><span class="pi">:</span> <span class="s">string</span>
+<span class="na">config</span><span class="pi">:</span> <span class="pi">{}</span>
+<span class="na">auth-types</span><span class="pi">:</span> <span class="pi">[]</span>
+<span class="na">regions</span><span class="pi">:</span> <span class="pi">[]</span>
+<span class="na">type</span><span class="pi">:</span> <span class="s">string</span>
+<span class="na">users</span><span class="pi">:</span> <span class="pi">[]</span>
+<span class="na">ca-certificates</span><span class="pi">:</span> <span class="pi">[]</span>
+<span class="na">host-cloud-region</span><span class="pi">:</span> <span class="s">string</span>
+<span class="na">is-controller-cloud</span><span class="pi">:</span> <span class="no">true</span>
+<span class="na">skip-tls-verify</span><span class="pi">:</span> <span class="no">true</span>
+
+</code></pre></div><h3 id='properties-2'>Properties</h3>
+<p>allOf</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td><a href="#schemacloud">Cloud</a></td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody></table>
+
+<p>and</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>object</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» ca-certificates</td>
+<td>[string]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» host-cloud-region</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» is-controller-cloud</td>
+<td>boolean</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» skip-tls-verify</td>
+<td>boolean</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody></table>
+
+<h2 id="tocS_CloudList">CloudList</h2>
+
+<!-- backwards compatibility -->
+
+<p><a id="schemacloudlist"></a>
+<a id="schema_CloudList"></a>
+<a id="tocScloudlist"></a>
+<a id="tocscloudlist"></a></p>
+<div class="highlight"><pre class="highlight yaml tab-yaml"><code><span class="na">clouds</span><span class="pi">:</span> <span class="pi">[]</span>
+
+</code></pre></div><h3 id='properties-3'>Properties</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>clouds</td>
+<td>[oneOf]</td>
+<td>true</td>
+<td>none</td>
+<td>List of supported clouds.</td>
+</tr>
+</tbody></table>
+
+<p>oneOf</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>» <em>anonymous</em></td>
+<td><a href="#schemacloud">Cloud</a></td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody></table>
+
+<p>xor</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>» <em>anonymous</em></td>
+<td><a href="#schemaclouddetail">CloudDetail</a></td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody></table>
+
+<h2 id="tocS_CloudRegion">CloudRegion</h2>
+
+<!-- backwards compatibility -->
+
+<p><a id="schemacloudregion"></a>
+<a id="schema_CloudRegion"></a>
+<a id="tocScloudregion"></a>
+<a id="tocscloudregion"></a></p>
+<div class="highlight"><pre class="highlight yaml tab-yaml"><code><span class="na">endpoint</span><span class="pi">:</span> <span class="s">string</span>
+<span class="na">identity-endpoint</span><span class="pi">:</span> <span class="s">string</span>
+<span class="na">name</span><span class="pi">:</span> <span class="s">string</span>
+<span class="na">storage-endpoint</span><span class="pi">:</span> <span class="s">string</span>
+<span class="na">config</span><span class="pi">:</span> <span class="pi">{}</span>
+
+</code></pre></div><h3 id='properties-4'>Properties</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>endpoint</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>identity-endpoint</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>storage-endpoint</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>config</td>
+<td>object</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody></table>
+
+<h2 id="tocS_CloudUser">CloudUser</h2>
+
+<!-- backwards compatibility -->
+
+<p><a id="schemaclouduser"></a>
+<a id="schema_CloudUser"></a>
+<a id="tocSclouduser"></a>
+<a id="tocsclouduser"></a></p>
+<div class="highlight"><pre class="highlight yaml tab-yaml"><code><span class="na">access</span><span class="pi">:</span> <span class="s">add-model</span>
+<span class="na">display-name</span><span class="pi">:</span> <span class="s">string</span>
+<span class="na">user</span><span class="pi">:</span> <span class="s">string</span>
+
+</code></pre></div><h3 id='properties-5'>Properties</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>access</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>display-name</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>user</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody></table>
+<h4 id='enumerated-values-3'>Enumerated Values</h4>
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>access</td>
+<td>add-model</td>
+</tr>
+<tr>
+<td>access</td>
+<td>admin</td>
+</tr>
+</tbody></table>
+
+<h2 id="tocS_CloudUserAccess">CloudUserAccess</h2>
+
+<!-- backwards compatibility -->
+
+<p><a id="schemaclouduseraccess"></a>
+<a id="schema_CloudUserAccess"></a>
+<a id="tocSclouduseraccess"></a>
+<a id="tocsclouduseraccess"></a></p>
+<div class="highlight"><pre class="highlight yaml tab-yaml"><code><span class="na">user-access</span><span class="pi">:</span> <span class="s">add-model</span>
+
+</code></pre></div><h3 id='properties-6'>Properties</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>user-access</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody></table>
+<h4 id='enumerated-values-4'>Enumerated Values</h4>
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>user-access</td>
+<td>add-model</td>
+</tr>
+<tr>
+<td>user-access</td>
+<td>admin</td>
+</tr>
+</tbody></table>
+
+<h2 id="tocS_Error">Error</h2>
+
+<!-- backwards compatibility -->
+
+<p><a id="schemaerror"></a>
+<a id="schema_Error"></a>
+<a id="tocSerror"></a>
+<a id="tocserror"></a></p>
+<div class="highlight"><pre class="highlight yaml tab-yaml"><code><span class="na">error</span><span class="pi">:</span> <span class="s">Bad request.</span>
+<span class="na">error_code</span><span class="pi">:</span> <span class="m">400</span>
+<span class="na">type</span><span class="pi">:</span> <span class="s">error</span>
+
+</code></pre></div><h3 id='properties-7'>Properties</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>error</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>error_code</td>
+<td>integer</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>type</td>
 <td>string</td>
 <td>true</td>
 <td>none</td>
@@ -1760,7 +3083,7 @@ This operation does not require authentication
 <span class="na">tags</span><span class="pi">:</span> <span class="pi">[]</span>
 <span class="na">virt-type</span><span class="pi">:</span> <span class="s">string</span>
 
-</code></pre></div><h3 id='properties-2'>Properties</h3>
+</code></pre></div><h3 id='properties-8'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1852,11 +3175,10 @@ This operation does not require authentication
 <span class="na">migration</span><span class="pi">:</span> <span class="pi">{}</span>
 <span class="na">provider-type</span><span class="pi">:</span> <span class="s">string</span>
 <span class="na">sla</span><span class="pi">:</span> <span class="pi">{}</span>
-<span class="na">user-access</span><span class="pi">:</span> <span class="s">string</span>
 
 </code></pre></div>
 <p>Detailed information about a given model.</p>
-<h3 id='properties-3'>Properties</h3>
+<h3 id='properties-9'>Properties</h3>
 <p>allOf</p>
 
 <table><thead>
@@ -1979,27 +3301,20 @@ This operation does not require authentication
 <td>none</td>
 <td>none</td>
 </tr>
-<tr>
-<td>» user-access</td>
-<td>string</td>
-<td>true</td>
-<td>none</td>
-<td>none</td>
-</tr>
 </tbody></table>
 
-<h2 id="tocS_ModelAccess">ModelAccess</h2>
+<h2 id="tocS_ModelUserAccess">ModelUserAccess</h2>
 
 <!-- backwards compatibility -->
 
-<p><a id="schemamodelaccess"></a>
-<a id="schema_ModelAccess"></a>
-<a id="tocSmodelaccess"></a>
-<a id="tocsmodelaccess"></a></p>
+<p><a id="schemamodeluseraccess"></a>
+<a id="schema_ModelUserAccess"></a>
+<a id="tocSmodeluseraccess"></a>
+<a id="tocsmodeluseraccess"></a></p>
 <div class="highlight"><pre class="highlight yaml tab-yaml"><code><span class="na">access</span><span class="pi">:</span> <span class="s">read</span>
 <span class="na">user</span><span class="pi">:</span> <span class="s">string</span>
 
-</code></pre></div><h3 id='properties-4'>Properties</h3>
+</code></pre></div><h3 id='properties-10'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2024,7 +3339,7 @@ This operation does not require authentication
 <td>Identifier of the user to whom permissions apply.</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values-2'>Enumerated Values</h4>
+<h4 id='enumerated-values-5'>Enumerated Values</h4>
 <table><thead>
 <tr>
 <th>Property</th>
@@ -2045,17 +3360,17 @@ This operation does not require authentication
 </tr>
 </tbody></table>
 
-<h2 id="tocS_ModelAccessList">ModelAccessList</h2>
+<h2 id="tocS_ModelUserAccessList">ModelUserAccessList</h2>
 
 <!-- backwards compatibility -->
 
-<p><a id="schemamodelaccesslist"></a>
-<a id="schema_ModelAccessList"></a>
-<a id="tocSmodelaccesslist"></a>
-<a id="tocsmodelaccesslist"></a></p>
+<p><a id="schemamodeluseraccesslist"></a>
+<a id="schema_ModelUserAccessList"></a>
+<a id="tocSmodeluseraccesslist"></a>
+<a id="tocsmodeluseraccesslist"></a></p>
 <div class="highlight"><pre class="highlight yaml tab-yaml"><code><span class="na">permissions</span><span class="pi">:</span> <span class="pi">[]</span>
 
-</code></pre></div><h3 id='properties-5'>Properties</h3>
+</code></pre></div><h3 id='properties-11'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2067,26 +3382,26 @@ This operation does not require authentication
 </thead><tbody>
 <tr>
 <td>permissions</td>
-<td>[<a href="#schemamodelaccess">ModelAccess</a>]</td>
+<td>[<a href="#schemamodeluseraccess">ModelUserAccess</a>]</td>
 <td>true</td>
 <td>none</td>
 <td>List of granted permissions to the model.</td>
 </tr>
 </tbody></table>
 
-<h2 id="tocS_ModelAccessUpdate">ModelAccessUpdate</h2>
+<h2 id="tocS_ModelUserAccessUpdate">ModelUserAccessUpdate</h2>
 
 <!-- backwards compatibility -->
 
-<p><a id="schemamodelaccessupdate"></a>
-<a id="schema_ModelAccessUpdate"></a>
-<a id="tocSmodelaccessupdate"></a>
-<a id="tocsmodelaccessupdate"></a></p>
+<p><a id="schemamodeluseraccessupdate"></a>
+<a id="schema_ModelUserAccessUpdate"></a>
+<a id="tocSmodeluseraccessupdate"></a>
+<a id="tocsmodeluseraccessupdate"></a></p>
 <div class="highlight"><pre class="highlight yaml tab-yaml"><code><span class="na">access</span><span class="pi">:</span> <span class="s">read</span>
 <span class="na">user</span><span class="pi">:</span> <span class="s">string</span>
 <span class="na">action</span><span class="pi">:</span> <span class="s">grant</span>
 
-</code></pre></div><h3 id='properties-6'>Properties</h3>
+</code></pre></div><h3 id='properties-12'>Properties</h3>
 <p>allOf</p>
 
 <table><thead>
@@ -2100,7 +3415,7 @@ This operation does not require authentication
 </thead><tbody>
 <tr>
 <td><em>anonymous</em></td>
-<td><a href="#schemamodelaccess">ModelAccess</a></td>
+<td><a href="#schemamodeluseraccess">ModelUserAccess</a></td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
@@ -2133,7 +3448,7 @@ This operation does not require authentication
 <td>Whether to &#39;grant&#39; or &#39;revoke&#39; the given permission for the specified user.</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values-3'>Enumerated Values</h4>
+<h4 id='enumerated-values-6'>Enumerated Values</h4>
 <table><thead>
 <tr>
 <th>Property</th>
@@ -2150,17 +3465,17 @@ This operation does not require authentication
 </tr>
 </tbody></table>
 
-<h2 id="tocS_ModelAccessUpdateList">ModelAccessUpdateList</h2>
+<h2 id="tocS_ModelUserAccessUpdateList">ModelUserAccessUpdateList</h2>
 
 <!-- backwards compatibility -->
 
-<p><a id="schemamodelaccessupdatelist"></a>
-<a id="schema_ModelAccessUpdateList"></a>
-<a id="tocSmodelaccessupdatelist"></a>
-<a id="tocsmodelaccessupdatelist"></a></p>
+<p><a id="schemamodeluseraccessupdatelist"></a>
+<a id="schema_ModelUserAccessUpdateList"></a>
+<a id="tocSmodeluseraccessupdatelist"></a>
+<a id="tocsmodeluseraccessupdatelist"></a></p>
 <div class="highlight"><pre class="highlight yaml tab-yaml"><code><span class="na">permissions</span><span class="pi">:</span> <span class="pi">[]</span>
 
-</code></pre></div><h3 id='properties-7'>Properties</h3>
+</code></pre></div><h3 id='properties-13'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2172,7 +3487,7 @@ This operation does not require authentication
 </thead><tbody>
 <tr>
 <td>permissions</td>
-<td>[<a href="#schemamodelaccessupdate">ModelAccessUpdate</a>]</td>
+<td>[<a href="#schemamodeluseraccessupdate">ModelUserAccessUpdate</a>]</td>
 <td>true</td>
 <td>none</td>
 <td>List of model access updates.</td>
@@ -2189,7 +3504,7 @@ This operation does not require authentication
 <a id="tocsmodelapplicationinfo"></a></p>
 <div class="highlight"><pre class="highlight yaml tab-yaml"><code><span class="na">name</span><span class="pi">:</span> <span class="s">string</span>
 
-</code></pre></div><h3 id='properties-8'>Properties</h3>
+</code></pre></div><h3 id='properties-14'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2223,7 +3538,7 @@ This operation does not require authentication
 <span class="na">owner</span><span class="pi">:</span> <span class="s">string</span>
 <span class="na">region</span><span class="pi">:</span> <span class="s">string</span>
 
-</code></pre></div><h3 id='properties-9'>Properties</h3>
+</code></pre></div><h3 id='properties-15'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2287,7 +3602,7 @@ This operation does not require authentication
 <a id="tocsmodelcredential"></a></p>
 <div class="highlight"><pre class="highlight yaml tab-yaml"><code><span class="na">cloud-credential</span><span class="pi">:</span> <span class="s">string</span>
 
-</code></pre></div><h3 id='properties-10'>Properties</h3>
+</code></pre></div><h3 id='properties-16'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2318,7 +3633,7 @@ This operation does not require authentication
 
 </code></pre></div>
 <p>A list of model defaults for the specified clouds</p>
-<h3 id='properties-11'>Properties</h3>
+<h3 id='properties-17'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2351,7 +3666,7 @@ This operation does not require authentication
 
 </code></pre></div>
 <p>Model defaults for a given cloud.</p>
-<h3 id='properties-12'>Properties</h3>
+<h3 id='properties-18'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2408,7 +3723,6 @@ This operation does not require authentication
 <span class="na">migration</span><span class="pi">:</span> <span class="pi">{}</span>
 <span class="na">provider-type</span><span class="pi">:</span> <span class="s">string</span>
 <span class="na">sla</span><span class="pi">:</span> <span class="pi">{}</span>
-<span class="na">user-access</span><span class="pi">:</span> <span class="s">string</span>
 <span class="na">cloud-credential-validity</span><span class="pi">:</span> <span class="no">true</span>
 <span class="na">default-base</span><span class="pi">:</span> <span class="s">string</span>
 <span class="na">machines</span><span class="pi">:</span> <span class="pi">[]</span>
@@ -2418,7 +3732,7 @@ This operation does not require authentication
 
 </code></pre></div>
 <p>Detailed administrative information about a model</p>
-<h3 id='properties-13'>Properties</h3>
+<h3 id='properties-19'>Properties</h3>
 <p>allOf</p>
 
 <table><thead>
@@ -2512,7 +3826,7 @@ This operation does not require authentication
 <div class="highlight"><pre class="highlight yaml tab-yaml"><code><span class="na">count</span><span class="pi">:</span> <span class="m">0</span>
 <span class="na">entity</span><span class="pi">:</span> <span class="s">string</span>
 
-</code></pre></div><h3 id='properties-14'>Properties</h3>
+</code></pre></div><h3 id='properties-20'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2554,7 +3868,7 @@ This operation does not require authentication
 
 </code></pre></div>
 <p>Represents a filesystem within the model.</p>
-<h3 id='properties-15'>Properties</h3>
+<h3 id='properties-21'>Properties</h3>
 <p><em>None</em></p>
 
 <h2 id="tocS_ModelMachine">ModelMachine</h2>
@@ -2575,7 +3889,7 @@ This operation does not require authentication
 <span class="na">status</span><span class="pi">:</span> <span class="s">string</span>
 <span class="na">wants-vote</span><span class="pi">:</span> <span class="no">true</span>
 
-</code></pre></div><h3 id='properties-16'>Properties</h3>
+</code></pre></div><h3 id='properties-22'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2664,7 +3978,7 @@ This operation does not require authentication
 
 </code></pre></div>
 <p>Status information about a model migration, including start and finish time.</p>
-<h3 id='properties-17'>Properties</h3>
+<h3 id='properties-23'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2708,7 +4022,7 @@ This operation does not require authentication
 <div class="highlight"><pre class="highlight yaml tab-yaml"><code><span class="na">level</span><span class="pi">:</span> <span class="s">string</span>
 <span class="na">owner</span><span class="pi">:</span> <span class="s">string</span>
 
-</code></pre></div><h3 id='properties-18'>Properties</h3>
+</code></pre></div><h3 id='properties-24'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2755,7 +4069,7 @@ This operation does not require authentication
 <span class="na">unit-count</span><span class="pi">:</span> <span class="m">0</span>
 <span class="na">volumes</span><span class="pi">:</span> <span class="pi">[]</span>
 
-</code></pre></div><h3 id='properties-19'>Properties</h3>
+</code></pre></div><h3 id='properties-25'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2865,7 +4179,7 @@ This operation does not require authentication
 <span class="na">provider-id</span><span class="pi">:</span> <span class="s">string</span>
 <span class="na">status</span><span class="pi">:</span> <span class="s">string</span>
 
-</code></pre></div><h3 id='properties-20'>Properties</h3>
+</code></pre></div><h3 id='properties-26'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2927,7 +4241,7 @@ This operation does not require authentication
 
 </code></pre></div>
 <p>Basic identifying information about a given model.</p>
-<h3 id='properties-21'>Properties</h3>
+<h3 id='properties-27'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2981,7 +4295,7 @@ This operation does not require authentication
 <span class="na">model</span><span class="pi">:</span> <span class="s">string</span>
 <span class="na">user</span><span class="pi">:</span> <span class="s">string</span>
 
-</code></pre></div><h3 id='properties-22'>Properties</h3>
+</code></pre></div><h3 id='properties-28'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3044,7 +4358,7 @@ This operation does not require authentication
 
 </code></pre></div>
 <p>Represents a volume within the model</p>
-<h3 id='properties-23'>Properties</h3>
+<h3 id='properties-29'>Properties</h3>
 <p><em>None</em></p>
 
 <h2 id="tocS_RegionDefaults">RegionDefaults</h2>
@@ -3058,7 +4372,7 @@ This operation does not require authentication
 <div class="highlight"><pre class="highlight yaml tab-yaml"><code><span class="na">region-name</span><span class="pi">:</span> <span class="s">string</span>
 <span class="na">value</span><span class="pi">:</span> <span class="pi">{}</span>
 
-</code></pre></div><h3 id='properties-24'>Properties</h3>
+</code></pre></div><h3 id='properties-30'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3097,7 +4411,7 @@ This operation does not require authentication
 <span class="na">name</span><span class="pi">:</span> <span class="s">string</span>
 <span class="na">token-rotate-interval</span><span class="pi">:</span> <span class="m">0</span>
 
-</code></pre></div><h3 id='properties-25'>Properties</h3>
+</code></pre></div><h3 id='properties-31'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3151,7 +4465,7 @@ This operation does not require authentication
 <p>An object representing the model defaults to update. Keys represent the model defaults to
 set, and values represent the desired values. The &#39;unset&#39; a model default, its value
 should be set to <code>null</code>.</p>
-<h3 id='properties-26'>Properties</h3>
+<h3 id='properties-32'>Properties</h3>
 <p><em>None</em></p>
 
 <h2 id="tocS_SupportedFeature">SupportedFeature</h2>
@@ -3166,7 +4480,7 @@ should be set to <code>null</code>.</p>
 <span class="na">name</span><span class="pi">:</span> <span class="s">string</span>
 <span class="na">version</span><span class="pi">:</span> <span class="s">string</span>
 
-</code></pre></div><h3 id='properties-27'>Properties</h3>
+</code></pre></div><h3 id='properties-33'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3199,20 +4513,30 @@ should be set to <code>null</code>.</p>
 </tr>
 </tbody></table>
 
-<h2 id="tocS_UserModel">UserModel</h2>
+<h2 id="tocS_UserCloud">UserCloud</h2>
 
 <!-- backwards compatibility -->
 
-<p><a id="schemausermodel"></a>
-<a id="schema_UserModel"></a>
-<a id="tocSusermodel"></a>
-<a id="tocsusermodel"></a></p>
-<div class="highlight"><pre class="highlight yaml tab-yaml"><code><span class="na">last-connection</span><span class="pi">:</span> <span class="s">2019-08-24T14:15:22Z</span>
-<span class="na">model</span><span class="pi">:</span> <span class="pi">{}</span>
+<p><a id="schemausercloud"></a>
+<a id="schema_UserCloud"></a>
+<a id="tocSusercloud"></a>
+<a id="tocsusercloud"></a></p>
+<div class="highlight"><pre class="highlight yaml tab-yaml"><code><span class="na">user-access</span><span class="pi">:</span> <span class="s">add-model</span>
+<span class="na">endpoint</span><span class="pi">:</span> <span class="s">string</span>
+<span class="na">identity-endpoint</span><span class="pi">:</span> <span class="s">string</span>
+<span class="na">name</span><span class="pi">:</span> <span class="s">string</span>
+<span class="na">storage-endpoint</span><span class="pi">:</span> <span class="s">string</span>
+<span class="na">config</span><span class="pi">:</span> <span class="pi">{}</span>
+<span class="na">auth-types</span><span class="pi">:</span> <span class="pi">[]</span>
+<span class="na">regions</span><span class="pi">:</span> <span class="pi">[]</span>
+<span class="na">type</span><span class="pi">:</span> <span class="s">string</span>
+<span class="na">users</span><span class="pi">:</span> <span class="pi">[]</span>
 
 </code></pre></div>
-<p>A model that a given user has access to.</p>
-<h3 id='properties-28'>Properties</h3>
+<p>A cloud that a given user has access to.</p>
+<h3 id='properties-34'>Properties</h3>
+<p>allOf</p>
+
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3223,14 +4547,137 @@ should be set to <code>null</code>.</p>
 </tr>
 </thead><tbody>
 <tr>
-<td>last-connection</td>
+<td><em>anonymous</em></td>
+<td><a href="#schemaclouduseraccess">CloudUserAccess</a></td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody></table>
+
+<p>and</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>any</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody></table>
+
+<p>oneOf</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>» <em>anonymous</em></td>
+<td><a href="#schemacloud">Cloud</a></td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody></table>
+
+<p>xor</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>» <em>anonymous</em></td>
+<td><a href="#schemaclouddetail">CloudDetail</a></td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody></table>
+
+<h2 id="tocS_UserModel">UserModel</h2>
+
+<!-- backwards compatibility -->
+
+<p><a id="schemausermodel"></a>
+<a id="schema_UserModel"></a>
+<a id="tocSusermodel"></a>
+<a id="tocsusermodel"></a></p>
+<div class="highlight"><pre class="highlight yaml tab-yaml"><code><span class="na">access</span><span class="pi">:</span> <span class="s">read</span>
+<span class="na">user</span><span class="pi">:</span> <span class="s">string</span>
+<span class="na">last-connection</span><span class="pi">:</span> <span class="s">2019-08-24T14:15:22Z</span>
+<span class="na">model</span><span class="pi">:</span> <span class="pi">{}</span>
+
+</code></pre></div>
+<p>A model that a given user has access to.</p>
+<h3 id='properties-35'>Properties</h3>
+<p>allOf</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td><a href="#schemamodeluseraccess">ModelUserAccess</a></td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody></table>
+
+<p>and</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><em>anonymous</em></td>
+<td>object</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>» last-connection</td>
 <td>string(date-time)</td>
 <td>true</td>
 <td>none</td>
 <td>none</td>
 </tr>
 <tr>
-<td>model</td>
+<td>» model</td>
 <td>any</td>
 <td>true</td>
 <td>none</td>
@@ -3250,7 +4697,7 @@ should be set to <code>null</code>.</p>
 </tr>
 </thead><tbody>
 <tr>
-<td>» <em>anonymous</em></td>
+<td>»» <em>anonymous</em></td>
 <td><a href="#schemamodelsummary">ModelSummary</a></td>
 <td>false</td>
 <td>none</td>
@@ -3270,7 +4717,7 @@ should be set to <code>null</code>.</p>
 </tr>
 </thead><tbody>
 <tr>
-<td>» <em>anonymous</em></td>
+<td>»» <em>anonymous</em></td>
 <td><a href="#schemamodel">Model</a></td>
 <td>false</td>
 <td>none</td>
@@ -3286,11 +4733,11 @@ should be set to <code>null</code>.</p>
 <a id="schema_UserModelList"></a>
 <a id="tocSusermodellist"></a>
 <a id="tocsusermodellist"></a></p>
-<div class="highlight"><pre class="highlight yaml tab-yaml"><code><span class="na">user-models</span><span class="pi">:</span> <span class="pi">[]</span>
+<div class="highlight"><pre class="highlight yaml tab-yaml"><code><span class="na">models</span><span class="pi">:</span> <span class="pi">[]</span>
 
 </code></pre></div>
 <p>A list of models that a given user has access to.</p>
-<h3 id='properties-29'>Properties</h3>
+<h3 id='properties-36'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3301,11 +4748,42 @@ should be set to <code>null</code>.</p>
 </tr>
 </thead><tbody>
 <tr>
-<td>user-models</td>
+<td>models</td>
 <td>[<a href="#schemausermodel">UserModel</a>]</td>
 <td>true</td>
 <td>none</td>
 <td>[A model that a given user has access to.]</td>
+</tr>
+</tbody></table>
+
+<h2 id="tocS_UserCloudList">UserCloudList</h2>
+
+<!-- backwards compatibility -->
+
+<p><a id="schemausercloudlist"></a>
+<a id="schema_UserCloudList"></a>
+<a id="tocSusercloudlist"></a>
+<a id="tocsusercloudlist"></a></p>
+<div class="highlight"><pre class="highlight yaml tab-yaml"><code><span class="na">clouds</span><span class="pi">:</span> <span class="pi">[]</span>
+
+</code></pre></div>
+<p>A list of clouds that a given user has access to.</p>
+<h3 id='properties-37'>Properties</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>clouds</td>
+<td>[<a href="#schemausercloud">UserCloud</a>]</td>
+<td>true</td>
+<td>none</td>
+<td>[A cloud that a given user has access to.]</td>
 </tr>
 </tbody></table>
 
@@ -3323,7 +4801,7 @@ should be set to <code>null</code>.</p>
 <span class="na">Patch</span><span class="pi">:</span> <span class="m">0</span>
 <span class="na">Tag</span><span class="pi">:</span> <span class="s">string</span>
 
-</code></pre></div><h3 id='properties-30'>Properties</h3>
+</code></pre></div><h3 id='properties-38'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
