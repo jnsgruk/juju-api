@@ -2233,18 +2233,13 @@ curl <span class="nt">-X</span> POST https://localhost:17777/api/v1/clouds <span
 <p>Body parameter</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"endpoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"identity-endpoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"storage-endpoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"config"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="nl">"auth-types"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"regions"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aws"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
   </span><span class="nl">"ca-certificates"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-  </span><span class="nl">"host-cloud-region"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"is-controller-cloud"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"default-cloud-region"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"skip-tls-verify"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
@@ -2552,18 +2547,13 @@ curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/cloud/<span c
 <p>200 Response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"endpoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"identity-endpoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"storage-endpoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"config"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
   </span><span class="nl">"auth-types"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"regions"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aws"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
   </span><span class="nl">"ca-certificates"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-  </span><span class="nl">"host-cloud-region"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"is-controller-cloud"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"default-cloud-region"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"skip-tls-verify"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
@@ -2615,19 +2605,13 @@ This operation does not require authentication
 <a id="schema_Cloud"></a>
 <a id="tocScloud"></a>
 <a id="tocscloud"></a></p>
-<div class="highlight"><pre class="highlight yaml tab-yaml"><code><span class="na">endpoint</span><span class="pi">:</span> <span class="s">string</span>
-<span class="na">identity-endpoint</span><span class="pi">:</span> <span class="s">string</span>
+<div class="highlight"><pre class="highlight yaml tab-yaml"><code><span class="na">auth-types</span><span class="pi">:</span> <span class="pi">[]</span>
 <span class="na">name</span><span class="pi">:</span> <span class="s">string</span>
-<span class="na">storage-endpoint</span><span class="pi">:</span> <span class="s">string</span>
-<span class="na">config</span><span class="pi">:</span> <span class="pi">{}</span>
-<span class="na">auth-types</span><span class="pi">:</span> <span class="pi">[]</span>
 <span class="na">regions</span><span class="pi">:</span> <span class="pi">[]</span>
-<span class="na">type</span><span class="pi">:</span> <span class="s">string</span>
+<span class="na">type</span><span class="pi">:</span> <span class="s">aws</span>
 <span class="na">users</span><span class="pi">:</span> <span class="pi">[]</span>
 
 </code></pre></div><h3 id='properties'>Properties</h3>
-<p>allOf</p>
-
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2638,59 +2622,75 @@ This operation does not require authentication
 </tr>
 </thead><tbody>
 <tr>
-<td><em>anonymous</em></td>
-<td><a href="#schemacloudregion">CloudRegion</a></td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-</tbody></table>
-
-<p>and</p>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Restrictions</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><em>anonymous</em></td>
-<td>object</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» auth-types</td>
+<td>auth-types</td>
 <td>[string]</td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
 </tr>
 <tr>
-<td>» regions</td>
+<td>name</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>regions</td>
 <td>[<a href="#schemacloudregion">CloudRegion</a>]</td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
 </tr>
 <tr>
-<td>» type</td>
+<td>type</td>
 <td>string</td>
 <td>true</td>
 <td>none</td>
 <td>none</td>
 </tr>
 <tr>
-<td>» users</td>
+<td>users</td>
 <td>[<a href="#schemaclouduser">CloudUser</a>]</td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
+</tr>
+</tbody></table>
+<h4 id='enumerated-values-3'>Enumerated Values</h4>
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>type</td>
+<td>aws</td>
+</tr>
+<tr>
+<td>type</td>
+<td>azure</td>
+</tr>
+<tr>
+<td>type</td>
+<td>equinix</td>
+</tr>
+<tr>
+<td>type</td>
+<td>gce</td>
+</tr>
+<tr>
+<td>type</td>
+<td>lxd</td>
+</tr>
+<tr>
+<td>type</td>
+<td>k8s</td>
+</tr>
+<tr>
+<td>type</td>
+<td>oci</td>
 </tr>
 </tbody></table>
 
@@ -2702,18 +2702,13 @@ This operation does not require authentication
 <a id="schema_CloudDetail"></a>
 <a id="tocSclouddetail"></a>
 <a id="tocsclouddetail"></a></p>
-<div class="highlight"><pre class="highlight yaml tab-yaml"><code><span class="na">endpoint</span><span class="pi">:</span> <span class="s">string</span>
-<span class="na">identity-endpoint</span><span class="pi">:</span> <span class="s">string</span>
+<div class="highlight"><pre class="highlight yaml tab-yaml"><code><span class="na">auth-types</span><span class="pi">:</span> <span class="pi">[]</span>
 <span class="na">name</span><span class="pi">:</span> <span class="s">string</span>
-<span class="na">storage-endpoint</span><span class="pi">:</span> <span class="s">string</span>
-<span class="na">config</span><span class="pi">:</span> <span class="pi">{}</span>
-<span class="na">auth-types</span><span class="pi">:</span> <span class="pi">[]</span>
 <span class="na">regions</span><span class="pi">:</span> <span class="pi">[]</span>
-<span class="na">type</span><span class="pi">:</span> <span class="s">string</span>
+<span class="na">type</span><span class="pi">:</span> <span class="s">aws</span>
 <span class="na">users</span><span class="pi">:</span> <span class="pi">[]</span>
 <span class="na">ca-certificates</span><span class="pi">:</span> <span class="pi">[]</span>
-<span class="na">host-cloud-region</span><span class="pi">:</span> <span class="s">string</span>
-<span class="na">is-controller-cloud</span><span class="pi">:</span> <span class="no">true</span>
+<span class="na">default-cloud-region</span><span class="pi">:</span> <span class="s">string</span>
 <span class="na">skip-tls-verify</span><span class="pi">:</span> <span class="no">true</span>
 
 </code></pre></div><h3 id='properties-2'>Properties</h3>
@@ -2763,15 +2758,8 @@ This operation does not require authentication
 <td>none</td>
 </tr>
 <tr>
-<td>» host-cloud-region</td>
+<td>» default-cloud-region</td>
 <td>string</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>» is-controller-cloud</td>
-<td>boolean</td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
@@ -2959,7 +2947,7 @@ This operation does not require authentication
 <td>none</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values-3'>Enumerated Values</h4>
+<h4 id='enumerated-values-4'>Enumerated Values</h4>
 <table><thead>
 <tr>
 <th>Property</th>
@@ -3004,7 +2992,7 @@ This operation does not require authentication
 <td>none</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values-4'>Enumerated Values</h4>
+<h4 id='enumerated-values-5'>Enumerated Values</h4>
 <table><thead>
 <tr>
 <th>Property</th>
@@ -3339,7 +3327,7 @@ This operation does not require authentication
 <td>Identifier of the user to whom permissions apply.</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values-5'>Enumerated Values</h4>
+<h4 id='enumerated-values-6'>Enumerated Values</h4>
 <table><thead>
 <tr>
 <th>Property</th>
@@ -3448,7 +3436,7 @@ This operation does not require authentication
 <td>Whether to &#39;grant&#39; or &#39;revoke&#39; the given permission for the specified user.</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values-6'>Enumerated Values</h4>
+<h4 id='enumerated-values-7'>Enumerated Values</h4>
 <table><thead>
 <tr>
 <th>Property</th>
@@ -4522,14 +4510,10 @@ should be set to <code>null</code>.</p>
 <a id="tocSusercloud"></a>
 <a id="tocsusercloud"></a></p>
 <div class="highlight"><pre class="highlight yaml tab-yaml"><code><span class="na">user-access</span><span class="pi">:</span> <span class="s">add-model</span>
-<span class="na">endpoint</span><span class="pi">:</span> <span class="s">string</span>
-<span class="na">identity-endpoint</span><span class="pi">:</span> <span class="s">string</span>
-<span class="na">name</span><span class="pi">:</span> <span class="s">string</span>
-<span class="na">storage-endpoint</span><span class="pi">:</span> <span class="s">string</span>
-<span class="na">config</span><span class="pi">:</span> <span class="pi">{}</span>
 <span class="na">auth-types</span><span class="pi">:</span> <span class="pi">[]</span>
+<span class="na">name</span><span class="pi">:</span> <span class="s">string</span>
 <span class="na">regions</span><span class="pi">:</span> <span class="pi">[]</span>
-<span class="na">type</span><span class="pi">:</span> <span class="s">string</span>
+<span class="na">type</span><span class="pi">:</span> <span class="s">aws</span>
 <span class="na">users</span><span class="pi">:</span> <span class="pi">[]</span>
 
 </code></pre></div>
