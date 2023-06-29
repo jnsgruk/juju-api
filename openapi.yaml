@@ -40,8 +40,110 @@ tags:
     externalDocs:
       description: Find out more about Juju models.
       url: https://juju.is/docs/olm/manage-models
+  - name: cloud
+    description: Manage Juju clouds
+    externalDocs:
+      description: Find out more about Juju clouds.
+      url: https://juju.is/docs/olm/manage-clouds
 
 paths:
+  /clouds:
+    get:
+      tags:
+        - cloud
+      summary: Get clouds that specified user has access to.
+      description: |
+        Returns clouds that the specified user has access to. Controller admins (superuser) can
+        list clouds for any user. Other users can only ask about their own clouds.
+      operationId: listClouds
+      parameters:
+        - $ref: "#/components/parameters/Detailed"
+        - $ref: "#/components/parameters/All"
+        - $ref: "#/components/parameters/User"
+      responses:
+        "200":
+          description: List of supported clouds.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserCloudList"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+    
+    post:
+      tags:
+        - cloud
+      summary: Adds a new cloud.
+      description: Adds a new cloud, different from the one managed by the controller.
+      operationId: addCloud
+      parameters:
+        - $ref: "#/components/parameters/Force"
+      requestBody:
+        description: Cloud creation parameters.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CloudDetail"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/EntityCreated"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  
+  /clouds/supported:
+    get:
+      tags:
+        - cloud
+      summary: Get supported clouds.
+      description: |
+        Returns the definitions of all clouds supported by the controller that the logged in
+        user can see.
+      operationId: listSupportedClouds
+      responses:
+        "200":
+          description: List of supported clouds.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CloudList"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  
+  /cloud/{name}:
+    get:
+      tags:
+        - cloud
+      summary: Get a specific cloud.
+      description: |
+        Returns detailed information about a given cloud
+      operationId: getCloud
+      parameters:
+        - $ref: "#/components/parameters/CloudName"
+      responses:
+        "200":
+          description: Detailed information about the requested cloud.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CloudDetail"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+
   /model/{name}:
     get:
       tags:
@@ -59,12 +161,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ModelDetail"
-        "404":
-          description: Model not found.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
     
     delete:
       tags:
@@ -81,13 +183,13 @@ paths:
         - $ref: "#/components/parameters/Timeout"
       responses:
         "200":
-          description: Model deleted.
-        "404":
-          description: Model not found.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
+          $ref: "#/components/responses/EmptySyncResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
 
   /model/{name}/status:
     get:
@@ -106,12 +208,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ModelStatus"
-        "404":
-          description: Model not found.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
   
   /model/{name}/access:
     get:
@@ -121,7 +223,7 @@ paths:
       description: |
         Return a list of objects that describe the level of permissions granted over the model
         to users on the controller.
-      operationId: getModelAccess
+      operationId: getModelUserAccess
       parameters:
         - $ref: "#/components/parameters/ModelName"
       responses:
@@ -130,26 +232,20 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ModelAccessList"
-        "404":
-          description: Model not found.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "401":
-          description: Unauthorised to view model access controls.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
+                $ref: "#/components/schemas/ModelUserAccessList"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
     patch:
       tags:
         - model
       summary: Change the model access granted to users.
       description: |
         Update the level of model access that is granted to specific users.
-      operationId: updateModelAccess
+      operationId: updateModelUserAccess
       parameters:
         - $ref: "#/components/parameters/ModelName"
       requestBody:
@@ -157,33 +253,17 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ModelAccessUpdateList"
+              $ref: "#/components/schemas/ModelUserAccessUpdateList"
         required: true
       responses:
         "200":
-          description: Updated list of model access controls
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ModelAccessList"
+          $ref: "#/components/responses/EmptySyncResponse"
         "400":
-          description: Malformed access update request.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "404":
-          description: Model not found.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "401":
-          description: Unauthorised to update model access controls.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
   
   /model/{name}/credential:
     patch:
@@ -204,29 +284,13 @@ paths:
         required: true
       responses:
         "200":
-          description: Updated list of model access controls
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ModelDetail"
+          $ref: "#/components/responses/EmptySyncResponse"
         "400":
-          description: Malformed credential update request.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "404":
-          description: Model not found.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "401":
-          description: Unauthorised to update model credential.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
 
   /models:
     get:
@@ -241,32 +305,9 @@ paths:
         Other users can only ask about their own models.
       operationId: listModels
       parameters:
-        - name: user
-          in: query
-          description: The user to list models for (administrative users only)
-          required: false
-          schema: 
-            type: string
-        - name: all
-          in: query
-          description: Lists all models, regardless of user accessibility (administrative users only)
-          required: false
-          schema: 
-            type: string
-            default: false
-            enum:
-              - true
-              - false
-        - name: detailed
-          in: query
-          description: Return detailed model summaries with more information.
-          required: false
-          schema: 
-            type: string
-            default: false
-            enum:
-              - true
-              - false
+        - $ref: "#/components/parameters/All"
+        - $ref: "#/components/parameters/Detailed"
+        - $ref: "#/components/parameters/User"
       responses:
         "200":
           description: List of models the specified user has access to.
@@ -274,6 +315,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UserModelList"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
     
     post:
       tags:
@@ -289,18 +336,14 @@ paths:
               $ref: "#/components/schemas/ModelCreateArgs"
         required: true
       responses:
-        "201":
-          description: Model created.
-          headers:
-            Location:
-              schema:
-                type: string
-                format: uri
-              description: The location of the newly created model.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ModelSummary"
+        "200":
+          $ref: "#/components/responses/EntityCreated"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
   
   /models/defaults:
     get:
@@ -326,6 +369,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ModelDefaultsList"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
     
     patch:
       tags:
@@ -364,37 +413,155 @@ paths:
         required: true
       responses:
         "200":
-          description: List of model defaults for the specified cloud.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ModelDefaultsList"
+          $ref: "#/components/responses/EmptySyncResponse"
         "400":
-          description: Controller hosts more than one cloud but no cloud was specified.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
 components:
   schemas:
-    Error:
+    Cloud:
+      type: object
+      allOf:
+        - type: object
+          properties:
+            auth-types:
+              type: array
+              items:
+                type: string
+                enum:
+                  - access-key
+                  - instance-role
+                  - userpass
+                  - oauth1
+                  - oauth2
+                  - jsonfile
+                  - clientcertificate
+                  - httpsig
+                  - interactive
+                  - empty
+                  - auth-types
+                  - endpoint
+                  - regions
+                  - certfilename
+            name:
+              type: string
+            regions:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CloudRegion'
+            type:
+              type: string
+              enum:
+                - aws
+                - azure
+                - equinix
+                - gce
+                - lxd
+                - k8s
+                - oci
+            users:
+              type: array
+              items:
+                $ref: "#/components/schemas/CloudUser"
+          additionalProperties: false
+          required:
+            - type
+    CloudDetail:
+      type: object
+      allOf:
+      # TODO: 'Cloud' seems to have all the fields of a CloudRegion
+      # Could this be modelled differently?
+      - $ref: '#/components/schemas/Cloud'
+      - type: object
+        properties:
+          # TODO: We should probably be modelling CA's properly in this spec?
+          ca-certificates:
+            type: array
+            items:
+              type: string
+          default-cloud-region:
+            type: string
+          skip-tls-verify:
+            type: boolean
+        additionalProperties: false
+    CloudList:
       type: object
       properties:
-        code:
+        clouds:
+          description: List of supported clouds.
+          type: array
+          items:
+            oneOf:
+              - $ref: '#/components/schemas/Cloud'
+              - $ref: '#/components/schemas/CloudDetail'
+      additionalProperties: false
+      required:
+      - clouds
+    CloudRegion:
+      type: object
+      properties:
+        endpoint:
           type: string
-        info:
+        identity-endpoint:
+          type: string
+        name:
+          type: string
+        storage-endpoint:
+          type: string
+        config:
           type: object
           additionalProperties: true
-          # patternProperties:
-          #   .*:
-          #     type: object
-          #     additionalProperties: true
-        message:
+      additionalProperties: false
+      required:
+      - name
+    CloudUser:
+      type: object
+      properties:
+        access:
+          type: string
+          enum:
+            - add-model
+            - admin
+        display-name:
+          type: string
+        user:
           type: string
       additionalProperties: false
       required:
-      - message
-      - code
+      - user
+      - display-name
+      - access
+    CloudUserAccess:
+      type: object
+      properties:
+        user-access:
+          type: string
+          enum:
+            - add-model
+            - admin
+      additionalProperties: false
+      required:
+        - user-access
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          example: Bad request.
+        error_code:
+          type: integer
+          example: 400
+        type:
+          type: string
+          example: error
+      additionalProperties: false
+      required:
+      - error
+      - error_code
+      - type
     MachineHardware:
       type: object
       properties:
@@ -451,19 +618,16 @@ components:
             type: string
           sla:
             $ref: '#/components/schemas/ModelSLAInfo'
-          user-access:
-            type: string
         additionalProperties: false
         required:
         - controller-uuid
         - is-controller
         - cloud
         - life
-        - user-access
         - counts
         - sla
         - agent-version
-    ModelAccess:
+    ModelUserAccess:
       type: object
       properties:
         access:
@@ -480,21 +644,21 @@ components:
       required:
       - access
       - user
-    ModelAccessList:
+    ModelUserAccessList:
       type: object
       properties:
         permissions:
           description: List of granted permissions to the model.
           type: array
           items:
-            $ref: '#/components/schemas/ModelAccess'
+            $ref: '#/components/schemas/ModelUserAccess'
       additionalProperties: false
       required:
       - permissions
-    ModelAccessUpdate:
+    ModelUserAccessUpdate:
       type: object
       allOf:
-      - $ref: '#/components/schemas/ModelAccess'
+      - $ref: '#/components/schemas/ModelUserAccess'
       - type: object
         properties:
           action:
@@ -506,14 +670,14 @@ components:
         required:
         - action
       additionalProperties: false
-    ModelAccessUpdateList:
+    ModelUserAccessUpdateList:
       type: object
       properties:
         permissions:
           description: List of model access updates.
           type: array
           items:
-            $ref: '#/components/schemas/ModelAccessUpdate'
+            $ref: '#/components/schemas/ModelUserAccessUpdate'
       additionalProperties: false
       required:
       - permissions
@@ -810,10 +974,6 @@ components:
         config:
           type: object
           additionalProperties: true
-          # patternProperties:
-          #   .*:
-          #     type: object
-          #     additionalProperties: true
         name:
           type: string
         token-rotate-interval:
@@ -843,32 +1003,52 @@ components:
       required:
       - name
       - description
+    UserCloud:
+      description: A cloud that a given user has access to.
+      allOf:
+      - $ref: "#/components/schemas/CloudUserAccess"
+      - oneOf:
+          - $ref: '#/components/schemas/Cloud'
+          - $ref: '#/components/schemas/CloudDetail'
     UserModel:
       description: A model that a given user has access to.
-      type: object
-      properties:
-        last-connection:
-          type: string
-          format: date-time
-        model:
-          oneOf:
-            - $ref: '#/components/schemas/ModelSummary'
-            - $ref: '#/components/schemas/Model'
-      additionalProperties: false
-      required:
-        - model
-        - last-connection
+      allOf:
+       - $ref: "#/components/schemas/ModelUserAccess"
+       - type: object
+         properties:
+           last-connection:
+             type: string
+             format: date-time
+           model:
+             oneOf:
+               - $ref: '#/components/schemas/ModelSummary'
+               - $ref: '#/components/schemas/Model'
+         additionalProperties: false
+         required:
+           - model
+           - last-connection
     UserModelList:
       description: A list of models that a given user has access to.
       type: object
       properties:
-        user-models:
+        models:
           type: array
           items:
             $ref: '#/components/schemas/UserModel'
       additionalProperties: false
       required:
-        - user-models
+        - models
+    UserCloudList:
+      description: A list of clouds that a given user has access to.
+      type: object
+      properties:
+        clouds:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserCloud'
+      additionalProperties: false
+      required:
+        - clouds
     Version:
       type: object
       properties:
@@ -891,6 +1071,24 @@ components:
       - Build
 
   parameters:
+    All:
+      in: query
+      name: all
+      description: List all instances of entity, irrespective of user.
+      required: false
+      schema: 
+        type: string
+        default: false
+        enum:
+          - true
+          - false
+    CloudName:
+      in: path
+      name: name
+      required: true
+      description: The name of a cloud in the controller.
+      schema: 
+        type: string
     ModelName:
       in: path
       name: name
@@ -904,6 +1102,17 @@ components:
       required: false
       schema:
         type: boolean
+    Detailed:
+      in: query
+      name: detailed
+      description: Return detailed information about requested entity.
+      required: false
+      schema: 
+        type: string
+        default: false
+        enum:
+          - true
+          - false
     Force:
       in: query
       name: force
@@ -922,6 +1131,69 @@ components:
       required: false
       schema:
         type: integer
+    User:
+      in: query
+      name: user
+      required: false
+      description: Identifier of a user on the controller.
+      schema:
+        type: string
+  
+  responses:
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    EmptySyncResponse:
+      description: Empty sync response.
+      content:
+        application/json:
+          schema:
+            properties:
+              status:
+                example: Success
+                type: string
+              status_code:
+                example: 200
+                type: integer
+              type:
+                example: sync
+                type: string
+    EntityCreated:
+      description: Entity created response
+      content:
+        application/json:
+          schema:
+            properties:
+              status:
+                example: Success
+                type: string
+              status_code:
+                example: 200
+                type: integer
+              type:
+                example: sync
+                type: string
+      headers:
+        Location:
+          schema:
+            type: string
+            format: uri
+          description: The location of the newly created entity.
+    Forbidden:
+      description: Forbidden.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalServerError:
+      description: Internal server error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   
   
   # Use this section to define reusable objects

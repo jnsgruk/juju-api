@@ -149,16 +149,16 @@ This table tracks progress through the redesign of the Juju client API:
 | Client               | FullStatus                      |                                      |
 | Client               | StatusHistory                   |                                      |
 | Client               | WatchAll                        |                                      |
-| Cloud                | AddCloud                        |                                      |
+| Cloud                | AddCloud                        | `POST /clouds`                       |
 | Cloud                | AddCredentials                  |                                      |
 | Cloud                | CheckCredentialsModels          |                                      |
-| Cloud                | Cloud                           |                                      |
-| Cloud                | CloudInfo                       |                                      |
-| Cloud                | Clouds                          |                                      |
+| Cloud                | Cloud                           | `GET /cloud/{name}`                  |
+| Cloud                | CloudInfo                       | `GET /cloud/{name}`                  |
+| Cloud                | Clouds                          | `GET /clouds/supported`              |
 | Cloud                | Credential                      |                                      |
 | Cloud                | CredentialContents              |                                      |
 | Cloud                | InstanceTypes                   |                                      |
-| Cloud                | ListCloudInfo                   |                                      |
+| Cloud                | ListCloudInfo                   | `GET /clouds`                        |
 | Cloud                | ModifyCloudAccess               |                                      |
 | Cloud                | RemoveClouds                    |                                      |
 | Cloud                | RevokeCredentialsCheckModels    |                                      |
