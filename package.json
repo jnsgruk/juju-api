@@ -1,9 +1,0 @@
-{
-  "scripts": {
-    "generate": "npm run generate-spec; npm run generate-converted-spec",
-    "generate-spec": "npx widdershins -e .widdershins.yaml ./openapi.yaml -o site/index.html.md",
-    "generate-converted-spec": "npx widdershins -e .widdershins.yaml ./schemas/generated.yaml -o site/generated.html.md",
-    "serve": "docker run --rm -v $(pwd)/build:/srv/slate/build -v $(pwd)/site:/srv/slate/source -p4567:4567 slatedocs/slate serve",
-    "build": "docker run --rm -v $(pwd)/build:/srv/slate/build -v $(pwd)/site:/srv/slate/source slatedocs/slate build"
-  }
-}
