@@ -339,9 +339,6 @@
                     <a href="#tocS_ModelStorageAttributes" class="toc-h2 toc-link" data-title="ModelStorageAttributes">ModelStorageAttributes</a>
                   </li>
                   <li>
-                    <a href="#tocS_ModelSummary" class="toc-h2 toc-link" data-title="ModelSummary">ModelSummary</a>
-                  </li>
-                  <li>
                     <a href="#tocS_ModelUserInfo" class="toc-h2 toc-link" data-title="ModelUserInfo">ModelUserInfo</a>
                   </li>
                   <li>
@@ -3165,10 +3162,8 @@ This operation does not require authentication
 <span class="na">sla</span><span class="pi">:</span> <span class="pi">{}</span>
 
 </code></pre></div>
-<p>Detailed information about a given model.</p>
+<p>Information about a given model.</p>
 <h3 id='properties-9'>Properties</h3>
-<p>allOf</p>
-
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3179,111 +3174,112 @@ This operation does not require authentication
 </tr>
 </thead><tbody>
 <tr>
-<td><em>anonymous</em></td>
-<td><a href="#schemamodelsummary">ModelSummary</a></td>
-<td>false</td>
-<td>none</td>
-<td>Basic identifying information about a given model.</td>
-</tr>
-</tbody></table>
-
-<p>and</p>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Restrictions</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><em>anonymous</em></td>
-<td>object</td>
-<td>false</td>
+<td>name</td>
+<td>string</td>
+<td>true</td>
 <td>none</td>
 <td>none</td>
 </tr>
 <tr>
-<td>» agent-version</td>
+<td>owner</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>Identifier of the model&#39;s owner.</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>uuid</td>
+<td>string</td>
+<td>true</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>agent-version</td>
 <td><a href="#schemaversion">Version</a></td>
 <td>true</td>
 <td>none</td>
 <td>none</td>
 </tr>
 <tr>
-<td>» cloud-credential</td>
+<td>cloud-credential</td>
 <td>string</td>
 <td>false</td>
 <td>none</td>
 <td>Identifier for the model&#39;s cloud credential.</td>
 </tr>
 <tr>
-<td>» cloud-region</td>
+<td>cloud-region</td>
 <td>string</td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
 </tr>
 <tr>
-<td>» cloud</td>
+<td>cloud</td>
 <td>string</td>
 <td>true</td>
 <td>none</td>
 <td>Identifier for the model&#39;s cloud.</td>
 </tr>
 <tr>
-<td>» controller-uuid</td>
+<td>controller-uuid</td>
 <td>string</td>
 <td>true</td>
 <td>none</td>
 <td>none</td>
 </tr>
 <tr>
-<td>» counts</td>
+<td>counts</td>
 <td>[<a href="#schemamodelentitycount">ModelEntityCount</a>]</td>
 <td>true</td>
 <td>none</td>
 <td>none</td>
 </tr>
 <tr>
-<td>» default-series</td>
+<td>default-series</td>
 <td>string</td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
 </tr>
 <tr>
-<td>» is-controller</td>
+<td>is-controller</td>
 <td>boolean</td>
 <td>true</td>
 <td>none</td>
 <td>none</td>
 </tr>
 <tr>
-<td>» life</td>
+<td>life</td>
 <td>string</td>
 <td>true</td>
 <td>none</td>
 <td>none</td>
 </tr>
 <tr>
-<td>» migration</td>
+<td>migration</td>
 <td><a href="#schemamodelmigrationstatus">ModelMigrationStatus</a></td>
 <td>false</td>
 <td>none</td>
 <td>Status information about a model migration, including start and finish time.</td>
 </tr>
 <tr>
-<td>» provider-type</td>
+<td>provider-type</td>
 <td>string</td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
 </tr>
 <tr>
-<td>» sla</td>
+<td>sla</td>
 <td><a href="#schemamodelslainfo">ModelSLAInfo</a></td>
 <td>true</td>
 <td>none</td>
@@ -3737,7 +3733,7 @@ This operation does not require authentication
 <td><a href="#schemamodel">Model</a></td>
 <td>false</td>
 <td>none</td>
-<td>Detailed information about a given model.</td>
+<td>Information about a given model.</td>
 </tr>
 </tbody></table>
 
@@ -4214,61 +4210,6 @@ This operation does not require authentication
 </tr>
 </tbody></table>
 
-<h2 id="tocS_ModelSummary">ModelSummary</h2>
-
-<!-- backwards compatibility -->
-
-<p><a id="schemamodelsummary"></a>
-<a id="schema_ModelSummary"></a>
-<a id="tocSmodelsummary"></a>
-<a id="tocsmodelsummary"></a></p>
-<div class="highlight"><pre class="highlight yaml tab-yaml"><code><span class="na">name</span><span class="pi">:</span> <span class="s">string</span>
-<span class="na">owner</span><span class="pi">:</span> <span class="s">string</span>
-<span class="na">type</span><span class="pi">:</span> <span class="s">string</span>
-<span class="na">uuid</span><span class="pi">:</span> <span class="s">string</span>
-
-</code></pre></div>
-<p>Basic identifying information about a given model.</p>
-<h3 id='properties-27'>Properties</h3>
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Restrictions</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>name</td>
-<td>string</td>
-<td>true</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>owner</td>
-<td>string</td>
-<td>true</td>
-<td>none</td>
-<td>Identifier of the model&#39;s owner.</td>
-</tr>
-<tr>
-<td>type</td>
-<td>string</td>
-<td>true</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>uuid</td>
-<td>string</td>
-<td>true</td>
-<td>none</td>
-<td>none</td>
-</tr>
-</tbody></table>
-
 <h2 id="tocS_ModelUserInfo">ModelUserInfo</h2>
 
 <!-- backwards compatibility -->
@@ -4283,7 +4224,7 @@ This operation does not require authentication
 <span class="na">model</span><span class="pi">:</span> <span class="s">string</span>
 <span class="na">user</span><span class="pi">:</span> <span class="s">string</span>
 
-</code></pre></div><h3 id='properties-28'>Properties</h3>
+</code></pre></div><h3 id='properties-27'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4346,7 +4287,7 @@ This operation does not require authentication
 
 </code></pre></div>
 <p>Represents a volume within the model</p>
-<h3 id='properties-29'>Properties</h3>
+<h3 id='properties-28'>Properties</h3>
 <p><em>None</em></p>
 
 <h2 id="tocS_RegionDefaults">RegionDefaults</h2>
@@ -4360,7 +4301,7 @@ This operation does not require authentication
 <div class="highlight"><pre class="highlight yaml tab-yaml"><code><span class="na">region-name</span><span class="pi">:</span> <span class="s">string</span>
 <span class="na">value</span><span class="pi">:</span> <span class="pi">{}</span>
 
-</code></pre></div><h3 id='properties-30'>Properties</h3>
+</code></pre></div><h3 id='properties-29'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4399,7 +4340,7 @@ This operation does not require authentication
 <span class="na">name</span><span class="pi">:</span> <span class="s">string</span>
 <span class="na">token-rotate-interval</span><span class="pi">:</span> <span class="m">0</span>
 
-</code></pre></div><h3 id='properties-31'>Properties</h3>
+</code></pre></div><h3 id='properties-30'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4453,7 +4394,7 @@ This operation does not require authentication
 <p>An object representing the model defaults to update. Keys represent the model defaults to
 set, and values represent the desired values. The &#39;unset&#39; a model default, its value
 should be set to <code>null</code>.</p>
-<h3 id='properties-32'>Properties</h3>
+<h3 id='properties-31'>Properties</h3>
 <p><em>None</em></p>
 
 <h2 id="tocS_SupportedFeature">SupportedFeature</h2>
@@ -4468,7 +4409,7 @@ should be set to <code>null</code>.</p>
 <span class="na">name</span><span class="pi">:</span> <span class="s">string</span>
 <span class="na">version</span><span class="pi">:</span> <span class="s">string</span>
 
-</code></pre></div><h3 id='properties-33'>Properties</h3>
+</code></pre></div><h3 id='properties-32'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4518,7 +4459,7 @@ should be set to <code>null</code>.</p>
 
 </code></pre></div>
 <p>A cloud that a given user has access to.</p>
-<h3 id='properties-34'>Properties</h3>
+<h3 id='properties-33'>Properties</h3>
 <p>allOf</p>
 
 <table><thead>
@@ -4610,11 +4551,11 @@ should be set to <code>null</code>.</p>
 <div class="highlight"><pre class="highlight yaml tab-yaml"><code><span class="na">access</span><span class="pi">:</span> <span class="s">read</span>
 <span class="na">user</span><span class="pi">:</span> <span class="s">string</span>
 <span class="na">last-connection</span><span class="pi">:</span> <span class="s">2019-08-24T14:15:22Z</span>
-<span class="na">model</span><span class="pi">:</span> <span class="pi">{}</span>
+<span class="na">model</span><span class="pi">:</span> <span class="no">null</span>
 
 </code></pre></div>
 <p>A model that a given user has access to.</p>
-<h3 id='properties-35'>Properties</h3>
+<h3 id='properties-34'>Properties</h3>
 <p>allOf</p>
 
 <table><thead>
@@ -4669,46 +4610,6 @@ should be set to <code>null</code>.</p>
 </tr>
 </tbody></table>
 
-<p>oneOf</p>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Restrictions</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>»» <em>anonymous</em></td>
-<td><a href="#schemamodelsummary">ModelSummary</a></td>
-<td>false</td>
-<td>none</td>
-<td>Basic identifying information about a given model.</td>
-</tr>
-</tbody></table>
-
-<p>xor</p>
-
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Restrictions</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>»» <em>anonymous</em></td>
-<td><a href="#schemamodel">Model</a></td>
-<td>false</td>
-<td>none</td>
-<td>Detailed information about a given model.</td>
-</tr>
-</tbody></table>
-
 <h2 id="tocS_UserModelList">UserModelList</h2>
 
 <!-- backwards compatibility -->
@@ -4721,7 +4622,7 @@ should be set to <code>null</code>.</p>
 
 </code></pre></div>
 <p>A list of models that a given user has access to.</p>
-<h3 id='properties-36'>Properties</h3>
+<h3 id='properties-35'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4752,7 +4653,7 @@ should be set to <code>null</code>.</p>
 
 </code></pre></div>
 <p>A list of clouds that a given user has access to.</p>
-<h3 id='properties-37'>Properties</h3>
+<h3 id='properties-36'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4785,7 +4686,7 @@ should be set to <code>null</code>.</p>
 <span class="na">Patch</span><span class="pi">:</span> <span class="m">0</span>
 <span class="na">Tag</span><span class="pi">:</span> <span class="s">string</span>
 
-</code></pre></div><h3 id='properties-38'>Properties</h3>
+</code></pre></div><h3 id='properties-37'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
