@@ -143,6 +143,26 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
+    
+    delete:
+      tags:
+        - cloud
+      summary: Delete a cloud.
+      description: |
+        Delete a cloud from the controller. If the cloud is in use (has any model deployed),
+        the removal will fail.
+      operationId: deleteCloud
+      parameters:
+        - $ref: "#/components/parameters/CloudName"
+      responses:
+        "200":
+          $ref: "#/components/responses/EmptySyncResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
 
   /model/{name}:
     get:
