@@ -424,56 +424,52 @@ components:
   schemas:
     Cloud:
       type: object
-      allOf:
-        - type: object
-          properties:
-            auth-types:
-              type: array
-              items:
-                type: string
-                enum:
-                  - access-key
-                  - instance-role
-                  - userpass
-                  - oauth1
-                  - oauth2
-                  - jsonfile
-                  - clientcertificate
-                  - httpsig
-                  - interactive
-                  - empty
-                  - auth-types
-                  - endpoint
-                  - regions
-                  - certfilename
-            name:
-              type: string
-            regions:
-                type: array
-                items:
-                  $ref: '#/components/schemas/CloudRegion'
-            type:
-              type: string
-              enum:
-                - aws
-                - azure
-                - equinix
-                - gce
-                - lxd
-                - k8s
-                - oci
-            users:
-              type: array
-              items:
-                $ref: "#/components/schemas/CloudUser"
-          additionalProperties: false
-          required:
-            - type
+      properties:
+        auth-types:
+          type: array
+          items:
+            type: string
+            enum:
+              - access-key
+              - instance-role
+              - userpass
+              - oauth1
+              - oauth2
+              - jsonfile
+              - clientcertificate
+              - httpsig
+              - interactive
+              - empty
+              - auth-types
+              - endpoint
+              - regions
+              - certfilename
+        name:
+          type: string
+        regions:
+            type: array
+            items:
+              $ref: '#/components/schemas/CloudRegion'
+        type:
+          type: string
+          enum:
+            - aws
+            - azure
+            - equinix
+            - gce
+            - lxd
+            - k8s
+            - oci
+        users:
+          type: array
+          items:
+            $ref: "#/components/schemas/CloudUser"
+      additionalProperties: false
+      required:
+        - type
     CloudDetail:
       type: object
       allOf:
-      # TODO: 'Cloud' seems to have all the fields of a CloudRegion
-      # Could this be modelled differently?
       - $ref: '#/components/schemas/Cloud'
       - type: object
         properties:
@@ -585,48 +581,61 @@ components:
           type: string
       additionalProperties: false
     Model:
-      description: Detailed information about a given model.
-      allOf:
-      - $ref: '#/components/schemas/ModelSummary'
-      - type: object
-        properties:
-          agent-version:
-            $ref: '#/components/schemas/Version'
-          cloud-credential:
-            description: Identifier for the model's cloud credential.
-            type: string
-          cloud-region:
-            type: string
-          cloud:
-            description: Identifier for the model's cloud.
-            type: string
-          controller-uuid:
-            type: string
-          counts:
-            type: array
-            items:
-              $ref: '#/components/schemas/ModelEntityCount'
-          default-series:
-            type: string
-          is-controller:
-            type: boolean
-          life:
-            type: string
-          migration:
-            $ref: '#/components/schemas/ModelMigrationStatus'
-          provider-type:
-            type: string
-          sla:
-            $ref: '#/components/schemas/ModelSLAInfo'
-        additionalProperties: false
-        required:
-        - controller-uuid
-        - is-controller
-        - cloud
-        - life
-        - counts
-        - sla
-        - agent-version
+      description: Information about a given model.
+      type: object
+      properties:
+        name:
+          type: string
+        owner:
+          description: Identifier of the model's owner.
+          type: string
+        # TODO: Should this be an enum?
+        type:
+          type: string
+        uuid:
+          type: string
+        agent-version:
+          $ref: '#/components/schemas/Version'
+        cloud-credential:
+          description: Identifier for the model's cloud credential.
+          type: string
+        cloud-region:
+          type: string
+        cloud:
+          description: Identifier for the model's cloud.
+          type: string
+        controller-uuid:
+          type: string
+        counts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ModelEntityCount'
+        default-series:
+          type: string
+        is-controller:
+          type: boolean
+        life:
+          type: string
+        migration:
+          $ref: '#/components/schemas/ModelMigrationStatus'
+        # TODO: Should this be an enum?
+        provider-type:
+          type: string
+        sla:
+          $ref: '#/components/schemas/ModelSLAInfo'
+      additionalProperties: false
+      required:
+      - name
+      - owner
+      - type
+      - uuid
+      - controller-uuid
+      - is-controller
+      - cloud
+      - life
+      - counts
+      - sla
+      - agent-version
     ModelUserAccess:
       type: object
       properties:
@@ -909,25 +918,6 @@ components:
       additionalProperties: false
       required:
       - id
-    ModelSummary:
-      type: object
-      description: Basic identifying information about a given model.
-      properties:
-        name:
-          type: string
-        owner:
-          description: Identifier of the model's owner.
-          type: string
-        type:
-          type: string
-        uuid:
-          type: string
-      additionalProperties: false
-      required:
-      - name
-      - uuid
-      - type
-      - owner
     ModelUserInfo:
       type: object
       properties:
@@ -1020,9 +1010,7 @@ components:
              type: string
              format: date-time
            model:
-             oneOf:
-               - $ref: '#/components/schemas/ModelSummary'
-               - $ref: '#/components/schemas/Model'
+             - $ref: '#/components/schemas/Model'
          additionalProperties: false
          required:
            - model
