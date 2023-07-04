@@ -33,7 +33,6 @@ externalDocs:
   url: http://juju.is/docs
 servers:
   - url: https://localhost:17777/api/v1
-
 tags:
   - name: model
     description: Manage Juju models
@@ -45,8 +44,98 @@ tags:
     externalDocs:
       description: Find out more about Juju clouds.
       url: https://juju.is/docs/olm/manage-clouds
-
 paths:
+  /cloud/{name}:
+    get:
+      tags:
+        - cloud
+      summary: Get a specific cloud.
+      description: |
+        Returns detailed information about a given cloud
+      operationId: getCloud
+      parameters:
+        - $ref: "#/components/parameters/CloudName"
+      responses:
+        "200":
+          description: Detailed information about the requested cloud.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CloudDetail"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+    delete:
+      tags:
+        - cloud
+      summary: Delete a cloud.
+      description: |
+        Delete a cloud from the controller. If the cloud is in use (has any model deployed),
+        the removal will fail.
+      operationId: deleteCloud
+      parameters:
+        - $ref: "#/components/parameters/CloudName"
+      responses:
+        "200":
+          $ref: "#/components/responses/EmptySyncResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /cloud/{name}/access:
+    get:
+      tags:
+        - cloud
+      summary: List of user permissions for cloud.
+      description: |
+        Return a list of objects that describe the level of permissions granted over the cloud
+        to users on the controller.
+      operationId: getCloudUserAccess
+      parameters:
+        - $ref: "#/components/parameters/CloudName"
+      responses:
+        "200":
+          description: List of cloud access controls
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CloudUserAccessList"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+    patch:
+      tags:
+        - cloud
+      summary: Change the cloud access granted to users.
+      description: |
+        Update the level of cloud access that is granted to specific users.
+      operationId: updateCloudUserAccess
+      parameters:
+        - $ref: "#/components/parameters/CloudName"
+      requestBody:
+        description: An object describing the changes to cloud access controls.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CloudUserAccessUpdateList"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/EmptySyncResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
   /clouds:
     get:
       tags:
@@ -73,7 +162,6 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-    
     post:
       tags:
         - cloud
@@ -98,7 +186,6 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  
   /clouds/supported:
     get:
       tags:
@@ -119,51 +206,6 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  
-  /cloud/{name}:
-    get:
-      tags:
-        - cloud
-      summary: Get a specific cloud.
-      description: |
-        Returns detailed information about a given cloud
-      operationId: getCloud
-      parameters:
-        - $ref: "#/components/parameters/CloudName"
-      responses:
-        "200":
-          description: Detailed information about the requested cloud.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/CloudDetail"
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "500":
-          $ref: "#/components/responses/InternalServerError"
-    
-    delete:
-      tags:
-        - cloud
-      summary: Delete a cloud.
-      description: |
-        Delete a cloud from the controller. If the cloud is in use (has any model deployed),
-        the removal will fail.
-      operationId: deleteCloud
-      parameters:
-        - $ref: "#/components/parameters/CloudName"
-      responses:
-        "200":
-          $ref: "#/components/responses/EmptySyncResponse"
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "500":
-          $ref: "#/components/responses/InternalServerError"
-
   /model/{name}:
     get:
       tags:
@@ -187,7 +229,6 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-    
     delete:
       tags:
         - model
@@ -210,31 +251,6 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
-  /model/{name}/status:
-    get:
-      tags:
-        - model
-      summary: Get the status of a specific model.
-      description: |
-        Returns status information about a model, such as applications deployed and machines.
-      operationId: getModelStatus
-      parameters:
-        - $ref: "#/components/parameters/ModelName"
-      responses:
-        "200":
-          description: Status information about the requested model.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ModelStatus"
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "500":
-          $ref: "#/components/responses/InternalServerError"
-  
   /model/{name}/access:
     get:
       tags:
@@ -284,7 +300,6 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  
   /model/{name}/credential:
     patch:
       tags:
@@ -311,18 +326,35 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-
+  /model/{name}/status:
+    get:
+      tags:
+        - model
+      summary: Get the status of a specific model.
+      description: |
+        Returns status information about a model, such as applications deployed and machines.
+      operationId: getModelStatus
+      parameters:
+        - $ref: "#/components/parameters/ModelName"
+      responses:
+        "200":
+          description: Status information about the requested model.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ModelStatus"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
   /models:
     get:
       tags:
         - model
       summary: List models
-      description: |
-        Returns the models that the specified user has access to in the current server.
-        
-        Controller admins (superuser) can list models for any user. 
-        
-        Other users can only ask about their own models.
+      description: "Returns the models that the specified user has access to in the current server.\n\nController admins (superuser) can list models for any user. \n\nOther users can only ask about their own models.\n"
       operationId: listModels
       parameters:
         - $ref: "#/components/parameters/All"
@@ -341,7 +373,6 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-    
     post:
       tags:
         - model
@@ -364,7 +395,6 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  
   /models/defaults:
     get:
       tags:
@@ -378,7 +408,7 @@ paths:
           in: query
           description: The clouds for which to fetch the model defaults.
           required: false
-          schema: 
+          schema:
             type: array
             items:
               type: string
@@ -395,7 +425,6 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-    
     patch:
       tags:
         - model
@@ -412,7 +441,7 @@ paths:
           in: query
           description: The cloud for which to update the model defaults.
           required: false
-          schema: 
+          schema:
             type: array
             items:
               type: string
@@ -420,7 +449,7 @@ paths:
           in: query
           description: The cloud region for which to update the model defaults.
           required: false
-          schema: 
+          schema:
             type: array
             items:
               type: string
@@ -467,9 +496,9 @@ components:
         name:
           type: string
         regions:
-            type: array
-            items:
-              $ref: '#/components/schemas/CloudRegion'
+          type: array
+          items:
+            $ref: '#/components/schemas/CloudRegion'
         type:
           type: string
           enum:
@@ -490,19 +519,19 @@ components:
     CloudDetail:
       type: object
       allOf:
-      - $ref: '#/components/schemas/Cloud'
-      - type: object
-        properties:
-          # TODO: We should probably be modelling CA's properly in this spec?
-          ca-certificates:
-            type: array
-            items:
+        - $ref: '#/components/schemas/Cloud'
+        - type: object
+          properties:
+            # TODO: We should probably be modelling CA's properly in this spec?
+            ca-certificates:
+              type: array
+              items:
+                type: string
+            default-cloud-region:
               type: string
-          default-cloud-region:
-            type: string
-          skip-tls-verify:
-            type: boolean
-        additionalProperties: false
+            skip-tls-verify:
+              type: boolean
+          additionalProperties: false
     CloudList:
       type: object
       properties:
@@ -515,7 +544,7 @@ components:
               - $ref: '#/components/schemas/CloudDetail'
       additionalProperties: false
       required:
-      - clouds
+        - clouds
     CloudRegion:
       type: object
       properties:
@@ -532,35 +561,71 @@ components:
           additionalProperties: true
       additionalProperties: false
       required:
-      - name
+        - name
     CloudUser:
       type: object
-      properties:
-        access:
-          type: string
-          enum:
-            - add-model
-            - admin
-        display-name:
-          type: string
-        user:
-          type: string
-      additionalProperties: false
-      required:
-      - user
-      - display-name
-      - access
+      allOf:
+        - $ref: '#/components/schemas/CloudUserAccess'
+        - type: object
+          properties:
+            display-name:
+              type: string
+          additionalProperties: false
+          required:
+            - display-name
     CloudUserAccess:
       type: object
       properties:
-        user-access:
+        access:
+          description: Level of access granted to the specified user.
           type: string
           enum:
             - add-model
             - admin
+        user:
+          description: Identifier of the user to whom permissions apply.
+          type: string
       additionalProperties: false
       required:
-        - user-access
+        - access
+        - user
+    CloudUserAccessList:
+      type: object
+      properties:
+        permissions:
+          description: List of granted permissions to the cloud.
+          type: array
+          items:
+            $ref: '#/components/schemas/CloudUserAccess'
+      additionalProperties: false
+      required:
+        - permissions
+    CloudUserAccessUpdate:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/CloudUserAccess'
+        - type: object
+          properties:
+            action:
+              description: Whether to 'grant' or 'revoke' the given permission for the specified user.
+              type: string
+              enum:
+                - grant
+                - revoke
+          required:
+            - action
+      additionalProperties: false
+    CloudUserAccessUpdateList:
+      type: object
+      properties:
+        permissions:
+          description: List of cloud access updates.
+          type: array
+          items:
+            $ref: '#/components/schemas/CloudUserAccessUpdate'
+      additionalProperties: false
+      required:
+        - permissions
     Error:
       type: object
       properties:
@@ -575,9 +640,9 @@ components:
           example: error
       additionalProperties: false
       required:
-      - error
-      - error_code
-      - type
+        - error
+        - error_code
+        - type
     MachineHardware:
       type: object
       properties:
@@ -643,73 +708,23 @@ components:
           type: string
         sla:
           $ref: '#/components/schemas/ModelSLAInfo'
-      additionalProperties: false
-      required:
-      - name
-      - owner
-      - type
-      - uuid
-      - controller-uuid
-      - is-controller
-      - cloud
-      - life
-      - counts
-      - sla
-      - agent-version
-    ModelUserAccess:
-      type: object
-      properties:
-        access:
-          description: Level of access granted to the specified user.
-          type: string
-          enum:
-              - read
-              - write
-              - admin
-        user:
-          description: Identifier of the user to whom permissions apply.
-          type: string
-      additionalProperties: false
-      required:
-      - access
-      - user
-    ModelUserAccessList:
-      type: object
-      properties:
-        permissions:
-          description: List of granted permissions to the model.
+        users:
           type: array
           items:
-            $ref: '#/components/schemas/ModelUserAccess'
+            $ref: "#/components/schemas/ModelUser"
       additionalProperties: false
       required:
-      - permissions
-    ModelUserAccessUpdate:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/ModelUserAccess'
-      - type: object
-        properties:
-          action:
-            description: Whether to 'grant' or 'revoke' the given permission for the specified user.
-            type: string
-            enum:
-                - grant
-                - revoke
-        required:
-        - action
-      additionalProperties: false
-    ModelUserAccessUpdateList:
-      type: object
-      properties:
-        permissions:
-          description: List of model access updates.
-          type: array
-          items:
-            $ref: '#/components/schemas/ModelUserAccessUpdate'
-      additionalProperties: false
-      required:
-      - permissions
+        - name
+        - owner
+        - type
+        - uuid
+        - controller-uuid
+        - is-controller
+        - cloud
+        - life
+        - counts
+        - sla
+        - agent-version
     ModelApplicationInfo:
       type: object
       properties:
@@ -717,7 +732,7 @@ components:
           type: string
       additionalProperties: false
       required:
-      - name
+        - name
     ModelCreateArgs:
       type: object
       properties:
@@ -742,8 +757,8 @@ components:
           type: string
       additionalProperties: false
       required:
-      - name
-      - owner
+        - name
+        - owner
     ModelCredential:
       type: object
       properties:
@@ -752,18 +767,7 @@ components:
           type: string
       additionalProperties: false
       required:
-      - cloud-credential
-    ModelDefaultsList:
-      description: A list of model defaults for the specified clouds
-      type: object
-      properties:
-        model-defaults:
-          type: array
-          items:
-            $ref: '#/components/schemas/ModelDefaults'
-      additionalProperties: false
-      required:
-        - model-defaults
+        - cloud-credential
     ModelDefaults:
       description: Model defaults for a given cloud.
       type: object
@@ -779,37 +783,50 @@ components:
           items:
             $ref: '#/components/schemas/RegionDefaults'
       additionalProperties: false
+    ModelDefaultsList:
+      description: A list of model defaults for the specified clouds
+      type: object
+      properties:
+        model-defaults:
+          type: array
+          items:
+            $ref: '#/components/schemas/ModelDefaults'
+      additionalProperties: false
+      required:
+        - model-defaults
+    ModelDefaultsUpdate:
+      type: object
+      description: |
+        An object representing the model defaults to update. Keys represent the model defaults to
+        set, and values represent the desired values. The 'unset' a model default, its value
+        should be set to `null`.
+      additionalProperties: false
     ModelDetail:
       description: Detailed administrative information about a model
       allOf:
-      - $ref: '#/components/schemas/Model'
-      - type: object
-        properties:
-          cloud-credential-validity:
-            type: boolean
-          default-base:
-            type: string
-          machines:
-            type: array
-            items:
-              $ref: '#/components/schemas/ModelMachine'
-          secret-backends:
-            type: array
-            items:
-              $ref: '#/components/schemas/SecretBackend'
-          supported-features:
-            type: array
-            items:
-              $ref: '#/components/schemas/SupportedFeature'
-          users:
-            type: array
-            items:
-              $ref: '#/components/schemas/ModelUserInfo'
-        additionalProperties: false
-        required:
-        - users
-        - machines
-        - secret-backends
+        - $ref: '#/components/schemas/Model'
+        - type: object
+          properties:
+            cloud-credential-validity:
+              type: boolean
+            default-base:
+              type: string
+            machines:
+              type: array
+              items:
+                $ref: '#/components/schemas/ModelMachine'
+            secret-backends:
+              type: array
+              items:
+                $ref: '#/components/schemas/SecretBackend'
+            supported-features:
+              type: array
+              items:
+                $ref: '#/components/schemas/SupportedFeature'
+          additionalProperties: false
+          required:
+            - machines
+            - secret-backends
     ModelEntityCount:
       type: object
       properties:
@@ -819,12 +836,25 @@ components:
           type: string
       additionalProperties: false
       required:
-      - entity
-      - count
+        - entity
+        - count
     ModelFilesystemInfo:
       description: Represents a filesystem within the model.
       allOf:
         - $ref: "#/components/schemas/ModelStorageAttributes"
+    ModelList:
+      type: object
+      properties:
+        models:
+          description: List of models.
+          type: array
+          items:
+            oneOf:
+              - $ref: '#/components/schemas/Model'
+              - $ref: '#/components/schemas/ModelDetail'
+      additionalProperties: false
+      required:
+        - models
     ModelMachine:
       type: object
       properties:
@@ -848,7 +878,7 @@ components:
           type: boolean
       additionalProperties: false
       required:
-      - id 
+        - id
     ModelMigrationStatus:
       description: Status information about a model migration, including start and finish time.
       type: object
@@ -863,8 +893,8 @@ components:
           type: string
       additionalProperties: false
       required:
-      - status
-      - start
+        - status
+        - start
     ModelSLAInfo:
       type: object
       properties:
@@ -874,8 +904,8 @@ components:
           type: string
       additionalProperties: false
       required:
-      - level
-      - owner
+        - level
+        - owner
     ModelStatus:
       type: object
       properties:
@@ -915,13 +945,13 @@ components:
             $ref: '#/components/schemas/ModelVolumeInfo'
       additionalProperties: false
       required:
-      - model
-      - life
-      - type
-      - hosted-machine-count
-      - application-count
-      - unit-count
-      - owner
+        - model
+        - life
+        - type
+        - hosted-machine-count
+        - application-count
+        - unit-count
+        - owner
     ModelStorageAttributes:
       type: object
       properties:
@@ -937,29 +967,72 @@ components:
           type: string
       additionalProperties: false
       required:
-      - id
-    ModelUserInfo:
+        - id
+    ModelUser:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/ModelUserAccess'
+        - type: object
+          properties:
+            display-name:
+              type: string
+          additionalProperties: false
+          required:
+            - display-name
+    ModelUserAccess:
       type: object
       properties:
         access:
+          description: Level of access granted to the specified user.
           type: string
-        display-name:
-          type: string
-        last-connection:
-          type: string
-          format: date-time
-        model:
-          description: Identifier of the model.
-          type: string
+          enum:
+            - read
+            - write
+            - admin
         user:
+          description: Identifier of the user to whom permissions apply.
           type: string
       additionalProperties: false
       required:
-      - model
-      - user
-      - display-name
-      - last-connection
-      - access
+        - access
+        - user
+    ModelUserAccessList:
+      type: object
+      properties:
+        permissions:
+          description: List of granted permissions to the model.
+          type: array
+          items:
+            $ref: '#/components/schemas/ModelUserAccess'
+      additionalProperties: false
+      required:
+        - permissions
+    ModelUserAccessUpdate:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/ModelUserAccess'
+        - type: object
+          properties:
+            action:
+              description: Whether to 'grant' or 'revoke' the given permission for the specified user.
+              type: string
+              enum:
+                - grant
+                - revoke
+          required:
+            - action
+      additionalProperties: false
+    ModelUserAccessUpdateList:
+      type: object
+      properties:
+        permissions:
+          description: List of model access updates.
+          type: array
+          items:
+            $ref: '#/components/schemas/ModelUserAccessUpdate'
+      additionalProperties: false
+      required:
+        - permissions
     ModelVolumeInfo:
       description: Represents a volume within the model
       allOf:
@@ -974,8 +1047,8 @@ components:
           additionalProperties: true
       additionalProperties: false
       required:
-      - region-name
-      - value
+        - region-name
+        - value
     SecretBackend:
       type: object
       properties:
@@ -990,16 +1063,9 @@ components:
           type: integer
       additionalProperties: false
       required:
-      - name
-      - backend-type
-      - config
-    ModelDefaultsUpdate:
-      type: object
-      description: |
-        An object representing the model defaults to update. Keys represent the model defaults to
-        set, and values represent the desired values. The 'unset' a model default, its value
-        should be set to `null`.
-      additionalProperties: false
+        - name
+        - backend-type
+        - config
     SupportedFeature:
       type: object
       properties:
@@ -1011,52 +1077,8 @@ components:
           type: string
       additionalProperties: false
       required:
-      - name
-      - description
-    UserCloud:
-      description: A cloud that a given user has access to.
-      allOf:
-      - $ref: "#/components/schemas/CloudUserAccess"
-      - oneOf:
-          - $ref: '#/components/schemas/Cloud'
-          - $ref: '#/components/schemas/CloudDetail'
-    UserModel:
-      description: A model that a given user has access to.
-      allOf:
-       - $ref: "#/components/schemas/ModelUserAccess"
-       - type: object
-         properties:
-           last-connection:
-             type: string
-             format: date-time
-           model:
-             - $ref: '#/components/schemas/Model'
-         additionalProperties: false
-         required:
-           - model
-           - last-connection
-    UserModelList:
-      description: A list of models that a given user has access to.
-      type: object
-      properties:
-        models:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserModel'
-      additionalProperties: false
-      required:
-        - models
-    UserCloudList:
-      description: A list of clouds that a given user has access to.
-      type: object
-      properties:
-        clouds:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserCloud'
-      additionalProperties: false
-      required:
-        - clouds
+        - name
+        - description
     Version:
       type: object
       properties:
@@ -1072,19 +1094,18 @@ components:
           type: string
       additionalProperties: false
       required:
-      - Major
-      - Minor
-      - Tag
-      - Patch
-      - Build
-
+        - Major
+        - Minor
+        - Tag
+        - Patch
+        - Build
   parameters:
     All:
       in: query
       name: all
       description: List all instances of entity, irrespective of user.
       required: false
-      schema: 
+      schema:
         type: string
         default: false
         enum:
@@ -1095,14 +1116,7 @@ components:
       name: name
       required: true
       description: The name of a cloud in the controller.
-      schema: 
-        type: string
-    ModelName:
-      in: path
-      name: name
-      required: true
-      description: The name of a model in the controller.
-      schema: 
+      schema:
         type: string
     DestroyStorage:
       in: query
@@ -1115,7 +1129,7 @@ components:
       name: detailed
       description: Return detailed information about requested entity.
       required: false
-      schema: 
+      schema:
         type: string
         default: false
         enum:
@@ -1133,6 +1147,13 @@ components:
       required: false
       schema:
         type: integer
+    ModelName:
+      in: path
+      name: name
+      required: true
+      description: The name of a model in the controller.
+      schema:
+        type: string
     Timeout:
       in: query
       name: max-wait
@@ -1146,7 +1167,6 @@ components:
       description: Identifier of a user on the controller.
       schema:
         type: string
-  
   responses:
     BadRequest:
       description: Bad request.
@@ -1202,15 +1222,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  
-  
-  # Use this section to define reusable objects
-  # callbacks: {}
-  # examples: {}
-  # headers: {}
-  # links: {}
-  # pathItems: {}
-  # requestBodies: {}
-  # responses: {}
-  # securitySchemes: {}
-
+# Use this section to define reusable objects
+# callbacks: {}
+# examples: {}
+# headers: {}
+# links: {}
+# pathItems: {}
+# requestBodies: {}
+# responses: {}
+# securitySchemes: {}

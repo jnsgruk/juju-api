@@ -159,7 +159,7 @@ This table tracks progress through the redesign of the Juju client API:
 | Cloud                | CredentialContents              |                                      |
 | Cloud                | InstanceTypes                   |                                      |
 | Cloud                | ListCloudInfo                   | `GET /clouds`                        |
-| Cloud                | ModifyCloudAccess               |                                      |
+| Cloud                | ModifyCloudAccess               | `PATCH /cloud/{name}/access`         |
 | Cloud                | RemoveClouds                    | `DELETE /cloud/{name}`               |
 | Cloud                | RevokeCredentialsCheckModels    |                                      |
 | Cloud                | UpdateCloud                     |                                      |
