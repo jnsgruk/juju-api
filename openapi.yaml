@@ -155,7 +155,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/UserCloudList"
+                $ref: "#/components/schemas/CloudList"
         "400":
           $ref: "#/components/responses/BadRequest"
         "403":
@@ -366,7 +366,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/UserModelList"
+                $ref: "#/components/schemas/ModelList"
         "400":
           $ref: "#/components/responses/BadRequest"
         "403":
