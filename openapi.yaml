@@ -1615,12 +1615,14 @@ components:
       required: false
       schema:
         type: boolean
+        default: false
     Force:
       in: query
       name: force
       required: false
       schema:
         type: boolean
+        default: false
     MaxWait:
       in: query
       name: max-wait
@@ -1652,6 +1654,7 @@ components:
       required: false
       schema:
         type: boolean
+        default: false
     User:
       in: query
       name: user
