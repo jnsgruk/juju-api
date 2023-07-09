@@ -73,219 +73,219 @@ following models:
 
 This table tracks progress through the redesign of the Juju client API:
 
-| Facade               | Facade Call                     | API Path                             |
-| :------------------- | :------------------------------ | :----------------------------------- |
-| Action               | Actions                         |                                      |
-| Action               | ApplicationsCharmsActions       |                                      |
-| Action               | Cancel                          |                                      |
-| Action               | EnqueueOperation                |                                      |
-| Action               | ListOperations                  |                                      |
-| Action               | Operations                      |                                      |
-| Action               | Run                             |                                      |
-| Action               | RunOnAllMachines                |                                      |
-| Action               | WatchActionsProgress            |                                      |
-| Admin                | Login                           |                                      |
-| Admin                | RedirectInfo                    |                                      |
-| AllModelWatcher      | Next                            |                                      |
-| AllModelWatcher      | Stop                            |                                      |
-| AllWatcher           | Next                            |                                      |
-| AllWatcher           | Stop                            |                                      |
-| Annotations          | Get                             |                                      |
-| Annotations          | Set                             |                                      |
-| Application          | AddRelation                     |                                      |
-| Application          | AddUnits                        |                                      |
-| Application          | ApplicationsInfo                |                                      |
-| Application          | CharmConfig                     |                                      |
-| Application          | CharmRelations                  |                                      |
-| Application          | Consume                         |                                      |
-| Application          | Deploy                          |                                      |
-| Application          | DeployFromRepository            |                                      |
-| Application          | DestroyApplication              |                                      |
-| Application          | DestroyConsumedApplications     |                                      |
-| Application          | DestroyRelation                 |                                      |
-| Application          | DestroyUnit                     |                                      |
-| Application          | Expose                          |                                      |
-| Application          | Get                             |                                      |
-| Application          | GetCharmURLOrigin               |                                      |
-| Application          | GetConfig                       |                                      |
-| Application          | GetConstraints                  |                                      |
-| Application          | Leader                          |                                      |
-| Application          | MergeBindings                   |                                      |
-| Application          | ResolveUnitErrors               |                                      |
-| Application          | ScaleApplications               |                                      |
-| Application          | SetCharm                        |                                      |
-| Application          | SetConfigs                      |                                      |
-| Application          | SetConstraints                  |                                      |
-| Application          | SetMetricCredentials            |                                      |
-| Application          | SetRelationsSuspended           |                                      |
-| Application          | Unexpose                        |                                      |
-| Application          | UnitsInfo                       |                                      |
-| Application          | UnsetApplicationsConfig         |                                      |
-| Application          | UpdateApplicationBase           |                                      |
-| ApplicationOffers    | ApplicationOffers               |                                      |
-| ApplicationOffers    | DestroyOffers                   |                                      |
-| ApplicationOffers    | FindApplicationOffers           |                                      |
-| ApplicationOffers    | GetConsumeDetails               |                                      |
-| ApplicationOffers    | ListApplicationOffers           |                                      |
-| ApplicationOffers    | ModifyOfferAccess               |                                      |
-| ApplicationOffers    | Offer                           |                                      |
-| ApplicationOffers    | RemoteApplicationInfo           |                                      |
-| Backup               | Create                          |                                      |
-| Block                | List                            |                                      |
-| Block                | SwitchBlockOff                  |                                      |
-| Block                | SwitchBlockOn                   |                                      |
-| Bundle               | ExportBundle                    |                                      |
-| Bundle               | GetChanges                      |                                      |
-| Bundle               | GetChangesMapArgs               |                                      |
-| Charms               | AddCharm                        |                                      |
-| Charms               | CharmInfo                       |                                      |
-| Charms               | CheckCharmPlacement             |                                      |
-| Charms               | GetDownloadInfos                |                                      |
-| Charms               | IsMetered                       |                                      |
-| Charms               | List                            |                                      |
-| Charms               | ListCharmResources              |                                      |
-| Charms               | ResolveCharms                   |                                      |
-| Client               | FindTools                       |                                      |
-| Client               | FullStatus                      |                                      |
-| Client               | StatusHistory                   |                                      |
-| Client               | WatchAll                        |                                      |
-| Cloud                | AddCloud                        | `POST /clouds`                       |
-| Cloud                | AddCredentials                  |                                      |
-| Cloud                | CheckCredentialsModels          |                                      |
-| Cloud                | Cloud                           | `GET /cloud/{name}`                  |
-| Cloud                | CloudInfo                       | `GET /cloud/{name}`                  |
-| Cloud                | Clouds                          | `GET /clouds/supported`              |
-| Cloud                | Credential                      |                                      |
-| Cloud                | CredentialContents              |                                      |
-| Cloud                | InstanceTypes                   |                                      |
-| Cloud                | ListCloudInfo                   | `GET /clouds`                        |
-| Cloud                | ModifyCloudAccess               | `PATCH /cloud/{name}/access`         |
-| Cloud                | RemoveClouds                    | `DELETE /cloud/{name}`               |
-| Cloud                | RevokeCredentialsCheckModels    |                                      |
-| Cloud                | UpdateCloud                     |                                      |
-| Cloud                | UpdateCredentialsCheckModels    |                                      |
-| Cloud                | UserCredentials                 |                                      |
-| Controller           | AllModels                       |                                      |
-| Controller           | CloudSpec                       |                                      |
-| Controller           | ConfigSet                       |                                      |
-| Controller           | ControllerAPIInfoForModels      |                                      |
-| Controller           | ControllerConfig                |                                      |
-| Controller           | ControllerVersion               |                                      |
-| Controller           | DashboardConnectionInfo         |                                      |
-| Controller           | DestroyController               |                                      |
-| Controller           | GetCloudSpec                    |                                      |
-| Controller           | GetControllerAccess             |                                      |
-| Controller           | HostedModelConfigs              |                                      |
-| Controller           | IdentityProviderURL             |                                      |
-| Controller           | InitiateMigration               |                                      |
-| Controller           | ListBlockedModels               |                                      |
-| Controller           | ModelConfig                     |                                      |
-| Controller           | ModelStatus                     |                                      |
-| Controller           | ModifyControllerAccess          |                                      |
-| Controller           | MongoVersion                    |                                      |
-| Controller           | RemoveBlocks                    |                                      |
-| Controller           | WatchAllModelSummaries          |                                      |
-| Controller           | WatchAllModels                  |                                      |
-| Controller           | WatchCloudSpecsChanges          |                                      |
-| Controller           | WatchModelSummaries             |                                      |
-| CredentialManager    | InvalidateModelCredential       |                                      |
-| FirewallRules        | ListFirewallRules               |                                      |
-| FirewallRules        | SetFirewallRules                |                                      |
-| HighAvailability     | EnableHA                        |                                      |
-| ImageMetaDataManager | Delete                          |                                      |
-| ImageMetaDataManager | List                            |                                      |
-| ImageMetaDataManager | Save                            |                                      |
-| KeyManager           | AddKeys                         |                                      |
-| KeyManager           | DeleteKeys                      |                                      |
-| KeyManager           | ImportKeys                      |                                      |
-| KeyManager           | ListKeys                        |                                      |
-| MachineManager       | AddMachines                     |                                      |
-| MachineManager       | DestroyMachineWithParams        |                                      |
-| MachineManager       | GetUpgradeSeriesMessages        |                                      |
-| MachineManager       | InstanceTypes                   |                                      |
-| MachineManager       | ProvisioningScript              |                                      |
-| MachineManager       | RetryProvisioning               |                                      |
-| MachineManager       | UpgradeSeriesComplete           |                                      |
-| MachineManager       | UpgradeSeriesPrepare            |                                      |
-| MachineManager       | UpgradeSeriesValidate           |                                      |
-| MachineManager       | WatchUpgradeSeriesNotifications |                                      |
-| MetricsDebug         | GetMetrics                      |                                      |
-| MetricsDebug         | SetMeterStatus                  |                                      |
-| ModelConfig          | GetModelConstraints             |                                      |
-| ModelConfig          | ModelGet                        |                                      |
-| ModelConfig          | ModelSet                        |                                      |
-| ModelConfig          | ModelUnset                      |                                      |
-| ModelConfig          | SLALevel                        |                                      |
-| ModelConfig          | Sequences                       |                                      |
-| ModelConfig          | SetModelConstraints             |                                      |
-| ModelConfig          | SetSLALevel                     |                                      |
-| ModelGeneration      | AbortBranch                     |                                      |
-| ModelGeneration      | AddBranch                       |                                      |
-| ModelGeneration      | BranchInfo                      |                                      |
-| ModelGeneration      | CommitBranch                    |                                      |
-| ModelGeneration      | HasActiveBranch                 |                                      |
-| ModelGeneration      | ListCommits                     |                                      |
-| ModelGeneration      | ShowCommit                      |                                      |
-| ModelGeneration      | TrackBranch                     |                                      |
-| ModelManager         | ChangeModelCredential           | `PATCH /model/{name}/credential`     |
-| ModelManager         | CreateModel                     | `POST /models`                       |
-| ModelManager         | DestroyModels                   | `DELETE /model/{name}`               |
-| ModelManager         | DumpModels                      | `GET /models?detailed=true&all=true` |
-| ModelManager         | DumpModelsDB                    | N/A                                  |
-| ModelManager         | ListModelSummaries              | `GET /models?detailed=true`          |
-| ModelManager         | ListModels                      | `GET /models`                        |
-| ModelManager         | ModelDefaultsForClouds          | `GET /models/defaults`               |
-| ModelManager         | ModelInfo                       | `GET /model/{name}`                  |
-| ModelManager         | ModelStatus                     | `GET /model/{name}/status`           |
-| ModelManager         | ModifyModelAccess               | `PATCH /model/{name}/access`         |
-| ModelManager         | SetModelDefaults                | `PATCH /models/defaults`             |
-| ModelManager         | UnsetModelDefaults              | `PATCH /models/defaults`             |
-| ModelUpgrader        | AbortModelUpgrade               |                                      |
-| ModelUpgrader        | UpgradeModel                    |                                      |
-| Payloads             | List                            |                                      |
-| Pinger               | Ping                            |                                      |
-| Pinger               | Stop                            |                                      |
-| Resources            | AddPendingResources             |                                      |
-| Resources            | ListResources                   |                                      |
-| SSHClient            | AllAddresses                    |                                      |
-| SSHClient            | ModelCredentialForSSH           |                                      |
-| SSHClient            | PrivateAddress                  |                                      |
-| SSHClient            | Proxy                           |                                      |
-| SSHClient            | PublicAddress                   |                                      |
-| SSHClient            | PublicKeys                      |                                      |
-| SecretBackends       | AddSecretBackends               |                                      |
-| SecretBackends       | ListSecretBackends              |                                      |
-| SecretBackends       | RemoveSecretBackends            |                                      |
-| SecretBackends       | UpdateSecretBackends            |                                      |
-| Secrets              | ListSecrets                     |                                      |
-| Spaces               | CreateSpaces                    |                                      |
-| Spaces               | ListSpaces                      |                                      |
-| Spaces               | MoveSubnets                     |                                      |
-| Spaces               | ReloadSpaces                    |                                      |
-| Spaces               | RemoveSpace                     |                                      |
-| Spaces               | RenameSpace                     |                                      |
-| Spaces               | ShowSpace                       |                                      |
-| Storage              | AddToUnit                       |                                      |
-| Storage              | Attach                          |                                      |
-| Storage              | CreatePool                      |                                      |
-| Storage              | DetachStorage                   |                                      |
-| Storage              | Import                          |                                      |
-| Storage              | ListFilesystems                 |                                      |
-| Storage              | ListPools                       |                                      |
-| Storage              | ListStorageDetails              |                                      |
-| Storage              | ListVolumes                     |                                      |
-| Storage              | Remove                          |                                      |
-| Storage              | RemovePool                      |                                      |
-| Storage              | StorageDetails                  |                                      |
-| Storage              | UpdatePool                      |                                      |
-| Subnets              | AllZones                        |                                      |
-| Subnets              | ListSubnets                     |                                      |
-| Subnets              | SubnetsByCIDR                   |                                      |
-| UserManager          | AddUser                         |                                      |
-| UserManager          | DisableUser                     |                                      |
-| UserManager          | EnableUser                      |                                      |
-| UserManager          | ModelUserInfo                   |                                      |
-| UserManager          | RemoveUser                      |                                      |
-| UserManager          | ResetPassword                   |                                      |
-| UserManager          | SetPassword                     |                                      |
-| UserManager          | UserInfo                        |                                      |
+| Facade               | Facade Call                     | API Path                                                         |
+| :------------------- | :------------------------------ |:-----------------------------------------------------------------|
+| Action               | Actions                         |                                                                  |
+| Action               | ApplicationsCharmsActions       |                                                                  |
+| Action               | Cancel                          |                                                                  |
+| Action               | EnqueueOperation                |                                                                  |
+| Action               | ListOperations                  |                                                                  |
+| Action               | Operations                      |                                                                  |
+| Action               | Run                             |                                                                  |
+| Action               | RunOnAllMachines                |                                                                  |
+| Action               | WatchActionsProgress            |                                                                  |
+| Admin                | Login                           |                                                                  |
+| Admin                | RedirectInfo                    |                                                                  |
+| AllModelWatcher      | Next                            |                                                                  |
+| AllModelWatcher      | Stop                            |                                                                  |
+| AllWatcher           | Next                            |                                                                  |
+| AllWatcher           | Stop                            |                                                                  |
+| Annotations          | Get                             |                                                                  |
+| Annotations          | Set                             |                                                                  |
+| Application          | AddRelation                     | `POST /application/relate`                                       |
+| Application          | AddUnits                        |                                                                  |
+| Application          | ApplicationsInfo                | `GET /application/{name}`                                        |
+| Application          | CharmConfig                     |                                                                  |
+| Application          | CharmRelations                  |                                                                  |
+| Application          | Consume                         |                                                                  |
+| Application          | Deploy                          |                                                                  |
+| Application          | DeployFromRepository            | `POST /application/{name}?force=false&dry-run=false&trust=false` |
+| Application          | DestroyApplication              | `DELETE /application/{name}`                                     |
+| Application          | DestroyConsumedApplications     |                                                                  |
+| Application          | DestroyRelation                 |                                                                  |
+| Application          | DestroyUnit                     |                                                                  |
+| Application          | Expose                          |                                                                  |
+| Application          | Get                             |                                                                  |
+| Application          | GetCharmURLOrigin               |                                                                  |
+| Application          | GetConfig                       |                                                                  |
+| Application          | GetConstraints                  |                                                                  |
+| Application          | Leader                          |                                                                  |
+| Application          | MergeBindings                   |                                                                  |
+| Application          | ResolveUnitErrors               |                                                                  |
+| Application          | ScaleApplications               |                                                                  |
+| Application          | SetCharm                        | `PATCH /application/{name}`                                      |
+| Application          | SetConfigs                      |                                                                  |
+| Application          | SetConstraints                  |                                                                  |
+| Application          | SetMetricCredentials            |                                                                  |
+| Application          | SetRelationsSuspended           |                                                                  |
+| Application          | Unexpose                        |                                                                  |
+| Application          | UnitsInfo                       |                                                                  |
+| Application          | UnsetApplicationsConfig         |                                                                  |
+| Application          | UpdateApplicationBase           |                                                                  |
+| ApplicationOffers    | ApplicationOffers               |                                                                  |
+| ApplicationOffers    | DestroyOffers                   |                                                                  |
+| ApplicationOffers    | FindApplicationOffers           |                                                                  |
+| ApplicationOffers    | GetConsumeDetails               |                                                                  |
+| ApplicationOffers    | ListApplicationOffers           |                                                                  |
+| ApplicationOffers    | ModifyOfferAccess               |                                                                  |
+| ApplicationOffers    | Offer                           |                                                                  |
+| ApplicationOffers    | RemoteApplicationInfo           |                                                                  |
+| Backup               | Create                          |                                                                  |
+| Block                | List                            |                                                                  |
+| Block                | SwitchBlockOff                  |                                                                  |
+| Block                | SwitchBlockOn                   |                                                                  |
+| Bundle               | ExportBundle                    |                                                                  |
+| Bundle               | GetChanges                      |                                                                  |
+| Bundle               | GetChangesMapArgs               |                                                                  |
+| Charms               | AddCharm                        |                                                                  |
+| Charms               | CharmInfo                       |                                                                  |
+| Charms               | CheckCharmPlacement             |                                                                  |
+| Charms               | GetDownloadInfos                |                                                                  |
+| Charms               | IsMetered                       |                                                                  |
+| Charms               | List                            |                                                                  |
+| Charms               | ListCharmResources              |                                                                  |
+| Charms               | ResolveCharms                   |                                                                  |
+| Client               | FindTools                       |                                                                  |
+| Client               | FullStatus                      |                                                                  |
+| Client               | StatusHistory                   |                                                                  |
+| Client               | WatchAll                        |                                                                  |
+| Cloud                | AddCloud                        | `POST /clouds`                                                   |
+| Cloud                | AddCredentials                  |                                                                  |
+| Cloud                | CheckCredentialsModels          |                                                                  |
+| Cloud                | Cloud                           | `GET /cloud/{name}`                                              |
+| Cloud                | CloudInfo                       | `GET /cloud/{name}`                                              |
+| Cloud                | Clouds                          | `GET /clouds/supported`                                          |
+| Cloud                | Credential                      |                                                                  |
+| Cloud                | CredentialContents              |                                                                  |
+| Cloud                | InstanceTypes                   |                                                                  |
+| Cloud                | ListCloudInfo                   | `GET /clouds`                                                    |
+| Cloud                | ModifyCloudAccess               | `PATCH /cloud/{name}/access`                                     |
+| Cloud                | RemoveClouds                    | `DELETE /cloud/{name}`                                           |
+| Cloud                | RevokeCredentialsCheckModels    |                                                                  |
+| Cloud                | UpdateCloud                     |                                                                  |
+| Cloud                | UpdateCredentialsCheckModels    |                                                                  |
+| Cloud                | UserCredentials                 |                                                                  |
+| Controller           | AllModels                       |                                                                  |
+| Controller           | CloudSpec                       |                                                                  |
+| Controller           | ConfigSet                       |                                                                  |
+| Controller           | ControllerAPIInfoForModels      |                                                                  |
+| Controller           | ControllerConfig                |                                                                  |
+| Controller           | ControllerVersion               |                                                                  |
+| Controller           | DashboardConnectionInfo         |                                                                  |
+| Controller           | DestroyController               |                                                                  |
+| Controller           | GetCloudSpec                    |                                                                  |
+| Controller           | GetControllerAccess             |                                                                  |
+| Controller           | HostedModelConfigs              |                                                                  |
+| Controller           | IdentityProviderURL             |                                                                  |
+| Controller           | InitiateMigration               |                                                                  |
+| Controller           | ListBlockedModels               |                                                                  |
+| Controller           | ModelConfig                     |                                                                  |
+| Controller           | ModelStatus                     |                                                                  |
+| Controller           | ModifyControllerAccess          |                                                                  |
+| Controller           | MongoVersion                    |                                                                  |
+| Controller           | RemoveBlocks                    |                                                                  |
+| Controller           | WatchAllModelSummaries          |                                                                  |
+| Controller           | WatchAllModels                  |                                                                  |
+| Controller           | WatchCloudSpecsChanges          |                                                                  |
+| Controller           | WatchModelSummaries             |                                                                  |
+| CredentialManager    | InvalidateModelCredential       |                                                                  |
+| FirewallRules        | ListFirewallRules               |                                                                  |
+| FirewallRules        | SetFirewallRules                |                                                                  |
+| HighAvailability     | EnableHA                        |                                                                  |
+| ImageMetaDataManager | Delete                          |                                                                  |
+| ImageMetaDataManager | List                            |                                                                  |
+| ImageMetaDataManager | Save                            |                                                                  |
+| KeyManager           | AddKeys                         |                                                                  |
+| KeyManager           | DeleteKeys                      |                                                                  |
+| KeyManager           | ImportKeys                      |                                                                  |
+| KeyManager           | ListKeys                        |                                                                  |
+| MachineManager       | AddMachines                     |                                                                  |
+| MachineManager       | DestroyMachineWithParams        |                                                                  |
+| MachineManager       | GetUpgradeSeriesMessages        |                                                                  |
+| MachineManager       | InstanceTypes                   |                                                                  |
+| MachineManager       | ProvisioningScript              |                                                                  |
+| MachineManager       | RetryProvisioning               |                                                                  |
+| MachineManager       | UpgradeSeriesComplete           |                                                                  |
+| MachineManager       | UpgradeSeriesPrepare            |                                                                  |
+| MachineManager       | UpgradeSeriesValidate           |                                                                  |
+| MachineManager       | WatchUpgradeSeriesNotifications |                                                                  |
+| MetricsDebug         | GetMetrics                      |                                                                  |
+| MetricsDebug         | SetMeterStatus                  |                                                                  |
+| ModelConfig          | GetModelConstraints             |                                                                  |
+| ModelConfig          | ModelGet                        |                                                                  |
+| ModelConfig          | ModelSet                        |                                                                  |
+| ModelConfig          | ModelUnset                      |                                                                  |
+| ModelConfig          | SLALevel                        |                                                                  |
+| ModelConfig          | Sequences                       |                                                                  |
+| ModelConfig          | SetModelConstraints             |                                                                  |
+| ModelConfig          | SetSLALevel                     |                                                                  |
+| ModelGeneration      | AbortBranch                     |                                                                  |
+| ModelGeneration      | AddBranch                       |                                                                  |
+| ModelGeneration      | BranchInfo                      |                                                                  |
+| ModelGeneration      | CommitBranch                    |                                                                  |
+| ModelGeneration      | HasActiveBranch                 |                                                                  |
+| ModelGeneration      | ListCommits                     |                                                                  |
+| ModelGeneration      | ShowCommit                      |                                                                  |
+| ModelGeneration      | TrackBranch                     |                                                                  |
+| ModelManager         | ChangeModelCredential           | `PATCH /model/{name}/credential`                                 |
+| ModelManager         | CreateModel                     | `POST /models`                                                   |
+| ModelManager         | DestroyModels                   | `DELETE /model/{name}`                                           |
+| ModelManager         | DumpModels                      | `GET /models?detailed=true&all=true`                             |
+| ModelManager         | DumpModelsDB                    | N/A                                                              |
+| ModelManager         | ListModelSummaries              | `GET /models?detailed=true`                                      |
+| ModelManager         | ListModels                      | `GET /models`                                                    |
+| ModelManager         | ModelDefaultsForClouds          | `GET /models/defaults`                                           |
+| ModelManager         | ModelInfo                       | `GET /model/{name}`                                              |
+| ModelManager         | ModelStatus                     | `GET /model/{name}/status`                                       |
+| ModelManager         | ModifyModelAccess               | `PATCH /model/{name}/access`                                     |
+| ModelManager         | SetModelDefaults                | `PATCH /models/defaults`                                         |
+| ModelManager         | UnsetModelDefaults              | `PATCH /models/defaults`                                         |
+| ModelUpgrader        | AbortModelUpgrade               |                                                                  |
+| ModelUpgrader        | UpgradeModel                    |                                                                  |
+| Payloads             | List                            |                                                                  |
+| Pinger               | Ping                            |                                                                  |
+| Pinger               | Stop                            |                                                                  |
+| Resources            | AddPendingResources             |                                                                  |
+| Resources            | ListResources                   |                                                                  |
+| SSHClient            | AllAddresses                    |                                                                  |
+| SSHClient            | ModelCredentialForSSH           |                                                                  |
+| SSHClient            | PrivateAddress                  |                                                                  |
+| SSHClient            | Proxy                           |                                                                  |
+| SSHClient            | PublicAddress                   |                                                                  |
+| SSHClient            | PublicKeys                      |                                                                  |
+| SecretBackends       | AddSecretBackends               |                                                                  |
+| SecretBackends       | ListSecretBackends              |                                                                  |
+| SecretBackends       | RemoveSecretBackends            |                                                                  |
+| SecretBackends       | UpdateSecretBackends            |                                                                  |
+| Secrets              | ListSecrets                     |                                                                  |
+| Spaces               | CreateSpaces                    |                                                                  |
+| Spaces               | ListSpaces                      |                                                                  |
+| Spaces               | MoveSubnets                     |                                                                  |
+| Spaces               | ReloadSpaces                    |                                                                  |
+| Spaces               | RemoveSpace                     |                                                                  |
+| Spaces               | RenameSpace                     |                                                                  |
+| Spaces               | ShowSpace                       |                                                                  |
+| Storage              | AddToUnit                       |                                                                  |
+| Storage              | Attach                          |                                                                  |
+| Storage              | CreatePool                      |                                                                  |
+| Storage              | DetachStorage                   |                                                                  |
+| Storage              | Import                          |                                                                  |
+| Storage              | ListFilesystems                 |                                                                  |
+| Storage              | ListPools                       |                                                                  |
+| Storage              | ListStorageDetails              |                                                                  |
+| Storage              | ListVolumes                     |                                                                  |
+| Storage              | Remove                          |                                                                  |
+| Storage              | RemovePool                      |                                                                  |
+| Storage              | StorageDetails                  |                                                                  |
+| Storage              | UpdatePool                      |                                                                  |
+| Subnets              | AllZones                        |                                                                  |
+| Subnets              | ListSubnets                     |                                                                  |
+| Subnets              | SubnetsByCIDR                   |                                                                  |
+| UserManager          | AddUser                         |                                                                  |
+| UserManager          | DisableUser                     |                                                                  |
+| UserManager          | EnableUser                      |                                                                  |
+| UserManager          | ModelUserInfo                   |                                                                  |
+| UserManager          | RemoveUser                      |                                                                  |
+| UserManager          | ResetPassword                   |                                                                  |
+| UserManager          | SetPassword                     |                                                                  |
+| UserManager          | UserInfo                        |                                                                  |
