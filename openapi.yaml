@@ -45,6 +45,126 @@ tags:
       description: Find out more about Juju clouds.
       url: https://juju.is/docs/olm/manage-clouds
 paths:
+  /application/{name}:
+    get:
+      tags:
+        - application
+      description: Returns application information.
+      operationId: getApplication
+      parameters:
+        - $ref: "#/components/parameters/ApplicationName"
+      responses:
+        "200":
+          description: Detailed information about the requested application.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Application"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+    post:
+      tags:
+        - application
+      description: Is a one-stop deployment method for repository charms. Only a charm
+        name is required to deploy. If argument validation fails, a list of all errors
+        found in validation will be returned. If a local resource is provided, details
+        required for uploading the validated resource will be returned.
+      operationId: addApplication
+      parameters:
+        - $ref: "#/components/parameters/ApplicationName"
+        - $ref: "#/components/parameters/Force"
+        - $ref: "#/components/parameters/DryRun"
+        - $ref: "#/components/parameters/Trust"
+        - $ref: "#/components/parameters/NumUnits"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeployFromRepositoryArgs'
+        required: true
+      responses:
+        "200":
+          description: Detailed information about the requested application.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeployFromRepositoryResult"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+    delete:
+      tags:
+        - application
+      description: Removes a given application.
+      operationId: deleteApplication
+      parameters:
+        - $ref: "#/components/parameters/ApplicationName"
+        - $ref: "#/components/parameters/DestroyStorage"
+        - $ref: "#/components/parameters/Force"
+        - $ref: "#/components/parameters/MaxWait"
+        - $ref: "#/components/parameters/DryRun"
+      responses:
+        "200":
+          $ref: "#/components/responses/ApplicationDestroyed"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /application/{name}/refresh:
+    patch:
+      tags:
+        - application
+      description: Sets the charm for a given for the application.
+      operationId: refreshApplication
+      parameters:
+        - $ref: "#/components/parameters/ApplicationName"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationSetCharm'
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/EmptySyncResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /application/relate:
+    post:
+      tags:
+        - application
+      summary: Adds a relation.
+      description: Adds a relation between the specified endpoints and returns the
+        relation info.
+      operationId: relateApplication
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddRelationArgs'
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/RelationCreated"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
   /cloud/{name}:
     get:
       tags:
@@ -471,6 +591,173 @@ paths:
           $ref: "#/components/responses/InternalServerError"
 components:
   schemas:
+    AddRelationArgs:
+      type: object
+      properties:
+        endpoints:
+          type: array
+          items:
+            type: string
+        via-cidrs:
+          type: array
+          items:
+            type: string
+      additionalProperties: false
+      required:
+        - endpoints
+    Application:
+      type: object
+      description: Information about a given application.
+      properties:
+        base:
+          $ref: '#/components/schemas/Base'
+        channel:
+          type: string
+        charm:
+          type: string
+        constraints:
+          $ref: '#/components/schemas/Constraints'
+        endpoint-bindings:
+          type: object
+          patternProperties:
+            .*:
+              type: string
+        exposed:
+          type: boolean
+        exposed-endpoints:
+          type: object
+          patternProperties:
+            .*:
+              $ref: '#/components/schemas/ExposedEndpoint'
+        life:
+          type: string
+        principal:
+          type: boolean
+        remote:
+          type: boolean
+        tag:
+          type: string
+      additionalProperties: false
+      required:
+        - tag
+        - principal
+        - exposed
+        - remote
+        - life
+    ApplicationSetCharm:
+      type: object
+      properties:
+        application:
+          type: string
+        channel:
+          type: string
+        charm-origin:
+          $ref: '#/components/schemas/CharmOrigin'
+        charm-url:
+          type: string
+        config-settings:
+          type: object
+          patternProperties:
+            .*:
+              type: string
+        config-settings-yaml:
+          type: string
+        endpoint-bindings:
+          type: object
+          patternProperties:
+            .*:
+              type: string
+        force:
+          type: boolean
+        force-base:
+          type: boolean
+        force-units:
+          type: boolean
+        generation:
+          type: string
+        resource-ids:
+          type: object
+          patternProperties:
+            .*:
+              type: string
+        storage-constraints:
+          type: object
+          patternProperties:
+            .*:
+              $ref: '#/components/schemas/StorageConstraints'
+      additionalProperties: false
+      required:
+        - application
+        - generation
+        - charm-url
+        - channel
+        - force
+        - force-units
+        - force-base
+    Base:
+      type: object
+      properties:
+        channel:
+          type: string
+        name:
+          type: string
+      additionalProperties: false
+      required:
+        - name
+        - channel
+    CharmRelation:
+      type: object
+      properties:
+        interface:
+          type: string
+        limit:
+          type: integer
+        name:
+          type: string
+        optional:
+          type: boolean
+        role:
+          type: string
+        scope:
+          type: string
+      additionalProperties: false
+      required:
+        - name
+        - role
+        - interface
+        - optional
+        - limit
+        - scope
+    CharmOrigin:
+      type: object
+      properties:
+        architecture:
+          type: string
+        base:
+          $ref: '#/components/schemas/Base'
+        branch:
+          type: string
+        hash:
+          type: string
+        id:
+          type: string
+        instance-key:
+          type: string
+        revision:
+          type: integer
+        risk:
+          type: string
+        source:
+          type: string
+        track:
+          type: string
+        type:
+          type: string
+      additionalProperties: false
+      required:
+        - source
+        - type
+        - id
     Cloud:
       type: object
       properties:
@@ -626,6 +913,140 @@ components:
       additionalProperties: false
       required:
         - permissions
+    Constraints:
+      type: object
+      properties:
+        allocate-public-ip:
+          type: boolean
+        arch:
+          type: string
+        container:
+          type: string
+        cores:
+          type: integer
+        cpu-power:
+          type: integer
+        image-id:
+          type: string
+        instance-role:
+          type: string
+        instance-type:
+          type: string
+        mem:
+          type: integer
+        root-disk:
+          type: integer
+        root-disk-source:
+          type: string
+        spaces:
+          type: array
+          items:
+            type: string
+        tags:
+          type: array
+          items:
+            type: string
+        virt-type:
+          type: string
+        zones:
+          type: array
+          items:
+            type: string
+      additionalProperties: false
+    DeployFromRepositoryArgs:
+      type: object
+      properties:
+        AttachStorage:
+          type: array
+          items:
+            type: string
+        CharmName:
+          type: string
+        ConfigYAML:
+          type: string
+        Cons:
+          $ref: '#/components/schemas/Constraints'
+        Devices:
+          type: object
+          patternProperties:
+            .*:
+              $ref: '#/components/schemas/Constraints'
+        Placement:
+          type: array
+          items:
+            $ref: '#/components/schemas/Placement'
+        Storage:
+          type: object
+          patternProperties:
+            .*:
+              $ref: '#/components/schemas/Constraints'
+        base:
+          $ref: '#/components/schemas/Base'
+        channel:
+          type: string
+        endpoint-bindings:
+          type: object
+          patternProperties:
+            .*:
+              type: string
+        resources:
+          type: object
+          patternProperties:
+            .*:
+              type: string
+        revision:
+          type: integer
+      additionalProperties: false
+      required:
+        - CharmName
+    DeployFromRepositoryInfo:
+      type: object
+      properties:
+        architecture:
+          type: string
+        base:
+          $ref: '#/components/schemas/Base'
+        channel:
+          type: string
+        charm-url:
+          type: string
+        effective-channel:
+          type: string
+      additionalProperties: false
+      required:
+        - charm-url
+        - architecture
+    DeployFromRepositoryResult:
+      type: object
+      properties:
+        Info:
+          $ref: '#/components/schemas/DeployFromRepositoryInfo'
+        PendingResourceUploads:
+          type: array
+          items:
+            $ref: '#/components/schemas/PendingResourceUpload'
+      additionalProperties: false
+      required:
+        - Info
+        - PendingResourceUploads
+    PendingResourceUpload:
+      type: object
+      description: Information about the local resources that need to be uploaded by the client after a deploy operation.
+      properties:
+        Filename:
+          type: string
+        Name:
+          type: string
+        Type:
+          type: string
+        pending-id:
+          type: string
+      additionalProperties: false
+      required:
+        - Name
+        - Filename
+        - pending-id
+        - Type
     Error:
       type: object
       properties:
@@ -643,6 +1064,18 @@ components:
         - error
         - error_code
         - type
+    ExposedEndpoint:
+      type: object
+      properties:
+        expose-to-cidrs:
+          type: array
+          items:
+            type: string
+        expose-to-spaces:
+          type: array
+          items:
+            type: string
+      additionalProperties: false
     MachineHardware:
       type: object
       properties:
@@ -1037,6 +1470,17 @@ components:
       description: Represents a volume within the model
       allOf:
         - $ref: "#/components/schemas/ModelStorageAttributes"
+    Placement:
+      type: object
+      properties:
+        directive:
+          type: string
+        scope:
+          type: string
+      additionalProperties: false
+      required:
+        - scope
+        - directive
     RegionDefaults:
       type: object
       properties:
@@ -1066,6 +1510,29 @@ components:
         - name
         - backend-type
         - config
+    StorageConstraints:
+      type: object
+      properties:
+        count:
+          type: integer
+        pool:
+          type: string
+        size:
+          type: integer
+      additionalProperties: false
+    Success:
+      type: object
+      properties:
+        status:
+          type: string
+          example: Success.
+        status_code:
+          type: integer
+          example: 200
+        type:
+          type: string
+          example: sync
+      additionalProperties: false
     SupportedFeature:
       type: object
       properties:
@@ -1111,6 +1578,13 @@ components:
         enum:
           - true
           - false
+    ApplicationName:
+      in: path
+      name: name
+      required: true
+      description: The name of a deployed application.
+      schema:
+        type: string
     CloudName:
       in: path
       name: name
@@ -1135,6 +1609,12 @@ components:
         enum:
           - true
           - false
+    DryRun:
+      in: query
+      name: dry-run
+      required: false
+      schema:
+        type: boolean
     Force:
       in: query
       name: force
@@ -1154,12 +1634,24 @@ components:
       description: The name of a model in the controller.
       schema:
         type: string
+    NumUnits:
+      in: query
+      name: num-units
+      required: false
+      schema:
+        type: integer
     Timeout:
       in: query
       name: max-wait
       required: false
       schema:
         type: integer
+    Trust:
+      in: query
+      name: trust
+      required: false
+      schema:
+        type: boolean
     User:
       in: query
       name: user
@@ -1168,6 +1660,22 @@ components:
       schema:
         type: string
   responses:
+    ApplicationDestroyed:
+      type: object
+      properties:
+        destroyed-storage:
+          type: array
+          items:
+            type: string
+        destroyed-units:
+          type: array
+          items:
+            type: string
+        detached-storage:
+          type: array
+          items:
+            type: string
+      additionalProperties: false
     BadRequest:
       description: Bad request.
       content:
@@ -1179,31 +1687,13 @@ components:
       content:
         application/json:
           schema:
-            properties:
-              status:
-                example: Success
-                type: string
-              status_code:
-                example: 200
-                type: integer
-              type:
-                example: sync
-                type: string
+            $ref: '#/components/schemas/Success'
     EntityCreated:
       description: Entity created response
       content:
         application/json:
           schema:
-            properties:
-              status:
-                example: Success
-                type: string
-              status_code:
-                example: 200
-                type: integer
-              type:
-                example: sync
-                type: string
+            $ref: '#/components/schemas/Success'
       headers:
         Location:
           schema:
@@ -1222,6 +1712,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    RelationCreated:
+      description: Relation added between specified endpoints.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CharmRelation'
 # Use this section to define reusable objects
 # callbacks: {}
 # examples: {}
