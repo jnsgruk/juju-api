@@ -923,7 +923,7 @@ components:
       properties:
         allocate-public-ip:
           type: boolean
-        arch:
+        architecture:
           type: string
         container:
           type: string
@@ -1071,7 +1071,7 @@ components:
     MachineHardware:
       type: object
       properties:
-        arch:
+        architecture:
           type: string
         availability-zone:
           type: string
