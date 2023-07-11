@@ -617,7 +617,7 @@ components:
         base:
           $ref: '#/components/schemas/Base'
         channel:
-          type: string
+          $ref: '#/components/schemas/CharmChannel'
         charm:
           type: string
         constraints:
@@ -703,6 +703,7 @@ components:
       type: object
       properties:
         channel:
+          # TODO: BaseChannel object
           type: string
         name:
           type: string
@@ -710,6 +711,20 @@ components:
       required:
         - name
         - channel
+    CharmChannel:
+      type: object
+      properties:
+        track:
+          type: string
+        risk:
+          type: string
+          enum:
+            - stable
+            - candidate
+            - beta
+            - edge
+        branch:
+          type: string
     CharmIntegration:
       type: object
       properties:
