@@ -34,6 +34,11 @@ externalDocs:
 servers:
   - url: https://localhost:17777/api/v1
 tags:
+  - name: application
+    description: Manage Juju applications
+    externalDocs:
+      description: Find out more about Juju applications.
+      url: https://juju.is/docs/olm/manage-applications
   - name: model
     description: Manage Juju models
     externalDocs:
