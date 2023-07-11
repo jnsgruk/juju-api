@@ -79,12 +79,12 @@ paths:
         - $ref: "#/components/parameters/Force"
         - $ref: "#/components/parameters/DryRun"
         - $ref: "#/components/parameters/Trust"
-        - $ref: "#/components/parameters/NumUnits"
+        - $ref: "#/components/parameters/Scale"
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DeployFromRepositoryArgs'
+              $ref: '#/components/schemas/DeployArgs'
         required: true
       responses:
         "200":
@@ -112,7 +112,7 @@ paths:
         - $ref: "#/components/parameters/DryRun"
       responses:
         "200":
-          $ref: "#/components/responses/ApplicationDestroyed"
+          $ref: "#/components/responses/EmptySyncResponse"
         "400":
           $ref: "#/components/responses/BadRequest"
         "403":
@@ -142,7 +142,7 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /application/relate:
+  /integrate
     post:
       tags:
         - application
@@ -154,11 +154,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AddRelationArgs'
+              $ref: '#/components/schemas/IntegrateArgs'
         required: true
       responses:
         "200":
-          $ref: "#/components/responses/RelationCreated"
+          $ref: "#/components/responses/EntityCreated"
         "400":
           $ref: "#/components/responses/BadRequest"
         "403":
@@ -591,7 +591,7 @@ paths:
           $ref: "#/components/responses/InternalServerError"
 components:
   schemas:
-    AddRelationArgs:
+    IntegrateArgs:
       type: object
       properties:
         endpoints:
@@ -705,7 +705,7 @@ components:
       required:
         - name
         - channel
-    CharmRelation:
+    CharmIntegration:
       type: object
       properties:
         interface:
@@ -953,7 +953,7 @@ components:
           items:
             type: string
       additionalProperties: false
-    DeployFromRepositoryArgs:
+    DeployArgs:
       type: object
       properties:
         AttachStorage:
@@ -1016,19 +1016,6 @@ components:
       required:
         - charm-url
         - architecture
-    DeployFromRepositoryResult:
-      type: object
-      properties:
-        Info:
-          $ref: '#/components/schemas/DeployFromRepositoryInfo'
-        PendingResourceUploads:
-          type: array
-          items:
-            $ref: '#/components/schemas/PendingResourceUpload'
-      additionalProperties: false
-      required:
-        - Info
-        - PendingResourceUploads
     PendingResourceUpload:
       type: object
       description: Information about the local resources that need to be uploaded by the client after a deploy operation.
@@ -1614,8 +1601,11 @@ components:
       name: dry-run
       required: false
       schema:
-        type: boolean
+        type: string
         default: false
+        enum:
+          - true
+          - false
     Force:
       in: query
       name: force
@@ -1636,7 +1626,7 @@ components:
       description: The name of a model in the controller.
       schema:
         type: string
-    NumUnits:
+    Scale:
       in: query
       name: num-units
       required: false
@@ -1663,22 +1653,6 @@ components:
       schema:
         type: string
   responses:
-    ApplicationDestroyed:
-      type: object
-      properties:
-        destroyed-storage:
-          type: array
-          items:
-            type: string
-        destroyed-units:
-          type: array
-          items:
-            type: string
-        detached-storage:
-          type: array
-          items:
-            type: string
-      additionalProperties: false
     BadRequest:
       description: Bad request.
       content:
@@ -1715,12 +1689,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    RelationCreated:
-      description: Relation added between specified endpoints.
+    IntegrationCreated:
+      description: Integration added between specified endpoints.
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/CharmRelation'
+            $ref: '#/components/schemas/CharmIntegration'
 # Use this section to define reusable objects
 # callbacks: {}
 # examples: {}
