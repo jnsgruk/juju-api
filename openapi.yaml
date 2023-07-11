@@ -50,29 +50,6 @@ tags:
       description: Find out more about Juju clouds.
       url: https://juju.is/docs/olm/manage-clouds
 paths:
-  /application/{app-name}/refresh:
-    patch:
-      tags:
-        - application
-      description: Sets the charm for a given for the application.
-      operationId: refreshApplication
-      parameters:
-        - $ref: "#/components/parameters/ApplicationName"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ApplicationSetCharm'
-        required: true
-      responses:
-        "200":
-          $ref: "#/components/responses/EmptySyncResponse"
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "500":
-          $ref: "#/components/responses/InternalServerError"
   /integrate:
     post:
       tags:
@@ -418,6 +395,30 @@ paths:
       responses:
         "200":
           $ref: "#/components/responses/EntityCreated"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /model/{model-name}/application/{app-name}/refresh:
+    patch:
+      tags:
+        - application
+      description: Sets the charm for a given for the application.
+      operationId: refreshApplication
+      parameters:
+        - $ref: "#/components/parameters/ModelName"
+        - $ref: "#/components/parameters/ApplicationName"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationSetCharm'
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/EmptySyncResponse"
         "400":
           $ref: "#/components/responses/BadRequest"
         "403":
