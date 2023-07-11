@@ -93,11 +93,7 @@ paths:
         required: true
       responses:
         "200":
-          description: Detailed information about the requested application.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/DeployFromRepositoryResult"
+          $ref: "#/components/responses/EntityCreated"
         "400":
           $ref: "#/components/responses/BadRequest"
         "403":
