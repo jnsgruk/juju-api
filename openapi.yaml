@@ -373,13 +373,35 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
+    delete:
+      tags:
+        - application
+      description: Removes a given application.
+      operationId: deleteApplication
+      parameters:
+        - $ref: "#/components/parameters/ModelName"
+        - $ref: "#/components/parameters/ApplicationName"
+        - $ref: "#/components/parameters/DestroyStorage"
+        - $ref: "#/components/parameters/Force"
+        - $ref: "#/components/parameters/MaxWait"
+        - $ref: "#/components/parameters/DryRun"
+      responses:
+        "200":
+          $ref: "#/components/responses/EmptySyncResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /model{model-name}/application/{app-name}/deploy:
     post:
       tags:
         - application
-      description: Is a one-stop deployment method for repository charms. Only a charm
-        name is required to deploy. If argument validation fails, a list of all errors
-        found in validation will be returned. If a local resource is provided, details
+      description: Deploy an application. If a local resource is provided, details
         required for uploading the validated resource will be returned.
+      # This needs to return info about local resources to be uploaded by the client
+      # post-deploy (PendingResourceUpload)
       operationId: addApplication
       parameters:
         - $ref: "#/components/parameters/ApplicationName"
@@ -396,27 +418,6 @@ paths:
       responses:
         "200":
           $ref: "#/components/responses/EntityCreated"
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "500":
-          $ref: "#/components/responses/InternalServerError"
-    delete:
-      tags:
-        - application
-      description: Removes a given application.
-      operationId: deleteApplication
-      parameters:
-        - $ref: "#/components/parameters/ModelName"
-        - $ref: "#/components/parameters/ApplicationName"
-        - $ref: "#/components/parameters/DestroyStorage"
-        - $ref: "#/components/parameters/Force"
-        - $ref: "#/components/parameters/MaxWait"
-        - $ref: "#/components/parameters/DryRun"
-      responses:
-        "200":
-          $ref: "#/components/responses/EmptySyncResponse"
         "400":
           $ref: "#/components/responses/BadRequest"
         "403":
