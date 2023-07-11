@@ -957,26 +957,26 @@ components:
     DeployArgs:
       type: object
       properties:
-        AttachStorage:
+        attachStorage:
           type: array
           items:
             type: string
-        CharmName:
+        charmName:
           type: string
-        ConfigYAML:
+        configYAML:
           type: string
-        Cons:
+        constraints:
           $ref: '#/components/schemas/Constraints'
-        Devices:
+        devices:
           type: object
           patternProperties:
             .*:
               $ref: '#/components/schemas/Constraints'
-        Placement:
+        placement:
           type: array
           items:
             $ref: '#/components/schemas/Placement'
-        Storage:
+        storage:
           type: object
           patternProperties:
             .*:
@@ -1021,11 +1021,11 @@ components:
       type: object
       description: Information about the local resources that need to be uploaded by the client after a deploy operation.
       properties:
-        Filename:
+        filename:
           type: string
-        Name:
+        name:
           type: string
-        Type:
+        type:
           type: string
         pending-id:
           type: string
