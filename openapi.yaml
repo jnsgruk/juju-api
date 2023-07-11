@@ -624,16 +624,14 @@ components:
           $ref: '#/components/schemas/Constraints'
         endpoint-bindings:
           type: object
-          patternProperties:
-            .*:
-              type: string
+          additionalProperties:
+            type: string
         exposed:
           type: boolean
         exposed-endpoints:
           type: object
-          patternProperties:
-            .*:
-              $ref: '#/components/schemas/ExposedEndpoint'
+          additionalProperties:
+            $ref: '#/components/schemas/ExposedEndpoint'
         life:
           type: string
         principal:
@@ -662,16 +660,14 @@ components:
           type: string
         config-settings:
           type: object
-          patternProperties:
-            .*:
-              type: string
+          additionalProperties:
+            type: string
         config-settings-yaml:
           type: string
         endpoint-bindings:
           type: object
-          patternProperties:
-            .*:
-              type: string
+          additionalProperties:
+            type: string
         force:
           type: boolean
         force-base:
@@ -682,14 +678,12 @@ components:
           type: string
         resource-ids:
           type: object
-          patternProperties:
-            .*:
-              type: string
+          additionalProperties:
+            type: string
         storage-constraints:
           type: object
-          patternProperties:
-            .*:
-              $ref: '#/components/schemas/StorageConstraints'
+          additionalProperties:
+            $ref: '#/components/schemas/StorageConstraints'
       additionalProperties: false
       required:
         - application
@@ -988,32 +982,28 @@ components:
           $ref: '#/components/schemas/Constraints'
         devices:
           type: object
-          patternProperties:
-            .*:
-              $ref: '#/components/schemas/Constraints'
+          additionalProperties:
+            $ref: '#/components/schemas/Constraints'
         placement:
           type: array
           items:
             $ref: '#/components/schemas/Placement'
         storage:
           type: object
-          patternProperties:
-            .*:
-              $ref: '#/components/schemas/Constraints'
+          additionalProperties:
+            $ref: '#/components/schemas/Constraints'
         base:
           $ref: '#/components/schemas/Base'
         channel:
           type: string
         endpoint-bindings:
           type: object
-          patternProperties:
-            .*:
-              type: string
+          additionalProperties:
+            type: string
         resources:
           type: object
-          patternProperties:
-            .*:
-              type: string
+          additionalProperties:
+            type: string
         revision:
           type: integer
       additionalProperties: false
