@@ -50,77 +50,7 @@ tags:
       description: Find out more about Juju clouds.
       url: https://juju.is/docs/olm/manage-clouds
 paths:
-  /application/{name}:
-    get:
-      tags:
-        - application
-      description: Returns application information.
-      operationId: getApplication
-      parameters:
-        - $ref: "#/components/parameters/ApplicationName"
-      responses:
-        "200":
-          description: Detailed information about the requested application.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Application"
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "500":
-          $ref: "#/components/responses/InternalServerError"
-    post:
-      tags:
-        - application
-      description: Is a one-stop deployment method for repository charms. Only a charm
-        name is required to deploy. If argument validation fails, a list of all errors
-        found in validation will be returned. If a local resource is provided, details
-        required for uploading the validated resource will be returned.
-      operationId: addApplication
-      parameters:
-        - $ref: "#/components/parameters/ApplicationName"
-        - $ref: "#/components/parameters/Force"
-        - $ref: "#/components/parameters/DryRun"
-        - $ref: "#/components/parameters/Trust"
-        - $ref: "#/components/parameters/Scale"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/DeployArgs'
-        required: true
-      responses:
-        "200":
-          $ref: "#/components/responses/EntityCreated"
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "500":
-          $ref: "#/components/responses/InternalServerError"
-    delete:
-      tags:
-        - application
-      description: Removes a given application.
-      operationId: deleteApplication
-      parameters:
-        - $ref: "#/components/parameters/ApplicationName"
-        - $ref: "#/components/parameters/DestroyStorage"
-        - $ref: "#/components/parameters/Force"
-        - $ref: "#/components/parameters/MaxWait"
-        - $ref: "#/components/parameters/DryRun"
-      responses:
-        "200":
-          $ref: "#/components/responses/EmptySyncResponse"
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "500":
-          $ref: "#/components/responses/InternalServerError"
-  /application/{name}/refresh:
+  /application/{app-name}/refresh:
     patch:
       tags:
         - application
@@ -143,7 +73,7 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /integrate
+  /integrate:
     post:
       tags:
         - application
@@ -166,7 +96,7 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /cloud/{name}:
+  /cloud/{cloud-name}:
     get:
       tags:
         - cloud
@@ -208,7 +138,7 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /cloud/{name}/access:
+  /cloud/{cloud-name}/access:
     get:
       tags:
         - cloud
@@ -327,7 +257,7 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /model/{name}:
+  /model/{model-name}:
     get:
       tags:
         - model
@@ -372,7 +302,7 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /model/{name}/access:
+  /model/{model-name}/access:
     get:
       tags:
         - model
@@ -421,7 +351,79 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /model/{name}/credential:
+  /model{model-name}/application/{app-name}:
+    get:
+      tags:
+        - application
+      description: Returns application information.
+      operationId: getApplication
+      parameters:
+        - $ref: "#/components/parameters/ModelName"
+        - $ref: "#/components/parameters/ApplicationName"
+      responses:
+        "200":
+          description: Detailed information about the requested application.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Application"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+    post:
+      tags:
+        - application
+      description: Is a one-stop deployment method for repository charms. Only a charm
+        name is required to deploy. If argument validation fails, a list of all errors
+        found in validation will be returned. If a local resource is provided, details
+        required for uploading the validated resource will be returned.
+      operationId: addApplication
+      parameters:
+        - $ref: "#/components/parameters/ApplicationName"
+        - $ref: "#/components/parameters/Force"
+        - $ref: "#/components/parameters/DryRun"
+        - $ref: "#/components/parameters/Trust"
+        - $ref: "#/components/parameters/Scale"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeployArgs'
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/EntityCreated"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+    delete:
+      tags:
+        - application
+      description: Removes a given application.
+      operationId: deleteApplication
+      parameters:
+        - $ref: "#/components/parameters/ModelName"
+        - $ref: "#/components/parameters/ApplicationName"
+        - $ref: "#/components/parameters/DestroyStorage"
+        - $ref: "#/components/parameters/Force"
+        - $ref: "#/components/parameters/MaxWait"
+        - $ref: "#/components/parameters/DryRun"
+      responses:
+        "200":
+          $ref: "#/components/responses/EmptySyncResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /model/{model-name}/credential:
     patch:
       tags:
         - model
@@ -447,7 +449,7 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /model/{name}/status:
+  /model/{model-name}/status:
     get:
       tags:
         - model
@@ -1568,14 +1570,14 @@ components:
           - false
     ApplicationName:
       in: path
-      name: name
+      name: app-name
       required: true
       description: The name of a deployed application.
       schema:
         type: string
     CloudName:
       in: path
-      name: name
+      name: cloud-name
       required: true
       description: The name of a cloud in the controller.
       schema:
@@ -1622,7 +1624,7 @@ components:
         type: integer
     ModelName:
       in: path
-      name: name
+      name: model-name
       required: true
       description: The name of a model in the controller.
       schema:
