@@ -665,6 +665,13 @@ components:
         - force
         - force-units
         - force-base
+    Architecture:
+      type: string
+      enum:
+        - amd64
+        - arm64
+        - i386
+        - riscv64
     Base:
       type: object
       properties:
@@ -725,7 +732,7 @@ components:
       type: object
       properties:
         architecture:
-          type: string
+          $ref: '#/components/schemas/Architecture'
         base:
           $ref: '#/components/schemas/Base'
         branch:
@@ -912,7 +919,7 @@ components:
         allocate-public-ip:
           type: boolean
         architecture:
-          type: string
+          $ref: '#/components/schemas/Architecture'
         container:
           type: string
         cores:
@@ -992,7 +999,7 @@ components:
       type: object
       properties:
         architecture:
-          type: string
+          $ref: '#/components/schemas/Architecture'
         base:
           $ref: '#/components/schemas/Base'
         channel:
@@ -1056,7 +1063,7 @@ components:
       type: object
       properties:
         architecture:
-          type: string
+          $ref: '#/components/schemas/Architecture'
         availability-zone:
           type: string
         cores:
