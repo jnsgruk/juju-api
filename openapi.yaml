@@ -618,6 +618,8 @@ components:
           $ref: '#/components/schemas/Base'
         channel:
           $ref: '#/components/schemas/CharmChannel'
+        charm-origin:
+          $ref: '#/components/schemas/CharmOrigin'
         charm:
           type: string
         constraints:
@@ -632,14 +634,8 @@ components:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/ExposedEndpoint'
-        life:
-          type: string
         principal:
           type: boolean
-        remote:
-          type: boolean
-        tag:
-          type: string
       additionalProperties: false
       required:
         - tag
