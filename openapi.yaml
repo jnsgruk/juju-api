@@ -410,11 +410,13 @@ paths:
       parameters:
         - $ref: "#/components/parameters/ModelName"
         - $ref: "#/components/parameters/ApplicationName"
+        - $ref: "#/components/parameters/Force"
+        - $ref: "#/components/parameters/DryRun"
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ApplicationSetCharm'
+              $ref: '#/components/schemas/ApplicationSubstitute'
         required: true
       responses:
         "200":
@@ -643,7 +645,7 @@ components:
         - exposed
         - remote
         - life
-    ApplicationSetCharm:
+    ApplicationSubstitute:
       type: object
       properties:
         application:
@@ -654,32 +656,6 @@ components:
           $ref: '#/components/schemas/CharmOrigin'
         charm-url:
           type: string
-        config-settings:
-          type: object
-          additionalProperties:
-            type: string
-        config-settings-yaml:
-          type: string
-        endpoint-bindings:
-          type: object
-          additionalProperties:
-            type: string
-        force:
-          type: boolean
-        force-base:
-          type: boolean
-        force-units:
-          type: boolean
-        generation:
-          type: string
-        resource-ids:
-          type: object
-          additionalProperties:
-            type: string
-        storage-constraints:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/StorageConstraints'
       additionalProperties: false
       required:
         - application
