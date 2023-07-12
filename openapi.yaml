@@ -704,8 +704,15 @@ components:
           type: boolean
         role:
           type: string
+          enum:
+            - provider
+            - requirer
+            - peer
         scope:
           type: string
+          enum:
+            - global
+            - container
       additionalProperties: false
       required:
         - name
