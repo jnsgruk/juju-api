@@ -14,3 +14,4 @@ jobs:
       - uses: stoplightio/spectral-action@latest
         with:
           file_glob: 'openapi.yaml'
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
