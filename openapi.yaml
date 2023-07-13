@@ -749,10 +749,16 @@ components:
           type: string
         source:
           type: string
+          enum:
+            - local
+            - charm-hub
         track:
           type: string
         type:
           type: string
+          enum:
+            - charm
+            - bundle
       additionalProperties: false
       required:
         - source
