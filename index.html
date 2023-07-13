@@ -460,12 +460,12 @@ License: <a href="https://www.gnu.org/licenses/agpl-3.0.en.html">AGPL 3.0</a></p
 <blockquote>
 <p>Code samples</p>
 </blockquote>
-<div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://localhost:17777/api/v1/model/{name}</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://localhost:17777/api/v1/model/{model}</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">localhost:17777</span>
 <span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/model/<span class="o">{</span>name<span class="o">}</span> <span class="se">\</span>
+curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/model/<span class="o">{</span>model<span class="o">}</span> <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">package</span> <span class="n">main</span>
@@ -482,7 +482,7 @@ curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/model/<span c
     <span class="p">}</span>
 
     <span class="n">data</span> <span class="o">:=</span> <span class="n">bytes</span><span class="o">.</span><span class="n">NewBuffer</span><span class="p">([]</span><span class="kt">byte</span><span class="p">{</span><span class="n">jsonReq</span><span class="p">})</span>
-    <span class="n">req</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="s">"https://localhost:17777/api/v1/model/{name}"</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+    <span class="n">req</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="s">"https://localhost:17777/api/v1/model/{model}"</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
     <span class="n">req</span><span class="o">.</span><span class="n">Header</span> <span class="o">=</span> <span class="n">headers</span>
 
     <span class="n">client</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="n">http</span><span class="o">.</span><span class="n">Client</span><span class="p">{}</span>
@@ -495,12 +495,12 @@ curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/model/<span c
   <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">}</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://localhost:17777/api/v1/model/{name}'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://localhost:17777/api/v1/model/{model}'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
 
 </code></pre></div>
-<p><code>GET /model/{name}</code></p>
+<p><code>GET /model/{model}</code></p>
 
 <p><em>Get a specific model.</em></p>
 
@@ -518,7 +518,7 @@ curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/model/<span c
 </tr>
 </thead><tbody>
 <tr>
-<td>name</td>
+<td>model</td>
 <td>path</td>
 <td>string</td>
 <td>true</td>
@@ -601,12 +601,12 @@ This operation does not require authentication
 <blockquote>
 <p>Code samples</p>
 </blockquote>
-<div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">DELETE</span> <span class="nn">https://localhost:17777/api/v1/model/{name}</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">DELETE</span> <span class="nn">https://localhost:17777/api/v1/model/{model}</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">localhost:17777</span>
 <span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl <span class="nt">-X</span> DELETE https://localhost:17777/api/v1/model/<span class="o">{</span>name<span class="o">}</span> <span class="se">\</span>
+curl <span class="nt">-X</span> DELETE https://localhost:17777/api/v1/model/<span class="o">{</span>model<span class="o">}</span> <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">package</span> <span class="n">main</span>
@@ -623,7 +623,7 @@ curl <span class="nt">-X</span> DELETE https://localhost:17777/api/v1/model/<spa
     <span class="p">}</span>
 
     <span class="n">data</span> <span class="o">:=</span> <span class="n">bytes</span><span class="o">.</span><span class="n">NewBuffer</span><span class="p">([]</span><span class="kt">byte</span><span class="p">{</span><span class="n">jsonReq</span><span class="p">})</span>
-    <span class="n">req</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"DELETE"</span><span class="p">,</span> <span class="s">"https://localhost:17777/api/v1/model/{name}"</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+    <span class="n">req</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"DELETE"</span><span class="p">,</span> <span class="s">"https://localhost:17777/api/v1/model/{model}"</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
     <span class="n">req</span><span class="o">.</span><span class="n">Header</span> <span class="o">=</span> <span class="n">headers</span>
 
     <span class="n">client</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="n">http</span><span class="o">.</span><span class="n">Client</span><span class="p">{}</span>
@@ -636,12 +636,12 @@ curl <span class="nt">-X</span> DELETE https://localhost:17777/api/v1/model/<spa
   <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">}</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="s">'https://localhost:17777/api/v1/model/{name}'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="s">'https://localhost:17777/api/v1/model/{model}'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
 
 </code></pre></div>
-<p><code>DELETE /model/{name}</code></p>
+<p><code>DELETE /model/{model}</code></p>
 
 <p><em>Delete a model.</em></p>
 
@@ -659,7 +659,7 @@ curl <span class="nt">-X</span> DELETE https://localhost:17777/api/v1/model/<spa
 </tr>
 </thead><tbody>
 <tr>
-<td>name</td>
+<td>model</td>
 <td>path</td>
 <td>string</td>
 <td>true</td>
@@ -681,6 +681,13 @@ curl <span class="nt">-X</span> DELETE https://localhost:17777/api/v1/model/<spa
 </tr>
 <tr>
 <td>max-wait</td>
+<td>query</td>
+<td>integer</td>
+<td>false</td>
+<td>none</td>
+</tr>
+<tr>
+<td>timeout</td>
 <td>query</td>
 <td>integer</td>
 <td>false</td>
@@ -780,12 +787,12 @@ This operation does not require authentication
 <blockquote>
 <p>Code samples</p>
 </blockquote>
-<div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://localhost:17777/api/v1/model/{name}/access</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://localhost:17777/api/v1/model/{model}/access</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">localhost:17777</span>
 <span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/model/<span class="o">{</span>name<span class="o">}</span>/access <span class="se">\</span>
+curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/model/<span class="o">{</span>model<span class="o">}</span>/access <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">package</span> <span class="n">main</span>
@@ -802,7 +809,7 @@ curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/model/<span c
     <span class="p">}</span>
 
     <span class="n">data</span> <span class="o">:=</span> <span class="n">bytes</span><span class="o">.</span><span class="n">NewBuffer</span><span class="p">([]</span><span class="kt">byte</span><span class="p">{</span><span class="n">jsonReq</span><span class="p">})</span>
-    <span class="n">req</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="s">"https://localhost:17777/api/v1/model/{name}/access"</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+    <span class="n">req</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="s">"https://localhost:17777/api/v1/model/{model}/access"</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
     <span class="n">req</span><span class="o">.</span><span class="n">Header</span> <span class="o">=</span> <span class="n">headers</span>
 
     <span class="n">client</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="n">http</span><span class="o">.</span><span class="n">Client</span><span class="p">{}</span>
@@ -815,12 +822,12 @@ curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/model/<span c
   <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">}</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://localhost:17777/api/v1/model/{name}/access'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://localhost:17777/api/v1/model/{model}/access'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
 
 </code></pre></div>
-<p><code>GET /model/{name}/access</code></p>
+<p><code>GET /model/{model}/access</code></p>
 
 <p><em>List of user permissions for model.</em></p>
 
@@ -839,7 +846,7 @@ to users on the controller.</p>
 </tr>
 </thead><tbody>
 <tr>
-<td>name</td>
+<td>model</td>
 <td>path</td>
 <td>string</td>
 <td>true</td>
@@ -901,13 +908,13 @@ This operation does not require authentication
 <blockquote>
 <p>Code samples</p>
 </blockquote>
-<div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">PATCH</span> <span class="nn">https://localhost:17777/api/v1/model/{name}/access</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">PATCH</span> <span class="nn">https://localhost:17777/api/v1/model/{model}/access</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">localhost:17777</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
 <span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl <span class="nt">-X</span> PATCH https://localhost:17777/api/v1/model/<span class="o">{</span>name<span class="o">}</span>/access <span class="se">\</span>
+curl <span class="nt">-X</span> PATCH https://localhost:17777/api/v1/model/<span class="o">{</span>model<span class="o">}</span>/access <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span>
 
@@ -926,7 +933,7 @@ curl <span class="nt">-X</span> PATCH https://localhost:17777/api/v1/model/<span
     <span class="p">}</span>
 
     <span class="n">data</span> <span class="o">:=</span> <span class="n">bytes</span><span class="o">.</span><span class="n">NewBuffer</span><span class="p">([]</span><span class="kt">byte</span><span class="p">{</span><span class="n">jsonReq</span><span class="p">})</span>
-    <span class="n">req</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"PATCH"</span><span class="p">,</span> <span class="s">"https://localhost:17777/api/v1/model/{name}/access"</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+    <span class="n">req</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"PATCH"</span><span class="p">,</span> <span class="s">"https://localhost:17777/api/v1/model/{model}/access"</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
     <span class="n">req</span><span class="o">.</span><span class="n">Header</span> <span class="o">=</span> <span class="n">headers</span>
 
     <span class="n">client</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="n">http</span><span class="o">.</span><span class="n">Client</span><span class="p">{}</span>
@@ -940,12 +947,12 @@ curl <span class="nt">-X</span> PATCH https://localhost:17777/api/v1/model/<span
   <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">}</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">patch</span><span class="p">(</span><span class="s">'https://localhost:17777/api/v1/model/{name}/access'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">patch</span><span class="p">(</span><span class="s">'https://localhost:17777/api/v1/model/{model}/access'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
 
 </code></pre></div>
-<p><code>PATCH /model/{name}/access</code></p>
+<p><code>PATCH /model/{model}/access</code></p>
 
 <p><em>Change the model access granted to users.</em></p>
 
@@ -970,7 +977,7 @@ curl <span class="nt">-X</span> PATCH https://localhost:17777/api/v1/model/<span
 </tr>
 </thead><tbody>
 <tr>
-<td>name</td>
+<td>model</td>
 <td>path</td>
 <td>string</td>
 <td>true</td>
@@ -1077,13 +1084,13 @@ This operation does not require authentication
 <blockquote>
 <p>Code samples</p>
 </blockquote>
-<div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">PATCH</span> <span class="nn">https://localhost:17777/api/v1/model/{name}/credential</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">PATCH</span> <span class="nn">https://localhost:17777/api/v1/model/{model}/credential</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">localhost:17777</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
 <span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl <span class="nt">-X</span> PATCH https://localhost:17777/api/v1/model/<span class="o">{</span>name<span class="o">}</span>/credential <span class="se">\</span>
+curl <span class="nt">-X</span> PATCH https://localhost:17777/api/v1/model/<span class="o">{</span>model<span class="o">}</span>/credential <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span>
 
@@ -1102,7 +1109,7 @@ curl <span class="nt">-X</span> PATCH https://localhost:17777/api/v1/model/<span
     <span class="p">}</span>
 
     <span class="n">data</span> <span class="o">:=</span> <span class="n">bytes</span><span class="o">.</span><span class="n">NewBuffer</span><span class="p">([]</span><span class="kt">byte</span><span class="p">{</span><span class="n">jsonReq</span><span class="p">})</span>
-    <span class="n">req</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"PATCH"</span><span class="p">,</span> <span class="s">"https://localhost:17777/api/v1/model/{name}/credential"</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+    <span class="n">req</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"PATCH"</span><span class="p">,</span> <span class="s">"https://localhost:17777/api/v1/model/{model}/credential"</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
     <span class="n">req</span><span class="o">.</span><span class="n">Header</span> <span class="o">=</span> <span class="n">headers</span>
 
     <span class="n">client</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="n">http</span><span class="o">.</span><span class="n">Client</span><span class="p">{}</span>
@@ -1116,12 +1123,12 @@ curl <span class="nt">-X</span> PATCH https://localhost:17777/api/v1/model/<span
   <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">}</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">patch</span><span class="p">(</span><span class="s">'https://localhost:17777/api/v1/model/{name}/credential'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">patch</span><span class="p">(</span><span class="s">'https://localhost:17777/api/v1/model/{model}/credential'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
 
 </code></pre></div>
-<p><code>PATCH /model/{name}/credential</code></p>
+<p><code>PATCH /model/{model}/credential</code></p>
 
 <p><em>Change the credential related to the model.</em></p>
 
@@ -1146,7 +1153,7 @@ curl <span class="nt">-X</span> PATCH https://localhost:17777/api/v1/model/<span
 </tr>
 </thead><tbody>
 <tr>
-<td>name</td>
+<td>model</td>
 <td>path</td>
 <td>string</td>
 <td>true</td>
@@ -1253,12 +1260,12 @@ This operation does not require authentication
 <blockquote>
 <p>Code samples</p>
 </blockquote>
-<div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://localhost:17777/api/v1/model/{name}/status</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://localhost:17777/api/v1/model/{model}/status</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">localhost:17777</span>
 <span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/model/<span class="o">{</span>name<span class="o">}</span>/status <span class="se">\</span>
+curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/model/<span class="o">{</span>model<span class="o">}</span>/status <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">package</span> <span class="n">main</span>
@@ -1275,7 +1282,7 @@ curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/model/<span c
     <span class="p">}</span>
 
     <span class="n">data</span> <span class="o">:=</span> <span class="n">bytes</span><span class="o">.</span><span class="n">NewBuffer</span><span class="p">([]</span><span class="kt">byte</span><span class="p">{</span><span class="n">jsonReq</span><span class="p">})</span>
-    <span class="n">req</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="s">"https://localhost:17777/api/v1/model/{name}/status"</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+    <span class="n">req</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="s">"https://localhost:17777/api/v1/model/{model}/status"</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
     <span class="n">req</span><span class="o">.</span><span class="n">Header</span> <span class="o">=</span> <span class="n">headers</span>
 
     <span class="n">client</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="n">http</span><span class="o">.</span><span class="n">Client</span><span class="p">{}</span>
@@ -1288,12 +1295,12 @@ curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/model/<span c
   <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">}</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://localhost:17777/api/v1/model/{name}/status'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://localhost:17777/api/v1/model/{model}/status'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
 
 </code></pre></div>
-<p><code>GET /model/{name}/status</code></p>
+<p><code>GET /model/{model}/status</code></p>
 
 <p><em>Get the status of a specific model.</em></p>
 
@@ -1311,7 +1318,7 @@ curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/model/<span c
 </tr>
 </thead><tbody>
 <tr>
-<td>name</td>
+<td>model</td>
 <td>path</td>
 <td>string</td>
 <td>true</td>
@@ -1384,12 +1391,12 @@ This operation does not require authentication
 <blockquote>
 <p>Code samples</p>
 </blockquote>
-<div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://localhost:17777/api/v1/models</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://localhost:17777/api/v1/models?user=string</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">localhost:17777</span>
 <span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/models <span class="se">\</span>
+curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/models?user<span class="o">=</span>string <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">package</span> <span class="n">main</span>
@@ -1419,7 +1426,9 @@ curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/models <span 
   <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">}</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://localhost:17777/api/v1/models'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://localhost:17777/api/v1/models'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+  <span class="s">'user'</span><span class="p">:</span> <span class="s">'string'</span>
+<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
 
@@ -1463,7 +1472,7 @@ curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/models <span 
 <td>user</td>
 <td>query</td>
 <td>string</td>
-<td>false</td>
+<td>true</td>
 <td>Username of a user on the controller.</td>
 </tr>
 </tbody></table>
@@ -2049,12 +2058,12 @@ This operation does not require authentication
 <blockquote>
 <p>Code samples</p>
 </blockquote>
-<div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://localhost:17777/api/v1/cloud/{name}</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://localhost:17777/api/v1/cloud/{cloud}</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">localhost:17777</span>
 <span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/cloud/<span class="o">{</span>name<span class="o">}</span> <span class="se">\</span>
+curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/cloud/<span class="o">{</span>cloud<span class="o">}</span> <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">package</span> <span class="n">main</span>
@@ -2071,7 +2080,7 @@ curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/cloud/<span c
     <span class="p">}</span>
 
     <span class="n">data</span> <span class="o">:=</span> <span class="n">bytes</span><span class="o">.</span><span class="n">NewBuffer</span><span class="p">([]</span><span class="kt">byte</span><span class="p">{</span><span class="n">jsonReq</span><span class="p">})</span>
-    <span class="n">req</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="s">"https://localhost:17777/api/v1/cloud/{name}"</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+    <span class="n">req</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="s">"https://localhost:17777/api/v1/cloud/{cloud}"</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
     <span class="n">req</span><span class="o">.</span><span class="n">Header</span> <span class="o">=</span> <span class="n">headers</span>
 
     <span class="n">client</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="n">http</span><span class="o">.</span><span class="n">Client</span><span class="p">{}</span>
@@ -2084,12 +2093,12 @@ curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/cloud/<span c
   <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">}</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://localhost:17777/api/v1/cloud/{name}'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://localhost:17777/api/v1/cloud/{cloud}'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
 
 </code></pre></div>
-<p><code>GET /cloud/{name}</code></p>
+<p><code>GET /cloud/{cloud}</code></p>
 
 <p><em>Get a specific cloud.</em></p>
 
@@ -2107,7 +2116,7 @@ curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/cloud/<span c
 </tr>
 </thead><tbody>
 <tr>
-<td>name</td>
+<td>cloud</td>
 <td>path</td>
 <td>string</td>
 <td>true</td>
@@ -2176,12 +2185,12 @@ This operation does not require authentication
 <blockquote>
 <p>Code samples</p>
 </blockquote>
-<div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">DELETE</span> <span class="nn">https://localhost:17777/api/v1/cloud/{name}</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">DELETE</span> <span class="nn">https://localhost:17777/api/v1/cloud/{cloud}</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">localhost:17777</span>
 <span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl <span class="nt">-X</span> DELETE https://localhost:17777/api/v1/cloud/<span class="o">{</span>name<span class="o">}</span> <span class="se">\</span>
+curl <span class="nt">-X</span> DELETE https://localhost:17777/api/v1/cloud/<span class="o">{</span>cloud<span class="o">}</span> <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">package</span> <span class="n">main</span>
@@ -2198,7 +2207,7 @@ curl <span class="nt">-X</span> DELETE https://localhost:17777/api/v1/cloud/<spa
     <span class="p">}</span>
 
     <span class="n">data</span> <span class="o">:=</span> <span class="n">bytes</span><span class="o">.</span><span class="n">NewBuffer</span><span class="p">([]</span><span class="kt">byte</span><span class="p">{</span><span class="n">jsonReq</span><span class="p">})</span>
-    <span class="n">req</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"DELETE"</span><span class="p">,</span> <span class="s">"https://localhost:17777/api/v1/cloud/{name}"</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+    <span class="n">req</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"DELETE"</span><span class="p">,</span> <span class="s">"https://localhost:17777/api/v1/cloud/{cloud}"</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
     <span class="n">req</span><span class="o">.</span><span class="n">Header</span> <span class="o">=</span> <span class="n">headers</span>
 
     <span class="n">client</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="n">http</span><span class="o">.</span><span class="n">Client</span><span class="p">{}</span>
@@ -2211,12 +2220,12 @@ curl <span class="nt">-X</span> DELETE https://localhost:17777/api/v1/cloud/<spa
   <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">}</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="s">'https://localhost:17777/api/v1/cloud/{name}'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="s">'https://localhost:17777/api/v1/cloud/{cloud}'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
 
 </code></pre></div>
-<p><code>DELETE /cloud/{name}</code></p>
+<p><code>DELETE /cloud/{cloud}</code></p>
 
 <p><em>Delete a cloud.</em></p>
 
@@ -2235,7 +2244,7 @@ the removal will fail.</p>
 </tr>
 </thead><tbody>
 <tr>
-<td>name</td>
+<td>cloud</td>
 <td>path</td>
 <td>string</td>
 <td>true</td>
@@ -2335,12 +2344,12 @@ This operation does not require authentication
 <blockquote>
 <p>Code samples</p>
 </blockquote>
-<div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://localhost:17777/api/v1/cloud/{name}/access</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://localhost:17777/api/v1/cloud/{cloud}/access</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">localhost:17777</span>
 <span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/cloud/<span class="o">{</span>name<span class="o">}</span>/access <span class="se">\</span>
+curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/cloud/<span class="o">{</span>cloud<span class="o">}</span>/access <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">package</span> <span class="n">main</span>
@@ -2357,7 +2366,7 @@ curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/cloud/<span c
     <span class="p">}</span>
 
     <span class="n">data</span> <span class="o">:=</span> <span class="n">bytes</span><span class="o">.</span><span class="n">NewBuffer</span><span class="p">([]</span><span class="kt">byte</span><span class="p">{</span><span class="n">jsonReq</span><span class="p">})</span>
-    <span class="n">req</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="s">"https://localhost:17777/api/v1/cloud/{name}/access"</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+    <span class="n">req</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="s">"https://localhost:17777/api/v1/cloud/{cloud}/access"</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
     <span class="n">req</span><span class="o">.</span><span class="n">Header</span> <span class="o">=</span> <span class="n">headers</span>
 
     <span class="n">client</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="n">http</span><span class="o">.</span><span class="n">Client</span><span class="p">{}</span>
@@ -2370,12 +2379,12 @@ curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/cloud/<span c
   <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">}</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://localhost:17777/api/v1/cloud/{name}/access'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://localhost:17777/api/v1/cloud/{cloud}/access'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
 
 </code></pre></div>
-<p><code>GET /cloud/{name}/access</code></p>
+<p><code>GET /cloud/{cloud}/access</code></p>
 
 <p><em>List of user permissions for cloud.</em></p>
 
@@ -2394,7 +2403,7 @@ to users on the controller.</p>
 </tr>
 </thead><tbody>
 <tr>
-<td>name</td>
+<td>cloud</td>
 <td>path</td>
 <td>string</td>
 <td>true</td>
@@ -2456,13 +2465,13 @@ This operation does not require authentication
 <blockquote>
 <p>Code samples</p>
 </blockquote>
-<div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">PATCH</span> <span class="nn">https://localhost:17777/api/v1/cloud/{name}/access</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">PATCH</span> <span class="nn">https://localhost:17777/api/v1/cloud/{cloud}/access</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">localhost:17777</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
 <span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl <span class="nt">-X</span> PATCH https://localhost:17777/api/v1/cloud/<span class="o">{</span>name<span class="o">}</span>/access <span class="se">\</span>
+curl <span class="nt">-X</span> PATCH https://localhost:17777/api/v1/cloud/<span class="o">{</span>cloud<span class="o">}</span>/access <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span>
 
@@ -2481,7 +2490,7 @@ curl <span class="nt">-X</span> PATCH https://localhost:17777/api/v1/cloud/<span
     <span class="p">}</span>
 
     <span class="n">data</span> <span class="o">:=</span> <span class="n">bytes</span><span class="o">.</span><span class="n">NewBuffer</span><span class="p">([]</span><span class="kt">byte</span><span class="p">{</span><span class="n">jsonReq</span><span class="p">})</span>
-    <span class="n">req</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"PATCH"</span><span class="p">,</span> <span class="s">"https://localhost:17777/api/v1/cloud/{name}/access"</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+    <span class="n">req</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"PATCH"</span><span class="p">,</span> <span class="s">"https://localhost:17777/api/v1/cloud/{cloud}/access"</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
     <span class="n">req</span><span class="o">.</span><span class="n">Header</span> <span class="o">=</span> <span class="n">headers</span>
 
     <span class="n">client</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="n">http</span><span class="o">.</span><span class="n">Client</span><span class="p">{}</span>
@@ -2495,12 +2504,12 @@ curl <span class="nt">-X</span> PATCH https://localhost:17777/api/v1/cloud/<span
   <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">}</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">patch</span><span class="p">(</span><span class="s">'https://localhost:17777/api/v1/cloud/{name}/access'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">patch</span><span class="p">(</span><span class="s">'https://localhost:17777/api/v1/cloud/{cloud}/access'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
 
 </code></pre></div>
-<p><code>PATCH /cloud/{name}/access</code></p>
+<p><code>PATCH /cloud/{cloud}/access</code></p>
 
 <p><em>Change the cloud access granted to users.</em></p>
 
@@ -2525,7 +2534,7 @@ curl <span class="nt">-X</span> PATCH https://localhost:17777/api/v1/cloud/<span
 </tr>
 </thead><tbody>
 <tr>
-<td>name</td>
+<td>cloud</td>
 <td>path</td>
 <td>string</td>
 <td>true</td>
@@ -2632,12 +2641,12 @@ This operation does not require authentication
 <blockquote>
 <p>Code samples</p>
 </blockquote>
-<div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://localhost:17777/api/v1/clouds</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://localhost:17777/api/v1/clouds?user=string</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">localhost:17777</span>
 <span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/clouds <span class="se">\</span>
+curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/clouds?user<span class="o">=</span>string <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">package</span> <span class="n">main</span>
@@ -2667,7 +2676,9 @@ curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/clouds <span 
   <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">}</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://localhost:17777/api/v1/clouds'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://localhost:17777/api/v1/clouds'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+  <span class="s">'user'</span><span class="p">:</span> <span class="s">'string'</span>
+<span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
 
@@ -2708,7 +2719,7 @@ list clouds for any user. Other users can only ask about their own clouds.</p>
 <td>user</td>
 <td>query</td>
 <td>string</td>
-<td>false</td>
+<td>true</td>
 <td>Username of a user on the controller.</td>
 </tr>
 </tbody></table>
@@ -3093,12 +3104,12 @@ This operation does not require authentication
 <blockquote>
 <p>Code samples</p>
 </blockquote>
-<div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://localhost:17777/api/v1/user/{name}</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">https://localhost:17777/api/v1/user/{user}</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">localhost:17777</span>
 <span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/user/<span class="o">{</span>name<span class="o">}</span> <span class="se">\</span>
+curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/user/<span class="o">{</span>user<span class="o">}</span> <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">package</span> <span class="n">main</span>
@@ -3115,7 +3126,7 @@ curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/user/<span cl
     <span class="p">}</span>
 
     <span class="n">data</span> <span class="o">:=</span> <span class="n">bytes</span><span class="o">.</span><span class="n">NewBuffer</span><span class="p">([]</span><span class="kt">byte</span><span class="p">{</span><span class="n">jsonReq</span><span class="p">})</span>
-    <span class="n">req</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="s">"https://localhost:17777/api/v1/user/{name}"</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+    <span class="n">req</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="s">"https://localhost:17777/api/v1/user/{user}"</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
     <span class="n">req</span><span class="o">.</span><span class="n">Header</span> <span class="o">=</span> <span class="n">headers</span>
 
     <span class="n">client</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="n">http</span><span class="o">.</span><span class="n">Client</span><span class="p">{}</span>
@@ -3128,12 +3139,12 @@ curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/user/<span cl
   <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">}</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://localhost:17777/api/v1/user/{name}'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://localhost:17777/api/v1/user/{user}'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
 
 </code></pre></div>
-<p><code>GET /user/{name}</code></p>
+<p><code>GET /user/{user}</code></p>
 
 <p><em>Returns information about a specific user.</em></p>
 
@@ -3152,9 +3163,9 @@ curl <span class="nt">-X</span> GET https://localhost:17777/api/v1/user/<span cl
 </thead><tbody>
 <tr>
 <td>user</td>
-<td>query</td>
+<td>path</td>
 <td>string</td>
-<td>false</td>
+<td>true</td>
 <td>Username of a user on the controller.</td>
 </tr>
 </tbody></table>
@@ -3219,13 +3230,13 @@ This operation does not require authentication
 <blockquote>
 <p>Code samples</p>
 </blockquote>
-<div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">PATCH</span> <span class="nn">https://localhost:17777/api/v1/user/{name}</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">PATCH</span> <span class="nn">https://localhost:17777/api/v1/user/{user}</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">localhost:17777</span>
 <span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
 <span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl <span class="nt">-X</span> PATCH https://localhost:17777/api/v1/user/<span class="o">{</span>name<span class="o">}</span> <span class="se">\</span>
+curl <span class="nt">-X</span> PATCH https://localhost:17777/api/v1/user/<span class="o">{</span>user<span class="o">}</span> <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span>
 
@@ -3244,7 +3255,7 @@ curl <span class="nt">-X</span> PATCH https://localhost:17777/api/v1/user/<span 
     <span class="p">}</span>
 
     <span class="n">data</span> <span class="o">:=</span> <span class="n">bytes</span><span class="o">.</span><span class="n">NewBuffer</span><span class="p">([]</span><span class="kt">byte</span><span class="p">{</span><span class="n">jsonReq</span><span class="p">})</span>
-    <span class="n">req</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"PATCH"</span><span class="p">,</span> <span class="s">"https://localhost:17777/api/v1/user/{name}"</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+    <span class="n">req</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"PATCH"</span><span class="p">,</span> <span class="s">"https://localhost:17777/api/v1/user/{user}"</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
     <span class="n">req</span><span class="o">.</span><span class="n">Header</span> <span class="o">=</span> <span class="n">headers</span>
 
     <span class="n">client</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="n">http</span><span class="o">.</span><span class="n">Client</span><span class="p">{}</span>
@@ -3258,12 +3269,12 @@ curl <span class="nt">-X</span> PATCH https://localhost:17777/api/v1/user/<span 
   <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">}</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">patch</span><span class="p">(</span><span class="s">'https://localhost:17777/api/v1/user/{name}'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">patch</span><span class="p">(</span><span class="s">'https://localhost:17777/api/v1/user/{user}'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
 
 </code></pre></div>
-<p><code>PATCH /user/{name}</code></p>
+<p><code>PATCH /user/{user}</code></p>
 
 <p><em>Updates a user.</em></p>
 
@@ -3292,9 +3303,9 @@ curl <span class="nt">-X</span> PATCH https://localhost:17777/api/v1/user/<span 
 </thead><tbody>
 <tr>
 <td>user</td>
-<td>query</td>
+<td>path</td>
 <td>string</td>
-<td>false</td>
+<td>true</td>
 <td>Username of a user on the controller.</td>
 </tr>
 <tr>
@@ -3398,12 +3409,12 @@ This operation does not require authentication
 <blockquote>
 <p>Code samples</p>
 </blockquote>
-<div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">DELETE</span> <span class="nn">https://localhost:17777/api/v1/user/{name}</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<div class="highlight"><pre class="highlight http tab-http"><code><span class="nf">DELETE</span> <span class="nn">https://localhost:17777/api/v1/user/{user}</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="p">:</span> <span class="s">localhost:17777</span>
 <span class="na">Accept</span><span class="p">:</span> <span class="s">application/json</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
-curl <span class="nt">-X</span> DELETE https://localhost:17777/api/v1/user/<span class="o">{</span>name<span class="o">}</span> <span class="se">\</span>
+curl <span class="nt">-X</span> DELETE https://localhost:17777/api/v1/user/<span class="o">{</span>user<span class="o">}</span> <span class="se">\</span>
   <span class="nt">-H</span> <span class="s1">'Accept: application/json'</span>
 
 </code></pre></div><div class="highlight"><pre class="highlight go tab-go"><code><span class="k">package</span> <span class="n">main</span>
@@ -3420,7 +3431,7 @@ curl <span class="nt">-X</span> DELETE https://localhost:17777/api/v1/user/<span
     <span class="p">}</span>
 
     <span class="n">data</span> <span class="o">:=</span> <span class="n">bytes</span><span class="o">.</span><span class="n">NewBuffer</span><span class="p">([]</span><span class="kt">byte</span><span class="p">{</span><span class="n">jsonReq</span><span class="p">})</span>
-    <span class="n">req</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"DELETE"</span><span class="p">,</span> <span class="s">"https://localhost:17777/api/v1/user/{name}"</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+    <span class="n">req</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"DELETE"</span><span class="p">,</span> <span class="s">"https://localhost:17777/api/v1/user/{user}"</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
     <span class="n">req</span><span class="o">.</span><span class="n">Header</span> <span class="o">=</span> <span class="n">headers</span>
 
     <span class="n">client</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="n">http</span><span class="o">.</span><span class="n">Client</span><span class="p">{}</span>
@@ -3433,12 +3444,12 @@ curl <span class="nt">-X</span> DELETE https://localhost:17777/api/v1/user/<span
   <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span>
 <span class="p">}</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="s">'https://localhost:17777/api/v1/user/{name}'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="s">'https://localhost:17777/api/v1/user/{user}'</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
 
 </code></pre></div>
-<p><code>DELETE /user/{name}</code></p>
+<p><code>DELETE /user/{user}</code></p>
 
 <p><em>Delete a user.</em></p>
 
@@ -3458,9 +3469,9 @@ removed we keep it&#39;s information around for auditing purposes.</p>
 </thead><tbody>
 <tr>
 <td>user</td>
-<td>query</td>
+<td>path</td>
 <td>string</td>
-<td>false</td>
+<td>true</td>
 <td>Username of a user on the controller.</td>
 </tr>
 </tbody></table>
