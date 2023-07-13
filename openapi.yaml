@@ -78,7 +78,7 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /cloud/{cloud-name}:
+  /cloud/{cloud}:
     get:
       tags:
         - cloud
@@ -120,7 +120,7 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /cloud/{cloud-name}/access:
+  /cloud/{cloud}/access:
     get:
       tags:
         - cloud
@@ -181,7 +181,7 @@ paths:
       parameters:
         - $ref: "#/components/parameters/Detailed"
         - $ref: "#/components/parameters/All"
-        - $ref: "#/components/parameters/User"
+        - $ref: "#/components/parameters/UserQuery"
       responses:
         "200":
           description: List of supported clouds.
@@ -239,7 +239,7 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /model/{model-name}:
+  /model/{model}:
     get:
       tags:
         - model
@@ -248,7 +248,7 @@ paths:
         Returns detailed information about a given model
       operationId: getModel
       parameters:
-        - $ref: "#/components/parameters/ModelName"
+        - $ref: "#/components/parameters/Model"
       responses:
         "200":
           description: Detailed information about the requested model.
@@ -270,7 +270,7 @@ paths:
         Delete a model from the controller.
       operationId: deleteModel
       parameters:
-        - $ref: "#/components/parameters/ModelName"
+        - $ref: "#/components/parameters/Model"
         - $ref: "#/components/parameters/DestroyStorage"
         - $ref: "#/components/parameters/Force"
         - $ref: "#/components/parameters/MaxWait"
@@ -284,7 +284,7 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /model/{model-name}/access:
+  /model/{model}/access:
     get:
       tags:
         - model
@@ -294,7 +294,7 @@ paths:
         to users on the controller.
       operationId: getModelUserAccess
       parameters:
-        - $ref: "#/components/parameters/ModelName"
+        - $ref: "#/components/parameters/Model"
       responses:
         "200":
           description: List of model access controls
@@ -316,7 +316,7 @@ paths:
         Update the level of model access that is granted to specific users.
       operationId: updateModelUserAccess
       parameters:
-        - $ref: "#/components/parameters/ModelName"
+        - $ref: "#/components/parameters/Model"
       requestBody:
         description: An object describing the changes to model access controls.
         content:
@@ -333,15 +333,15 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /model{model-name}/application/{app-name}:
+  /model{model}/application/{application}:
     get:
       tags:
         - application
       description: Returns application information.
       operationId: getApplication
       parameters:
-        - $ref: "#/components/parameters/ModelName"
-        - $ref: "#/components/parameters/ApplicationName"
+        - $ref: "#/components/parameters/Model"
+        - $ref: "#/components/parameters/Application"
       responses:
         "200":
           description: Detailed information about the requested application.
@@ -361,8 +361,8 @@ paths:
       description: Removes a given application.
       operationId: deleteApplication
       parameters:
-        - $ref: "#/components/parameters/ModelName"
-        - $ref: "#/components/parameters/ApplicationName"
+        - $ref: "#/components/parameters/Model"
+        - $ref: "#/components/parameters/Application"
         - $ref: "#/components/parameters/DestroyStorage"
         - $ref: "#/components/parameters/Force"
         - $ref: "#/components/parameters/MaxWait"
@@ -376,7 +376,7 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /model{model-name}/application/{app-name}/deploy:
+  /model{model}/application/{application}/deploy:
     post:
       tags:
         - application
@@ -386,7 +386,8 @@ paths:
       # post-deploy (PendingResourceUpload)
       operationId: addApplication
       parameters:
-        - $ref: "#/components/parameters/ApplicationName"
+        - $ref: "#/components/parameters/Application"
+        - $ref: "#/components/parameters/Model"
         - $ref: "#/components/parameters/Force"
         - $ref: "#/components/parameters/DryRun"
         - $ref: "#/components/parameters/Trust"
@@ -406,15 +407,15 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /model/{model-name}/application/{app-name}/refresh:
+  /model/{model}/application/{application}/refresh:
     patch:
       tags:
         - application
       description: Sets the charm for a given for the application.
       operationId: refreshApplication
       parameters:
-        - $ref: "#/components/parameters/ModelName"
-        - $ref: "#/components/parameters/ApplicationName"
+        - $ref: "#/components/parameters/Model"
+        - $ref: "#/components/parameters/Application"
         - $ref: "#/components/parameters/Force"
         - $ref: "#/components/parameters/DryRun"
       requestBody:
@@ -432,7 +433,7 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /model/{model-name}/credential:
+  /model/{model}/credential:
     patch:
       tags:
         - model
@@ -441,7 +442,7 @@ paths:
         Update the underlying cloud credential that's associated with the model.
       operationId: updateModelCredential
       parameters:
-        - $ref: "#/components/parameters/ModelName"
+        - $ref: "#/components/parameters/Model"
       requestBody:
         description: An object containing the identifier of the new cloud credential.
         content:
@@ -458,7 +459,7 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /model/{model-name}/status:
+  /model/{model}/status:
     get:
       tags:
         - model
@@ -467,7 +468,7 @@ paths:
         Returns status information about a model, such as applications deployed and machines.
       operationId: getModelStatus
       parameters:
-        - $ref: "#/components/parameters/ModelName"
+        - $ref: "#/components/parameters/Model"
       responses:
         "200":
           description: Status information about the requested model.
@@ -491,7 +492,7 @@ paths:
       parameters:
         - $ref: "#/components/parameters/All"
         - $ref: "#/components/parameters/Detailed"
-        - $ref: "#/components/parameters/User"
+        - $ref: "#/components/parameters/UserQuery"
       responses:
         "200":
           description: List of models the specified user has access to.
@@ -602,7 +603,7 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
   
-  /user/{name}:
+  /user/{user}:
     get:
       tags:
         - user
@@ -1707,20 +1708,20 @@ components:
       required: false
       schema:
         type: string
-        default: false
+        default: "false"
         enum:
           - true
           - false
-    ApplicationName:
+    Application:
       in: path
-      name: app-name
+      name: application
       required: true
       description: The name of a deployed application.
       schema:
         type: string
     Cloud:
       in: path
-      name: cloud-name
+      name: cloud
       required: true
       description: The name of a cloud in the controller.
       schema:
@@ -1738,20 +1739,20 @@ components:
       required: false
       schema:
         type: string
-        default: false
+        default: "false"
         enum:
-          - true
-          - false
+          - "true"
+          - "false"
     DryRun:
       in: query
       name: dry-run
       required: false
       schema:
         type: string
-        default: false
+        default: "false"
         enum:
-          - true
-          - false
+          - "true"
+          - "false"
     Force:
       in: query
       name: force
@@ -1765,9 +1766,9 @@ components:
       required: false
       schema:
         type: integer
-    ModelName:
+    Model:
       in: path
-      name: model-name
+      name: model
       required: true
       description: The name of a model in the controller.
       schema:
@@ -1780,7 +1781,7 @@ components:
         type: integer
     Timeout:
       in: query
-      name: max-wait
+      name: timeout
       required: false
       schema:
         type: integer
@@ -1792,9 +1793,16 @@ components:
         type: boolean
         default: false
     User:
+      in: path
+      name: user
+      required: true
+      description: Username of a user on the controller.
+      schema:
+        type: string
+    UserQuery:
       in: query
       name: user
-      required: false
+      required: true
       description: Username of a user on the controller.
       schema:
         type: string
