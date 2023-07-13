@@ -50,7 +50,7 @@ tags:
       description: Find out more about Juju users.
       url: https://juju.is/docs/olm/manage-users
 paths:
-  /cloud/{name}:
+  /cloud/{cloud}:
     get:
       tags:
         - cloud
@@ -92,7 +92,7 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /cloud/{name}/access:
+  /cloud/{cloud}/access:
     get:
       tags:
         - cloud
@@ -153,7 +153,7 @@ paths:
       parameters:
         - $ref: "#/components/parameters/Detailed"
         - $ref: "#/components/parameters/All"
-        - $ref: "#/components/parameters/User"
+        - $ref: "#/components/parameters/UserQuery"
       responses:
         "200":
           description: List of supported clouds.
@@ -211,7 +211,7 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /model/{name}:
+  /model/{model}:
     get:
       tags:
         - model
@@ -220,7 +220,7 @@ paths:
         Returns detailed information about a given model
       operationId: getModel
       parameters:
-        - $ref: "#/components/parameters/ModelName"
+        - $ref: "#/components/parameters/Model"
       responses:
         "200":
           description: Detailed information about the requested model.
@@ -242,7 +242,7 @@ paths:
         Delete a model from the controller.
       operationId: deleteModel
       parameters:
-        - $ref: "#/components/parameters/ModelName"
+        - $ref: "#/components/parameters/Model"
         - $ref: "#/components/parameters/DestroyStorage"
         - $ref: "#/components/parameters/Force"
         - $ref: "#/components/parameters/MaxWait"
@@ -256,7 +256,7 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /model/{name}/access:
+  /model/{model}/access:
     get:
       tags:
         - model
@@ -266,7 +266,7 @@ paths:
         to users on the controller.
       operationId: getModelUserAccess
       parameters:
-        - $ref: "#/components/parameters/ModelName"
+        - $ref: "#/components/parameters/Model"
       responses:
         "200":
           description: List of model access controls
@@ -288,7 +288,7 @@ paths:
         Update the level of model access that is granted to specific users.
       operationId: updateModelUserAccess
       parameters:
-        - $ref: "#/components/parameters/ModelName"
+        - $ref: "#/components/parameters/Model"
       requestBody:
         description: An object describing the changes to model access controls.
         content:
@@ -305,7 +305,7 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /model/{name}/credential:
+  /model/{model}/credential:
     patch:
       tags:
         - model
@@ -314,7 +314,7 @@ paths:
         Update the underlying cloud credential that's associated with the model.
       operationId: updateModelCredential
       parameters:
-        - $ref: "#/components/parameters/ModelName"
+        - $ref: "#/components/parameters/Model"
       requestBody:
         description: An object containing the identifier of the new cloud credential.
         content:
@@ -331,7 +331,7 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /model/{name}/status:
+  /model/{model}/status:
     get:
       tags:
         - model
@@ -340,7 +340,7 @@ paths:
         Returns status information about a model, such as applications deployed and machines.
       operationId: getModelStatus
       parameters:
-        - $ref: "#/components/parameters/ModelName"
+        - $ref: "#/components/parameters/Model"
       responses:
         "200":
           description: Status information about the requested model.
@@ -364,7 +364,7 @@ paths:
       parameters:
         - $ref: "#/components/parameters/All"
         - $ref: "#/components/parameters/Detailed"
-        - $ref: "#/components/parameters/User"
+        - $ref: "#/components/parameters/UserQuery"
       responses:
         "200":
           description: List of models the specified user has access to.
@@ -475,7 +475,7 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
   
-  /user/{name}:
+  /user/{user}:
     get:
       tags:
         - user
@@ -1251,13 +1251,13 @@ components:
       required: false
       schema:
         type: string
-        default: false
+        default: "false"
         enum:
-          - true
-          - false
+          - "true"
+          - "false"
     Cloud:
       in: path
-      name: name
+      name: cloud
       required: true
       description: The name of a cloud in the controller.
       schema:
@@ -1275,10 +1275,10 @@ components:
       required: false
       schema:
         type: string
-        default: false
+        default: "false"
         enum:
-          - true
-          - false
+          - "true"
+          - "false"
     Force:
       in: query
       name: force
@@ -1291,23 +1291,30 @@ components:
       required: false
       schema:
         type: integer
-    ModelName:
+    Model:
       in: path
-      name: name
+      name: model
       required: true
       description: The name of a model in the controller.
       schema:
         type: string
     Timeout:
       in: query
-      name: max-wait
+      name: timeout
       required: false
       schema:
         type: integer
     User:
+      in: path
+      name: user
+      required: true
+      description: Username of a user on the controller.
+      schema:
+        type: string
+    UserQuery:
       in: query
       name: user
-      required: false
+      required: true
       description: Username of a user on the controller.
       schema:
         type: string
