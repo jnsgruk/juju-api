@@ -44,6 +44,11 @@ tags:
     externalDocs:
       description: Find out more about Juju clouds.
       url: https://juju.is/docs/olm/manage-clouds
+  - name: user
+    description: Manage Juju users
+    externalDocs:
+      description: Find out more about Juju users.
+      url: https://juju.is/docs/olm/manage-users
 paths:
   /cloud/{name}:
     get:
@@ -463,6 +468,93 @@ paths:
       responses:
         "200":
           $ref: "#/components/responses/EmptySyncResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  
+  /user/{name}:
+    get:
+      tags:
+        - user
+      summary: Returns information about a specific user.
+      description: |
+        Returns information about a specific user.
+      operationId: getUser
+      parameters:
+        - $ref: "#/components/parameters/User"
+      responses:
+        "200":
+          $ref: '#/components/schemas/User'
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+    patch:
+      tags:
+        - user
+      summary: Updates a user.
+      description: |
+        Updates a given user including display-name, enabled/disabled state and password.
+      operationId: updateUser
+      parameters:
+        - $ref: "#/components/parameters/User"
+      requestBody:
+        description: User creation parameters.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserArgs"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/EmptySyncResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+    delete:
+      tags:
+        - user
+      summary: Delete a user.
+      description: |
+        Permanently removes a user from the current controller. While the user is permanently
+        removed we keep it's information around for auditing purposes.
+      operationId: deleteUser
+      parameters:
+        - $ref: "#/components/parameters/User"
+      responses:
+        "200":
+          $ref: "#/components/responses/EmptySyncResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /users:
+    post:
+      tags:
+        - user
+      summary: Adds a new user.
+      description: Adds a new user to the controller.
+      operationId: addUser
+      requestBody:
+        description: User creation parameters.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserArgs"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/EntityCreated"
         "400":
           $ref: "#/components/responses/BadRequest"
         "403":
@@ -1099,6 +1191,54 @@ components:
         - Tag
         - Patch
         - Build
+    User:
+      type: object
+      properties:
+        display-name:
+          type: string
+        username:
+          type: string
+        enabled:
+          type: boolean
+          default: true
+        access:
+          description: Level of access granted to the specified user.
+          type: string
+          enum:
+            - login
+            - superuser
+        createdBy:
+          type: string
+          description: Identifier of user that created this user
+        createdAt:
+          type: string
+          format: date-time
+        lastConnection:
+          type: string
+          format: date-time
+      additionalProperties: false
+      required:
+        - display-name
+        - username
+        - enabled
+        - access
+    UserArgs:
+      type: object
+      properties:
+        display-name:
+          type: string
+        username:
+          type: string
+        enabled:
+          type: boolean
+          default: true
+        password:
+          type: string
+      additionalProperties: false
+      required:
+        - display-name
+        - username
+        - password
   parameters:
     All:
       in: query

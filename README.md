@@ -259,11 +259,11 @@ This table tracks progress through the redesign of the Juju client API:
 | Subnets              | AllZones                        |                                      |
 | Subnets              | ListSubnets                     |                                      |
 | Subnets              | SubnetsByCIDR                   |                                      |
-| UserManager          | AddUser                         |                                      |
-| UserManager          | DisableUser                     |                                      |
-| UserManager          | EnableUser                      |                                      |
-| UserManager          | ModelUserInfo                   |                                      |
-| UserManager          | RemoveUser                      |                                      |
-| UserManager          | ResetPassword                   |                                      |
-| UserManager          | SetPassword                     |                                      |
-| UserManager          | UserInfo                        |                                      |
+| UserManager          | AddUser                         | `POST /users`                        |
+| UserManager          | DisableUser                     | `PATCH /user/{name}`                 |
+| UserManager          | EnableUser                      | `PATCH /user/{name}`                 |
+| UserManager          | ModelUserInfo                   | `GET /models?user={name}`            |
+| UserManager          | RemoveUser                      | `DELETE /user/{name}`                |
+| UserManager          | ResetPassword                   | `PATCH /user/{name}`                 |
+| UserManager          | SetPassword                     | `PATCH /user/{name}`                 |
+| UserManager          | UserInfo                        | `GET /user/{name}`                   |
