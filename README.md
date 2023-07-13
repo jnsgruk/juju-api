@@ -17,7 +17,7 @@ git clone https://github.com/jnsgruk/juju-api
 cd juju-api
 
 # Serve the site(s) using Docker
-npm run serve
+make serve
 ```
 
 You can now see the newly designed spec at https://localhost:4567/ and the generated spec at
@@ -30,7 +30,7 @@ https://localhost:4567/generated.html
 python3 tools/convert-juju-facade -i schemas/client-schemas.json -o schemas/generated.yaml
 
 # Generate MD from the new, and the generated OpenAPI specs
-npm run generate
+make generate
 ```
 
 ## Generating Juju schema files
@@ -46,28 +46,6 @@ cd juju/generate/schemagen
 # This will output the file client-facades.json
 go run schemagen.go -admin-facades -facade-group client ./schemas/client-schemas.json
 ```
-
-### Renamed Schemas
-
-While transitioning some of the existing models, it made sense (to me at least!) to rename the
-following models:
-
-- `Model` -> `ModelSummary`
-- `ModelMachineInfo` -> `ModelMachine`
-- `ModelSummary` -> `Model`
-- `ModelInfo` -> `ModelDetail`
-- `Number` -> `Version`
-- `SetModelDefaults` -> `NewModelDefaults`
-
-### Review Notes
-
-- [ ] `ModelFilesystemInfo` and `ModelVolumeInfo` have the same fields
-  - Created `ModelStorageAttributes` and made the existing schemas inherit for now
-- [ ] `Model` has a `status` attribute which _was_ an `EntityStatus` - changed to `ModelStatus`
-- [ ] Quite a significant change to the model defaults update
-  - No longer using two separate endpoints
-  - Now one single endpoint that takes cloud/region as (optional) query params
-  - Request body contains an object with {set: {}, unset: {}}
 
 ### Progress
 
