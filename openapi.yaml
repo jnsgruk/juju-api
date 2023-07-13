@@ -82,7 +82,7 @@ paths:
         Returns detailed information about a given cloud
       operationId: getCloud
       parameters:
-        - $ref: "#/components/parameters/CloudName"
+        - $ref: "#/components/parameters/Cloud"
       responses:
         "200":
           description: Detailed information about the requested cloud.
@@ -105,7 +105,7 @@ paths:
         the removal will fail.
       operationId: deleteCloud
       parameters:
-        - $ref: "#/components/parameters/CloudName"
+        - $ref: "#/components/parameters/Cloud"
       responses:
         "200":
           $ref: "#/components/responses/EmptySyncResponse"
@@ -125,7 +125,7 @@ paths:
         to users on the controller.
       operationId: getCloudUserAccess
       parameters:
-        - $ref: "#/components/parameters/CloudName"
+        - $ref: "#/components/parameters/Cloud"
       responses:
         "200":
           description: List of cloud access controls
@@ -147,7 +147,7 @@ paths:
         Update the level of cloud access that is granted to specific users.
       operationId: updateCloudUserAccess
       parameters:
-        - $ref: "#/components/parameters/CloudName"
+        - $ref: "#/components/parameters/Cloud"
       requestBody:
         description: An object describing the changes to cloud access controls.
         content:
@@ -1574,7 +1574,7 @@ components:
       description: The name of a deployed application.
       schema:
         type: string
-    CloudName:
+    Cloud:
       in: path
       name: cloud-name
       required: true
@@ -1651,7 +1651,7 @@ components:
       in: query
       name: user
       required: false
-      description: Identifier of a user on the controller.
+      description: Username of a user on the controller.
       schema:
         type: string
   responses:
