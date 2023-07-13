@@ -614,7 +614,11 @@ paths:
         - $ref: "#/components/parameters/User"
       responses:
         "200":
-          $ref: '#/components/schemas/User'
+          description: Detailed information about the requested user.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
         "400":
           $ref: "#/components/responses/BadRequest"
         "403":
