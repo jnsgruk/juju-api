@@ -1710,8 +1710,8 @@ components:
         type: string
         default: "false"
         enum:
-          - true
-          - false
+          - "true"
+          - "false"
     Application:
       in: path
       name: application
