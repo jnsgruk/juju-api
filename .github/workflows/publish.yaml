@@ -6,7 +6,12 @@ on:
       - main
 
 jobs:
+  lint:
+    uses: ./.github/workflows/lint.yaml
+  
   publish:
+    needs: 
+      - lint
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
