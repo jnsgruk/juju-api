@@ -1010,45 +1010,66 @@ components:
       required:
         - permissions
     Constraints:
+      description: Describes a user's requirements of the hardware on which units of an application will run. Constraints are used to choose an existing machine onto which a unit will be deployed, or to provision a new machine if no existing one satisfies the requirements.
       type: object
       properties:
         allocate-public-ip:
           type: boolean
         architecture:
+          description: Indicates that a machine must run the named architecture.
           $ref: '#/components/schemas/Architecture'
         container:
-          type: string
+          description: Indicates that a machine must be the specified container type.
+          $ref: '#/components/schemas/ContainerType'
         cores:
+          description: Indicates that a machine must have at least that number of effective cores available.
           type: integer
         cpu-power:
+          description: Indicates that a machine must have at least that amount of CPU power available, where 100 CpuPower is considered to be equivalent to 1 Amazon ECU (or, roughly, a single 2007-era Xeon).
           type: integer
         image-id:
+          description: Indicates that a machine must use the specified image. This is provider specific, and for the moment is only implemented on MAAS clouds.
           type: string
         instance-role:
+          description: Indicates that the specified role/profile for the given cloud should be used. Only valid for clouds which support instance roles. Currently only for AWS with instance-profiles.
           type: string
         instance-type:
+          description: Indicates that the specified cloud instance type be used. Only valid for clouds which support instance types.
           type: string
         mem:
+          description: Indicates that a machine must have at least that many megabytes of RAM.
           type: integer
         root-disk:
+          description: Indicates that a machine must have at least that many megabytes of disk space available in the root disk.
           type: integer
         root-disk-source:
+          description: Determines what storage the root disk should be allocated from. This will be provider specific - in the case of vSphere it identifies the datastore the root disk file should be created in.
           type: string
         spaces:
+          description: Holds a list of juju network spaces that should be available (or not) on the machine. Positive and negative values are accepted, and the difference is the latter have a "^" prefix to the name.
           type: array
           items:
             type: string
         tags:
+          description: Indicates tags that the machine must have applied to it.
           type: array
           items:
             type: string
         virt-type:
+          description: Indicates that a machine must run the named virtual type. Only valid for clouds with multi-hypervisor support.
           type: string
         zones:
+          description: Holds a list of availability zones limiting where the machine can be located.
           type: array
           items:
             type: string
       additionalProperties: false
+    ContainerType:
+      type: string
+      enum:
+        - none
+        - lxd
+        - kvm
     DeployArgs:
       type: object
       properties:
