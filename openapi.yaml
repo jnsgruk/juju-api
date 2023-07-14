@@ -1571,12 +1571,17 @@ components:
       allOf:
         - $ref: "#/components/schemas/ModelStorageAttributes"
     Placement:
+      description: Defines a placement directive, which has a scope and a value that is scope-specific.
       type: object
       properties:
         directive:
+          description: Scope-specific placement directive.
           type: string
         scope:
-          type: string
+          description: Can be a container type or a machine scope (#).
+          oneOf:
+            - $ref: '#/components/schemas/ContainerType'
+            - const: "#"
       additionalProperties: false
       required:
         - scope
