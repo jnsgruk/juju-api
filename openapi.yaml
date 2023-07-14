@@ -831,6 +831,7 @@ components:
         channel:
           $ref: '#/components/schemas/CharmChannel'
         hash:
+          description: The hash of the charm in CharmHub located by this origin.
           type: string
         id:
           type: string
