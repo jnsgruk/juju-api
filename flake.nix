@@ -13,20 +13,24 @@
       ];
     in
     {
-      devShell = forAllSystems (system:
-        let
-          pkgs = nixpkgs.legacyPackages.${system};
-        in
-        pkgs.mkShell {
-          # Enable experimental features without having to specify the argument
-          NIX_CONFIG = "experimental-features = nix-command flakes";
-          nativeBuildInputs = with pkgs; [
-            nodejs
-          ];
-          shellHook = ''
-            export PATH="$PWD/node_modules/.bin/:$PATH"
-          '';
-        }
-      );
+      devShells = forAllSystems (system: {
+        default =
+          let
+            pkgs = nixpkgs.legacyPackages.${system};
+          in
+          pkgs.mkShell {
+            name = "juju-api";
+            # Enable experimental features without having to specify the argument
+            NIX_CONFIG = "experimental-features = nix-command flakes";
+            nativeBuildInputs = with pkgs; [
+              nodejs
+            ];
+            shellHook = ''
+              export PATH="$PWD/node_modules/.bin/:$PATH"
+              exec zsh
+            '';
+          };
+      });
     };
 }
+
