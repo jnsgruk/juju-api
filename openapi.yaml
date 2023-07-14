@@ -713,10 +713,6 @@ components:
       type: object
       description: Information about a given application.
       properties:
-        base:
-          $ref: '#/components/schemas/Base'
-        channel:
-          $ref: '#/components/schemas/CharmChannel'
         charm-origin:
           $ref: '#/components/schemas/CharmOrigin'
         charm:
@@ -832,8 +828,8 @@ components:
           $ref: '#/components/schemas/Architecture'
         base:
           $ref: '#/components/schemas/Base'
-        branch:
-          type: string
+        channel:
+          $ref: '#/components/schemas/CharmChannel'
         hash:
           type: string
         id:
@@ -842,15 +838,11 @@ components:
           type: string
         revision:
           type: integer
-        risk:
-          type: string
         source:
           type: string
           enum:
             - local
             - charm-hub
-        track:
-          type: string
         type:
           type: string
           enum:
