@@ -834,6 +834,7 @@ components:
         id:
           type: string
         instance-key:
+          description: A unique string associated with the application. Create with the charmhub.CreateInstanceKey method.
           type: string
         revision:
           type: integer
