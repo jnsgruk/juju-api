@@ -91,7 +91,7 @@ This table tracks progress through the redesign of the Juju client API:
 | Application          | MergeBindings                   |                                                                                              |
 | Application          | ResolveUnitErrors               |                                                                                              |
 | Application          | ScaleApplications               |                                                                                              |
-| Application          | SetCharm                        | `PATCH /model/{model}/application/{application}/refresh`                                     |
+| Application          | SetCharm                        | `PATCH /model/{model}/application/{application}/refresh?force=false&dry-run=false`           |
 | Application          | SetConfigs                      |                                                                                              |
 | Application          | SetConstraints                  |                                                                                              |
 | Application          | SetMetricCredentials            |                                                                                              |
