@@ -737,7 +737,6 @@ components:
         - principal
         - exposed
         - remote
-        - life
     ApplicationSubstitute:
       type: object
       properties:
