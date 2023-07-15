@@ -602,7 +602,6 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  
   /user/{user}:
     get:
       tags:
