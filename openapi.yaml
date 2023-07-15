@@ -411,7 +411,7 @@ paths:
     patch:
       tags:
         - application
-      description: Sets the charm for a given for the application.
+      description: Resets the charm for a given for the application.
       operationId: refreshApplication
       parameters:
         - $ref: "#/components/parameters/Model"
@@ -740,8 +740,6 @@ components:
       type: object
       properties:
         application:
-          type: string
-        channel:
           type: string
         charm-origin:
           $ref: '#/components/schemas/CharmOrigin'
