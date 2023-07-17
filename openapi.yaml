@@ -55,6 +55,35 @@ tags:
       description: Find out more about Juju users.
       url: https://juju.is/docs/olm/manage-users
 paths:
+  /deploy:
+    post:
+      tags:
+        - application
+      description: Deploy an application. If a local resource is provided, details
+        required for uploading the validated resource will be returned.
+      # This needs to return info about local resources to be uploaded by the client
+      # post-deploy (PendingResourceUpload)
+      operationId: addApplication
+      parameters:
+        - $ref: "#/components/parameters/Force"
+        - $ref: "#/components/parameters/DryRun"
+        - $ref: "#/components/parameters/Trust"
+        - $ref: "#/components/parameters/Scale"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeployArgs'
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/EntityCreated"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
   /integrate:
     post:
       tags:
@@ -370,37 +399,6 @@ paths:
       responses:
         "200":
           $ref: "#/components/responses/EmptySyncResponse"
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "500":
-          $ref: "#/components/responses/InternalServerError"
-  /model{model}/application/{application}/deploy:
-    post:
-      tags:
-        - application
-      description: Deploy an application. If a local resource is provided, details
-        required for uploading the validated resource will be returned.
-      # This needs to return info about local resources to be uploaded by the client
-      # post-deploy (PendingResourceUpload)
-      operationId: addApplication
-      parameters:
-        - $ref: "#/components/parameters/Application"
-        - $ref: "#/components/parameters/Model"
-        - $ref: "#/components/parameters/Force"
-        - $ref: "#/components/parameters/DryRun"
-        - $ref: "#/components/parameters/Trust"
-        - $ref: "#/components/parameters/Scale"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/DeployArgs'
-        required: true
-      responses:
-        "200":
-          $ref: "#/components/responses/EntityCreated"
         "400":
           $ref: "#/components/responses/BadRequest"
         "403":
@@ -758,7 +756,7 @@ components:
         storage-constraints:
           type: object
           additionalProperties:
-            type: '#/components/schemas/StorageConstraints'
+            $ref: '#/components/schemas/StorageConstraints'
       additionalProperties: false
       required:
         - application
@@ -1050,6 +1048,10 @@ components:
     DeployArgs:
       type: object
       properties:
+        model-name:
+          type: string
+        application-name:
+          type: string
         attachStorage:
           type: array
           items:
@@ -1075,7 +1077,7 @@ components:
         base:
           $ref: '#/components/schemas/Base'
         channel:
-          type: string
+          $ref: '#/components/schemas/CharmChannel'
         endpoint-bindings:
           type: object
           additionalProperties:
@@ -1088,7 +1090,7 @@ components:
           type: integer
       additionalProperties: false
       required:
-        - CharmName
+        - charmName
     PendingResourceUpload:
       type: object
       description: Information about the local resources that need to be uploaded by the client after a deploy operation.
