@@ -749,10 +749,10 @@ components:
             type: string
         config-settings-yaml:
           type: string
-        resource-ids:
-          type: object
-          additionalProperties:
-            type: string
+        resources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Resource'
         storage-constraints:
           type: object
           additionalProperties:
@@ -1560,6 +1560,18 @@ components:
       required:
         - region-name
         - value
+    Resource:
+      type: object
+      properties:
+        name:
+          type: string
+        id:
+          type: string
+        type:
+          type: string
+          enum:
+            - file
+            - oci-image
     SecretBackend:
       type: object
       properties:
