@@ -797,36 +797,6 @@ components:
             - edge
         branch:
           type: string
-    CharmIntegration:
-      type: object
-      properties:
-        interface:
-          type: string
-        limit:
-          type: integer
-        name:
-          type: string
-        optional:
-          type: boolean
-        role:
-          type: string
-          enum:
-            - provider
-            - requirer
-            - peer
-        scope:
-          type: string
-          enum:
-            - global
-            - container
-      additionalProperties: false
-      required:
-        - name
-        - role
-        - interface
-        - optional
-        - limit
-        - scope
     CharmOrigin:
       type: object
       properties:
@@ -1119,23 +1089,6 @@ components:
       additionalProperties: false
       required:
         - CharmName
-    DeployFromRepositoryInfo:
-      type: object
-      properties:
-        architecture:
-          $ref: '#/components/schemas/Architecture'
-        base:
-          $ref: '#/components/schemas/Base'
-        channel:
-          type: string
-        charm-url:
-          type: string
-        effective-channel:
-          type: string
-      additionalProperties: false
-      required:
-        - charm-url
-        - architecture
     PendingResourceUpload:
       type: object
       description: Information about the local resources that need to be uploaded by the client after a deploy operation.
@@ -1869,12 +1822,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    IntegrationCreated:
-      description: Integration added between specified endpoints.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/CharmIntegration'
 # Use this section to define reusable objects
 # callbacks: {}
 # examples: {}
