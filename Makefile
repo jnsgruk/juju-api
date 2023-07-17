@@ -18,6 +18,11 @@ serve: generate
 generate: generate-spec generate-converted-spec
 ## generate: Generate the Markdown file for both the new and old Juju API specs.
 
+.PHONY: lint
+lint:
+## lint: Lint the OpenAPI spec with Spectral
+	npx @stoplight/spectral-cli lint ${CURDIR}/openapi.yaml
+
 .PHONY: build
 build: generate
 ## build: Build the sites using Docker.
