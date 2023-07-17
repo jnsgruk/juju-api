@@ -745,15 +745,25 @@ components:
           $ref: '#/components/schemas/CharmOrigin'
         charm-url:
           type: string
+        config-settings:
+          type: object
+          additionalProperties:
+            type: string
+        config-settings-yaml:
+          type: string
+        resource-ids:
+          type: object
+          additionalProperties:
+            type: string
+        storage-constraints:
+          type: object
+          additionalProperties:
+            type: '#/components/schemas/StorageConstraints'
       additionalProperties: false
       required:
         - application
-        - generation
         - charm-url
-        - channel
-        - force
-        - force-units
-        - force-base
+        - charm-origin
     Architecture:
       type: string
       enum:
