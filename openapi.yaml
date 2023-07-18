@@ -695,17 +695,14 @@ components:
     IntegrateArgs:
       type: object
       properties:
-        endpoints:
-          type: array
-          items:
-            type: string
-        via-cidrs:
-          type: array
-          items:
-            type: string
+        provider:
+          $ref: '#/components/schemas/Intergrator'
+        requirer:
+          $ref: '#/components/schemas/Intergrator'
       additionalProperties: false
       required:
-        - endpoints
+        - provider
+        - requirer
     Application:
       type: object
       description: Information about a given application.
@@ -1126,6 +1123,19 @@ components:
         - error
         - error_code
         - type
+    Intergrator:
+      description: An entity describing one end of an integration.
+      type: object
+      properties:
+        model:
+          type: string
+        application:
+          type: string
+        endpoint:
+          type: string
+      required:
+        - model
+        - application
     ExposedEndpoint:
       type: object
       properties:
