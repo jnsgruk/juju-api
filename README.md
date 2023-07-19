@@ -72,13 +72,13 @@ This table tracks progress through the redesign of the Juju client API:
 | Annotations          | Set                             |                                                                                              |
 | Application          | AddRelation                     | `POST /integrate`                                                                            |
 | Application          | AddUnits                        |                                                                                              |
-| Application          | ApplicationsInfo                | `GET /model{model}/application/{application}`                                                |
+| Application          | ApplicationsInfo                | `GET /model/{model}/application/{application}`                                                |
 | Application          | CharmConfig                     |                                                                                              |
 | Application          | CharmRelations                  |                                                                                              |
 | Application          | Consume                         |                                                                                              |
 | Application          | Deploy                          |                                                                                              |
-| Application          | DeployFromRepository            | `POST /model/{model}/application/{application}/deploy?force=false&dry-run=false&trust=false` |
-| Application          | DestroyApplication              | `DELETE /model/{model}/application/{application}`                                            |
+| Application          | DeployFromRepository            | `POST /model/{model}/application/{application}/deploy&dry-run=false&trust=false` |
+| Application          | DestroyApplication              | `DELETE /model/{model}/application/{application}?force=false`                                            |
 | Application          | DestroyConsumedApplications     |                                                                                              |
 | Application          | DestroyRelation                 |                                                                                              |
 | Application          | DestroyUnit                     |                                                                                              |

@@ -1045,7 +1045,7 @@ components:
     DeployArgs:
       type: object
       properties:
-        model-name:
+        model:
           type: string
         application-name:
           type: string
@@ -1751,7 +1751,7 @@ components:
       name: dry-run
       required: false
       schema:
-        type: string
+        type: boolean
         default: "false"
         enum:
           - "true"
