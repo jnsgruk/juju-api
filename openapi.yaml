@@ -707,10 +707,14 @@ components:
       type: object
       description: Information about a given application.
       properties:
-        charm-origin:
-          $ref: '#/components/schemas/CharmOrigin'
         charm:
           type: string
+        base:
+          $ref: '#/components/schemas/Base'
+        channel:
+          $ref: '#/components/schemas/CharmChannel'
+        revision:
+          type: integer
         constraints:
           $ref: '#/components/schemas/Constraints'
         endpoint-bindings:
@@ -770,7 +774,6 @@ components:
       type: object
       properties:
         channel:
-          # TODO: BaseChannel object
           type: string
         name:
           type: string
