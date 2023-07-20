@@ -742,7 +742,7 @@ components:
           type: string
         charm-origin:
           $ref: '#/components/schemas/CharmOrigin'
-        charm-url:
+        charm-name:
           type: string
         config-settings:
           type: object
@@ -761,8 +761,7 @@ components:
       additionalProperties: false
       required:
         - application
-        - charm-url
-        - charm-origin
+        - charm-name
     Architecture:
       type: string
       enum:
@@ -1091,6 +1090,7 @@ components:
       additionalProperties: false
       required:
         - charm-name
+        - model
     PendingResourceUpload:
       type: object
       description: Information about the local resources that need to be uploaded by the client after a deploy operation.
