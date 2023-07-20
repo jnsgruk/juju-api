@@ -431,6 +431,31 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
+  /model/{model}/application/{application}/resources/{resource}:
+    post:
+      tags:
+        - application
+      description: Uploads a resource for an application
+      operationId: addResource
+      parameters:
+        - $ref: "#/components/parameters/Model"
+        - $ref: "#/components/parameters/Application"
+        - $ref: "#/components/parameters/Resource"
+        - $ref: "#/components/parameters/Force"
+        - $ref: "#/components/parameters/DryRun"
+      requestBody:
+        content:
+          application/octet-stream: {}
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/EntityCreated"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
   /model/{model}/credential:
     patch:
       tags:
@@ -1760,6 +1785,13 @@ components:
       name: model
       required: true
       description: The name of a model in the controller.
+      schema:
+        type: string
+    Resource:
+      in: path
+      name: resource
+      required: true
+      description: The name of a resource for an application.
       schema:
         type: string
     Scale:
