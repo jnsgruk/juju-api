@@ -1052,13 +1052,13 @@ components:
           type: string
         application-name:
           type: string
-        attachStorage:
+        attach-storage:
           type: array
           items:
             type: string
-        charmName:
+        charm-name:
           type: string
-        configYAML:
+        config-yaml:
           type: string
         constraints:
           $ref: '#/components/schemas/Constraints'
@@ -1090,7 +1090,7 @@ components:
           type: integer
       additionalProperties: false
       required:
-        - charmName
+        - charm-name
     PendingResourceUpload:
       type: object
       description: Information about the local resources that need to be uploaded by the client after a deploy operation.
@@ -1115,7 +1115,7 @@ components:
         error:
           type: string
           example: Bad request.
-        error_code:
+        error-code:
           type: integer
           example: 400
         type:
@@ -1674,13 +1674,13 @@ components:
           enum:
             - login
             - superuser
-        createdBy:
+        created-by:
           type: string
           description: Identifier of user that created this user
-        createdAt:
+        created-at:
           type: string
           format: date-time
-        lastConnection:
+        last-connection:
           type: string
           format: date-time
       additionalProperties: false
@@ -1744,21 +1744,15 @@ components:
       description: Return detailed information about requested entity.
       required: false
       schema:
-        type: string
-        default: "false"
-        enum:
-          - "true"
-          - "false"
+        type: boolean
+        default: false
     DryRun:
       in: query
       name: dry-run
       required: false
       schema:
         type: boolean
-        default: "false"
-        enum:
-          - "true"
-          - "false"
+        default: false
     Force:
       in: query
       name: force
