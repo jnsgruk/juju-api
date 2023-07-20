@@ -727,6 +727,10 @@ components:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/ExposedEndpoint'
+        resources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Resource'
         principal:
           type: boolean
       additionalProperties: false
@@ -1091,24 +1095,6 @@ components:
       required:
         - charm-name
         - model
-    PendingResourceUpload:
-      type: object
-      description: Information about the local resources that need to be uploaded by the client after a deploy operation.
-      properties:
-        filename:
-          type: string
-        name:
-          type: string
-        type:
-          type: string
-        pending-id:
-          type: string
-      additionalProperties: false
-      required:
-        - Name
-        - Filename
-        - pending-id
-        - Type
     Error:
       type: object
       properties:
@@ -1585,6 +1571,9 @@ components:
           enum:
             - file
             - oci-image
+        descriptor:
+          description: Path or image url set when resource is created
+          type: string
     SecretBackend:
       type: object
       properties:
