@@ -14,6 +14,20 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
 
-      - name: Lint OpenAPI Spec
+      - name: Run linters
         run: |
           make lint
+
+      - name: Run formatters
+        run: |
+          sudo snap install yq
+          make format
+
+      - name: Check for modifications to generated files
+        run: |
+          if [[ -n "$(git status -s)" ]]; then
+            echo "Please run 'make format' then commit/push changes"
+            echo
+            git diff
+            exit 1
+          fi

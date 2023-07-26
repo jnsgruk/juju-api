@@ -31,7 +31,7 @@ format:
 	yq -i 'sort_keys(.components.schemas)' openapi.yaml
 	yq -i 'sort_keys(.components.responses)' openapi.yaml
 	yq -i 'sort_keys(.components.parameters)' openapi.yaml
-	yq -i 'sort_keys(.components.paths)' openapi.yaml
+	yq -i 'sort_keys(.paths)' openapi.yaml
 
 .PHONY: build
 build: generate
