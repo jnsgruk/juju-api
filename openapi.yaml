@@ -727,9 +727,9 @@ components:
       type: object
       properties:
         provider:
-          $ref: '#/components/schemas/Intergrator'
+          $ref: '#/components/schemas/Integrator'
         requirer:
-          $ref: '#/components/schemas/Intergrator'
+          $ref: '#/components/schemas/Integrator'
       additionalProperties: false
       required:
         - provider
@@ -1143,7 +1143,7 @@ components:
         - error
         - error_code
         - type
-    Intergrator:
+    Integrator:
       description: An entity describing one end of an integration.
       type: object
       properties:
