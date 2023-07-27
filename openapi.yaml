@@ -462,8 +462,7 @@ paths:
       tags:
         - model
       summary: Change the credential related to the model.
-      description: |
-        Update the underlying cloud credential that's associated with the model.
+      description: Update the underlying cloud credential that's associated with the model.
       operationId: updateModelCredential
       parameters:
         - $ref: "#/components/parameters/Model"
