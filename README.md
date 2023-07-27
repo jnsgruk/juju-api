@@ -78,7 +78,7 @@ This table tracks progress through the redesign of the Juju client API:
 | Application          | Consume                         |                                                                                              |
 | Application          | Deploy                          |                                                                                              |
 | Application          | DeployFromRepository            | `POST /model/{model}/application/{application}/deploy&dry-run=false&trust=false` |
-| Application          | DestroyApplication              | `DELETE /model/{model}/application/{application}?force=false`                                            |
+| Application          | DestroyApplication              | `DELETE /model/{model}/application/{application}`                                            |
 | Application          | DestroyConsumedApplications     |                                                                                              |
 | Application          | DestroyRelation                 |                                                                                              |
 | Application          | DestroyUnit                     |                                                                                              |
@@ -91,7 +91,7 @@ This table tracks progress through the redesign of the Juju client API:
 | Application          | MergeBindings                   |                                                                                              |
 | Application          | ResolveUnitErrors               |                                                                                              |
 | Application          | ScaleApplications               |                                                                                              |
-| Application          | SetCharm                        | `PATCH /model/{model}/application/{application}/refresh?force=false&dry-run=false`           |
+| Application          | SetCharm                        | `PATCH /model/{model}/application/{application}/refresh`           |
 | Application          | SetConfigs                      |                                                                                              |
 | Application          | SetConstraints                  |                                                                                              |
 | Application          | SetMetricCredentials            |                                                                                              |

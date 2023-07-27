@@ -59,10 +59,16 @@ paths:
     post:
       tags:
         - application
-      description: Deploy an application. If a local resource is provided, details
-        required for uploading the validated resource will be returned.
-      # This needs to return info about local resources to be uploaded by the client
-      # post-deploy (PendingResourceUpload)
+      description: |
+        Deploy an application. 
+
+        Returns a simple response with a location header pointing to the deployed
+        application.
+
+        If the deployment relies upon local resources being uploaded, clients should
+        retrieve the URL in the location header send in the response in order to
+        learn the URL resources should be POSTed too after deploy (see `uploadResource`
+        operation).
       operationId: addApplication
       parameters:
         - $ref: "#/components/parameters/Force"
@@ -436,7 +442,7 @@ paths:
       tags:
         - application
       description: Uploads a resource for an application
-      operationId: addResource
+      operationId: uploadResource
       parameters:
         - $ref: "#/components/parameters/Model"
         - $ref: "#/components/parameters/Application"
