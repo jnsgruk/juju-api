@@ -228,7 +228,7 @@ paths:
         retrieve the URL in the location header send in the response in order to
         learn the URL resources should be POSTed too after deploy (see `uploadResource`
         operation).
-      operationId: addApplication
+      operationId: deploy
       parameters:
         - $ref: "#/components/parameters/Force"
         - $ref: "#/components/parameters/DryRun"
@@ -253,9 +253,9 @@ paths:
     post:
       tags:
         - application
-      summary: Adds a relation.
-      description: Adds a relation between the specified endpoints and returns the relation info.
-      operationId: relateApplication
+      summary: Integrates two applications.
+      description: Integrates applications using specified endpoints and returns the relation info.
+      operationId: integrate
       requestBody:
         content:
           application/json:
