@@ -52,7 +52,7 @@ go run schemagen.go -admin-facades -facade-group client ./schemas/client-schemas
 This table tracks progress through the redesign of the Juju client API:
 
 | Facade               | Facade Call                     | API Path                                                 |
-| :------------------- | :------------------------------ |:---------------------------------------------------------|
+| :------------------- | :------------------------------ | :------------------------------------------------------- |
 | Action               | Actions                         |                                                          |
 | Action               | ApplicationsCharmsActions       |                                                          |
 | Action               | Cancel                          |                                                          |

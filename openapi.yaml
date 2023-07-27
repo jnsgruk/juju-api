@@ -39,79 +39,22 @@ tags:
     externalDocs:
       description: Find out more about Juju applications.
       url: https://juju.is/docs/olm/manage-applications
-  - name: model
-    description: Manage Juju models
-    externalDocs:
-      description: Find out more about Juju models.
-      url: https://juju.is/docs/olm/manage-models
   - name: cloud
     description: Manage Juju clouds
     externalDocs:
       description: Find out more about Juju clouds.
       url: https://juju.is/docs/olm/manage-clouds
+  - name: model
+    description: Manage Juju models
+    externalDocs:
+      description: Find out more about Juju models.
+      url: https://juju.is/docs/olm/manage-models
   - name: user
     description: Manage Juju users
     externalDocs:
       description: Find out more about Juju users.
       url: https://juju.is/docs/olm/manage-users
 paths:
-  /deploy:
-    post:
-      tags:
-        - application
-      description: |
-        Deploy an application.
-
-        Returns a simple response with a location header pointing to the deployed
-        application.
-
-        If the deployment relies upon local resources being uploaded, clients should
-        retrieve the URL in the location header send in the response in order to
-        learn the URL resources should be POSTed too after deploy (see `uploadResource`
-        operation).
-      operationId: addApplication
-      parameters:
-        - $ref: "#/components/parameters/Force"
-        - $ref: "#/components/parameters/DryRun"
-        - $ref: "#/components/parameters/Trust"
-        - $ref: "#/components/parameters/Scale"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/DeployArgs'
-        required: true
-      responses:
-        "200":
-          $ref: "#/components/responses/EntityCreated"
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "500":
-          $ref: "#/components/responses/InternalServerError"
-  /integrate:
-    post:
-      tags:
-        - application
-      summary: Adds a relation.
-      description: Adds a relation between the specified endpoints and returns the relation info.
-      operationId: relateApplication
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/IntegrateArgs'
-        required: true
-      responses:
-        "200":
-          $ref: "#/components/responses/EntityCreated"
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "500":
-          $ref: "#/components/responses/InternalServerError"
   /cloud/{cloud}:
     get:
       tags:
@@ -271,6 +214,63 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
+  /deploy:
+    post:
+      tags:
+        - application
+      description: |
+        Deploy an application.
+
+        Returns a simple response with a location header pointing to the deployed
+        application.
+
+        If the deployment relies upon local resources being uploaded, clients should
+        retrieve the URL in the location header send in the response in order to
+        learn the URL resources should be POSTed too after deploy (see `uploadResource`
+        operation).
+      operationId: addApplication
+      parameters:
+        - $ref: "#/components/parameters/Force"
+        - $ref: "#/components/parameters/DryRun"
+        - $ref: "#/components/parameters/Trust"
+        - $ref: "#/components/parameters/Scale"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeployArgs"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/EntityCreated"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /integrate:
+    post:
+      tags:
+        - application
+      summary: Adds a relation.
+      description: Adds a relation between the specified endpoints and returns the relation info.
+      operationId: relateApplication
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IntegrateArgs"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/EntityCreated"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
   /model/{model}:
     get:
       tags:
@@ -363,49 +363,6 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /model{model}/application/{application}:
-    get:
-      tags:
-        - application
-      description: Returns application information.
-      operationId: getApplication
-      parameters:
-        - $ref: "#/components/parameters/Model"
-        - $ref: "#/components/parameters/Application"
-      responses:
-        "200":
-          description: Detailed information about the requested application.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Application"
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "500":
-          $ref: "#/components/responses/InternalServerError"
-    delete:
-      tags:
-        - application
-      description: Removes a given application.
-      operationId: deleteApplication
-      parameters:
-        - $ref: "#/components/parameters/Model"
-        - $ref: "#/components/parameters/Application"
-        - $ref: "#/components/parameters/DestroyStorage"
-        - $ref: "#/components/parameters/Force"
-        - $ref: "#/components/parameters/MaxWait"
-        - $ref: "#/components/parameters/DryRun"
-      responses:
-        "200":
-          $ref: "#/components/responses/EmptySyncResponse"
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "500":
-          $ref: "#/components/responses/InternalServerError"
   /model/{model}/application/{application}/refresh:
     patch:
       tags:
@@ -421,7 +378,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ApplicationSubstitute'
+              $ref: "#/components/schemas/ApplicationSubstitute"
         required: true
       responses:
         "200":
@@ -629,6 +586,49 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
+  /model{model}/application/{application}:
+    get:
+      tags:
+        - application
+      description: Returns application information.
+      operationId: getApplication
+      parameters:
+        - $ref: "#/components/parameters/Model"
+        - $ref: "#/components/parameters/Application"
+      responses:
+        "200":
+          description: Detailed information about the requested application.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Application"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+    delete:
+      tags:
+        - application
+      description: Removes a given application.
+      operationId: deleteApplication
+      parameters:
+        - $ref: "#/components/parameters/Model"
+        - $ref: "#/components/parameters/Application"
+        - $ref: "#/components/parameters/DestroyStorage"
+        - $ref: "#/components/parameters/Force"
+        - $ref: "#/components/parameters/MaxWait"
+        - $ref: "#/components/parameters/DryRun"
+      responses:
+        "200":
+          $ref: "#/components/responses/EmptySyncResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
   /user/{user}:
     get:
       tags:
@@ -721,17 +721,6 @@ paths:
           $ref: "#/components/responses/InternalServerError"
 components:
   schemas:
-    IntegrateArgs:
-      type: object
-      properties:
-        provider:
-          $ref: '#/components/schemas/Integrator'
-        requirer:
-          $ref: '#/components/schemas/Integrator'
-      additionalProperties: false
-      required:
-        - provider
-        - requirer
     Application:
       type: object
       description: Information about a given application.
@@ -739,13 +728,13 @@ components:
         charm:
           type: string
         base:
-          $ref: '#/components/schemas/Base'
+          $ref: "#/components/schemas/Base"
         channel:
-          $ref: '#/components/schemas/CharmChannel'
+          $ref: "#/components/schemas/CharmChannel"
         revision:
           type: integer
         constraints:
-          $ref: '#/components/schemas/Constraints'
+          $ref: "#/components/schemas/Constraints"
         endpoint-bindings:
           type: object
           additionalProperties:
@@ -755,11 +744,11 @@ components:
         exposed-endpoints:
           type: object
           additionalProperties:
-            $ref: '#/components/schemas/ExposedEndpoint'
+            $ref: "#/components/schemas/ExposedEndpoint"
         resources:
           type: array
           items:
-            $ref: '#/components/schemas/Resource'
+            $ref: "#/components/schemas/Resource"
         principal:
           type: boolean
       additionalProperties: false
@@ -774,7 +763,7 @@ components:
         application:
           type: string
         charm-origin:
-          $ref: '#/components/schemas/CharmOrigin'
+          $ref: "#/components/schemas/CharmOrigin"
         charm-name:
           type: string
         config-settings:
@@ -786,11 +775,11 @@ components:
         resources:
           type: array
           items:
-            $ref: '#/components/schemas/Resource'
+            $ref: "#/components/schemas/Resource"
         storage-constraints:
           type: object
           additionalProperties:
-            $ref: '#/components/schemas/StorageConstraints'
+            $ref: "#/components/schemas/StorageConstraints"
       additionalProperties: false
       required:
         - application
@@ -831,11 +820,11 @@ components:
       type: object
       properties:
         architecture:
-          $ref: '#/components/schemas/Architecture'
+          $ref: "#/components/schemas/Architecture"
         base:
-          $ref: '#/components/schemas/Base'
+          $ref: "#/components/schemas/Base"
         channel:
-          $ref: '#/components/schemas/CharmChannel'
+          $ref: "#/components/schemas/CharmChannel"
         hash:
           description: The hash of the charm in CharmHub located by this origin.
           type: string
@@ -891,7 +880,7 @@ components:
         regions:
           type: array
           items:
-            $ref: '#/components/schemas/CloudRegion'
+            $ref: "#/components/schemas/CloudRegion"
         type:
           type: string
           enum:
@@ -912,7 +901,7 @@ components:
     CloudDetail:
       type: object
       allOf:
-        - $ref: '#/components/schemas/Cloud'
+        - $ref: "#/components/schemas/Cloud"
         - type: object
           properties:
             # TODO: We should probably be modelling CA's properly in this spec?
@@ -933,8 +922,8 @@ components:
           type: array
           items:
             oneOf:
-              - $ref: '#/components/schemas/Cloud'
-              - $ref: '#/components/schemas/CloudDetail'
+              - $ref: "#/components/schemas/Cloud"
+              - $ref: "#/components/schemas/CloudDetail"
       additionalProperties: false
       required:
         - clouds
@@ -958,7 +947,7 @@ components:
     CloudUser:
       type: object
       allOf:
-        - $ref: '#/components/schemas/CloudUserAccess'
+        - $ref: "#/components/schemas/CloudUserAccess"
         - type: object
           properties:
             display-name:
@@ -989,14 +978,14 @@ components:
           description: List of granted permissions to the cloud.
           type: array
           items:
-            $ref: '#/components/schemas/CloudUserAccess'
+            $ref: "#/components/schemas/CloudUserAccess"
       additionalProperties: false
       required:
         - permissions
     CloudUserAccessUpdate:
       type: object
       allOf:
-        - $ref: '#/components/schemas/CloudUserAccess'
+        - $ref: "#/components/schemas/CloudUserAccess"
         - type: object
           properties:
             action:
@@ -1015,7 +1004,7 @@ components:
           description: List of cloud access updates.
           type: array
           items:
-            $ref: '#/components/schemas/CloudUserAccessUpdate'
+            $ref: "#/components/schemas/CloudUserAccessUpdate"
       additionalProperties: false
       required:
         - permissions
@@ -1031,10 +1020,10 @@ components:
           type: boolean
         architecture:
           description: Indicates that a machine must run the named architecture.
-          $ref: '#/components/schemas/Architecture'
+          $ref: "#/components/schemas/Architecture"
         container:
           description: Indicates that a machine must be the specified container type.
-          $ref: '#/components/schemas/ContainerType'
+          $ref: "#/components/schemas/ContainerType"
         cores:
           description: Indicates that a machine must have at least that number of effective cores available.
           type: integer
@@ -1120,23 +1109,23 @@ components:
         config-yaml:
           type: string
         constraints:
-          $ref: '#/components/schemas/Constraints'
+          $ref: "#/components/schemas/Constraints"
         devices:
           type: object
           additionalProperties:
-            $ref: '#/components/schemas/Constraints'
+            $ref: "#/components/schemas/Constraints"
         placement:
           type: array
           items:
-            $ref: '#/components/schemas/Placement'
+            $ref: "#/components/schemas/Placement"
         storage:
           type: object
           additionalProperties:
-            $ref: '#/components/schemas/Constraints'
+            $ref: "#/components/schemas/Constraints"
         base:
-          $ref: '#/components/schemas/Base'
+          $ref: "#/components/schemas/Base"
         channel:
-          $ref: '#/components/schemas/CharmChannel'
+          $ref: "#/components/schemas/CharmChannel"
         endpoint-bindings:
           type: object
           additionalProperties:
@@ -1168,6 +1157,29 @@ components:
         - error
         - error_code
         - type
+    ExposedEndpoint:
+      type: object
+      properties:
+        expose-to-cidrs:
+          type: array
+          items:
+            type: string
+        expose-to-spaces:
+          type: array
+          items:
+            type: string
+      additionalProperties: false
+    IntegrateArgs:
+      type: object
+      properties:
+        provider:
+          $ref: "#/components/schemas/Integrator"
+        requirer:
+          $ref: "#/components/schemas/Integrator"
+      additionalProperties: false
+      required:
+        - provider
+        - requirer
     Integrator:
       description: An entity describing one end of an integration.
       type: object
@@ -1181,23 +1193,11 @@ components:
       required:
         - model
         - application
-    ExposedEndpoint:
-      type: object
-      properties:
-        expose-to-cidrs:
-          type: array
-          items:
-            type: string
-        expose-to-spaces:
-          type: array
-          items:
-            type: string
-      additionalProperties: false
     MachineHardware:
       type: object
       properties:
         architecture:
-          $ref: '#/components/schemas/Architecture'
+          $ref: "#/components/schemas/Architecture"
         availability-zone:
           type: string
         cores:
@@ -1230,7 +1230,7 @@ components:
         uuid:
           type: string
         agent-version:
-          $ref: '#/components/schemas/Version'
+          $ref: "#/components/schemas/Version"
         cloud-credential:
           description: Identifier for the model's cloud credential.
           type: string
@@ -1244,7 +1244,7 @@ components:
         counts:
           type: array
           items:
-            $ref: '#/components/schemas/ModelEntityCount'
+            $ref: "#/components/schemas/ModelEntityCount"
         default-series:
           type: string
         is-controller:
@@ -1252,12 +1252,12 @@ components:
         life:
           type: string
         migration:
-          $ref: '#/components/schemas/ModelMigrationStatus'
+          $ref: "#/components/schemas/ModelMigrationStatus"
         # TODO: Should this be an enum?
         provider-type:
           type: string
         sla:
-          $ref: '#/components/schemas/ModelSLAInfo'
+          $ref: "#/components/schemas/ModelSLAInfo"
         users:
           type: array
           items:
@@ -1331,7 +1331,7 @@ components:
         regions:
           type: array
           items:
-            $ref: '#/components/schemas/RegionDefaults'
+            $ref: "#/components/schemas/RegionDefaults"
       additionalProperties: false
     ModelDefaultsList:
       description: A list of model defaults for the specified clouds
@@ -1340,7 +1340,7 @@ components:
         model-defaults:
           type: array
           items:
-            $ref: '#/components/schemas/ModelDefaults'
+            $ref: "#/components/schemas/ModelDefaults"
       additionalProperties: false
       required:
         - model-defaults
@@ -1354,7 +1354,7 @@ components:
     ModelDetail:
       description: Detailed administrative information about a model
       allOf:
-        - $ref: '#/components/schemas/Model'
+        - $ref: "#/components/schemas/Model"
         - type: object
           properties:
             cloud-credential-validity:
@@ -1364,15 +1364,15 @@ components:
             machines:
               type: array
               items:
-                $ref: '#/components/schemas/ModelMachine'
+                $ref: "#/components/schemas/ModelMachine"
             secret-backends:
               type: array
               items:
-                $ref: '#/components/schemas/SecretBackend'
+                $ref: "#/components/schemas/SecretBackend"
             supported-features:
               type: array
               items:
-                $ref: '#/components/schemas/SupportedFeature'
+                $ref: "#/components/schemas/SupportedFeature"
           additionalProperties: false
           required:
             - machines
@@ -1400,8 +1400,8 @@ components:
           type: array
           items:
             oneOf:
-              - $ref: '#/components/schemas/Model'
-              - $ref: '#/components/schemas/ModelDetail'
+              - $ref: "#/components/schemas/Model"
+              - $ref: "#/components/schemas/ModelDetail"
       additionalProperties: false
       required:
         - models
@@ -1413,7 +1413,7 @@ components:
         ha-primary:
           type: boolean
         hardware:
-          $ref: '#/components/schemas/MachineHardware'
+          $ref: "#/components/schemas/MachineHardware"
         has-vote:
           type: boolean
         id:
@@ -1464,13 +1464,13 @@ components:
         applications:
           type: array
           items:
-            $ref: '#/components/schemas/ModelApplicationInfo'
+            $ref: "#/components/schemas/ModelApplicationInfo"
         error:
-          $ref: '#/components/schemas/Error'
+          $ref: "#/components/schemas/Error"
         filesystems:
           type: array
           items:
-            $ref: '#/components/schemas/ModelFilesystemInfo'
+            $ref: "#/components/schemas/ModelFilesystemInfo"
         hosted-machine-count:
           type: integer
         life:
@@ -1478,7 +1478,7 @@ components:
         machines:
           type: array
           items:
-            $ref: '#/components/schemas/ModelMachine'
+            $ref: "#/components/schemas/ModelMachine"
         model:
           description: Identifier of the model.
           type: string
@@ -1492,7 +1492,7 @@ components:
         volumes:
           type: array
           items:
-            $ref: '#/components/schemas/ModelVolumeInfo'
+            $ref: "#/components/schemas/ModelVolumeInfo"
       additionalProperties: false
       required:
         - model
@@ -1521,7 +1521,7 @@ components:
     ModelUser:
       type: object
       allOf:
-        - $ref: '#/components/schemas/ModelUserAccess'
+        - $ref: "#/components/schemas/ModelUserAccess"
         - type: object
           properties:
             display-name:
@@ -1553,14 +1553,14 @@ components:
           description: List of granted permissions to the model.
           type: array
           items:
-            $ref: '#/components/schemas/ModelUserAccess'
+            $ref: "#/components/schemas/ModelUserAccess"
       additionalProperties: false
       required:
         - permissions
     ModelUserAccessUpdate:
       type: object
       allOf:
-        - $ref: '#/components/schemas/ModelUserAccess'
+        - $ref: "#/components/schemas/ModelUserAccess"
         - type: object
           properties:
             action:
@@ -1579,7 +1579,7 @@ components:
           description: List of model access updates.
           type: array
           items:
-            $ref: '#/components/schemas/ModelUserAccessUpdate'
+            $ref: "#/components/schemas/ModelUserAccessUpdate"
       additionalProperties: false
       required:
         - permissions
@@ -1597,7 +1597,7 @@ components:
         scope:
           description: Can be a container type or a machine scope (#).
           oneOf:
-            - $ref: '#/components/schemas/ContainerType'
+            - $ref: "#/components/schemas/ContainerType"
             - const: "#"
       additionalProperties: false
       required:
@@ -1683,26 +1683,6 @@ components:
       required:
         - name
         - description
-    Version:
-      type: object
-      properties:
-        Build:
-          type: integer
-        Major:
-          type: integer
-        Minor:
-          type: integer
-        Patch:
-          type: integer
-        Tag:
-          type: string
-      additionalProperties: false
-      required:
-        - Major
-        - Minor
-        - Tag
-        - Patch
-        - Build
     User:
       type: object
       properties:
@@ -1751,6 +1731,26 @@ components:
         - display-name
         - username
         - password
+    Version:
+      type: object
+      properties:
+        Build:
+          type: integer
+        Major:
+          type: integer
+        Minor:
+          type: integer
+        Patch:
+          type: integer
+        Tag:
+          type: string
+      additionalProperties: false
+      required:
+        - Major
+        - Minor
+        - Tag
+        - Patch
+        - Build
   parameters:
     All:
       in: query
@@ -1864,19 +1864,19 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: "#/components/schemas/Error"
     EmptySyncResponse:
       description: Empty sync response.
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Success'
+            $ref: "#/components/schemas/Success"
     EntityCreated:
       description: Entity created response.
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Success'
+            $ref: "#/components/schemas/Success"
       headers:
         Location:
           schema:
@@ -1888,13 +1888,13 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: "#/components/schemas/Error"
     InternalServerError:
       description: Internal server error.
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: "#/components/schemas/Error"
 # Use this section to define reusable objects
 # callbacks: {}
 # examples: {}

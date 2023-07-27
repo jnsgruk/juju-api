@@ -4,24 +4,24 @@
 //= require ./app/_lang
 
 function adjustLanguageSelectorWidth() {
-  const elem = $('.dark-box > .lang-selector');
-  elem.width(elem.parent().width());
+  const elem = $(".dark-box > .lang-selector")
+  elem.width(elem.parent().width())
 }
 
-$(function() {
-  loadToc($('#toc'), '.toc-link', '.toc-list-h2', 10);
-  setupLanguages($('body').data('languages'));
-  $('.content').imagesLoaded( function() {
-    window.recacheHeights();
-    window.refreshToc();
-  });
+$(function () {
+  loadToc($("#toc"), ".toc-link", ".toc-list-h2", 10)
+  setupLanguages($("body").data("languages"))
+  $(".content").imagesLoaded(function () {
+    window.recacheHeights()
+    window.refreshToc()
+  })
 
-  $(window).resize(function() {
-    adjustLanguageSelectorWidth();
-  });
-  adjustLanguageSelectorWidth();
-});
+  $(window).resize(function () {
+    adjustLanguageSelectorWidth()
+  })
+  adjustLanguageSelectorWidth()
+})
 
-window.onpopstate = function() {
-  activateLanguage(getLanguageFromQueryString());
-};
+window.onpopstate = function () {
+  activateLanguage(getLanguageFromQueryString())
+}
