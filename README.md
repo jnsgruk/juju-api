@@ -84,7 +84,6 @@ This table tracks progress through the redesign of the Juju client API:
 | Application          | DestroyUnit                     |                                                          |
 | Application          | Expose                          |                                                          |
 | Application          | Get                             |                                                          |
-| Application          | GetCharmURLOrigin               |                                                          |
 | Application          | GetConfig                       |                                                          |
 | Application          | GetConstraints                  |                                                          |
 | Application          | Leader                          |                                                          |
@@ -116,7 +115,6 @@ This table tracks progress through the redesign of the Juju client API:
 | Bundle               | GetChanges                      |                                                          |
 | Bundle               | GetChangesMapArgs               |                                                          |
 | Charms               | AddCharm                        |                                                          |
-| Charms               | CharmInfo                       |                                                          |
 | Charms               | CheckCharmPlacement             |                                                          |
 | Charms               | GetDownloadInfos                |                                                          |
 | Charms               | IsMetered                       |                                                          |
@@ -220,10 +218,8 @@ This table tracks progress through the redesign of the Juju client API:
 | ModelManager         | UnsetModelDefaults              | `PATCH /models/defaults`                                 |
 | ModelUpgrader        | AbortModelUpgrade               |                                                          |
 | ModelUpgrader        | UpgradeModel                    |                                                          |
-| Payloads             | List                            |                                                          |
-| Pinger               | Ping                            |                                                          |
-| Pinger               | Stop                            |                                                          |
 | Resources            | AddPendingResources             |                                                          |
+| Resources            | Attach                          |                                                          |
 | Resources            | ListResources                   |                                                          |
 | SSHClient            | AllAddresses                    |                                                          |
 | SSHClient            | ModelCredentialForSSH           |                                                          |
