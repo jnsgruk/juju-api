@@ -34,6 +34,11 @@ externalDocs:
 servers:
   - url: https://localhost:17777/api/v1
 tags:
+  - name: application
+    description: Manage Juju applications
+    externalDocs:
+      description: Find out more about Juju applications.
+      url: https://juju.is/docs/olm/manage-applications
   - name: model
     description: Manage Juju models
     externalDocs:
@@ -50,13 +55,69 @@ tags:
       description: Find out more about Juju users.
       url: https://juju.is/docs/olm/manage-users
 paths:
+  /deploy:
+    post:
+      tags:
+        - application
+      description: |
+        Deploy an application.
+
+        Returns a simple response with a location header pointing to the deployed
+        application.
+
+        If the deployment relies upon local resources being uploaded, clients should
+        retrieve the URL in the location header send in the response in order to
+        learn the URL resources should be POSTed too after deploy (see `uploadResource`
+        operation).
+      operationId: addApplication
+      parameters:
+        - $ref: "#/components/parameters/Force"
+        - $ref: "#/components/parameters/DryRun"
+        - $ref: "#/components/parameters/Trust"
+        - $ref: "#/components/parameters/Scale"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeployArgs'
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/EntityCreated"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /integrate:
+    post:
+      tags:
+        - application
+      summary: Adds a relation.
+      description: Adds a relation between the specified endpoints and returns the relation info.
+      operationId: relateApplication
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IntegrateArgs'
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/EntityCreated"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
   /cloud/{cloud}:
     get:
       tags:
         - cloud
       summary: Get a specific cloud.
-      description: |
-        Returns detailed information about a given cloud
+      description: Returns detailed information about a given cloud.
       operationId: getCloud
       parameters:
         - $ref: "#/components/parameters/Cloud"
@@ -120,8 +181,7 @@ paths:
       tags:
         - cloud
       summary: Change the cloud access granted to users.
-      description: |
-        Update the level of cloud access that is granted to specific users.
+      description: Update the level of cloud access that is granted to specific users.
       operationId: updateCloudUserAccess
       parameters:
         - $ref: "#/components/parameters/Cloud"
@@ -216,8 +276,7 @@ paths:
       tags:
         - model
       summary: Get a specific model.
-      description: |
-        Returns detailed information about a given model
+      description: Returns detailed information about a given model.
       operationId: getModel
       parameters:
         - $ref: "#/components/parameters/Model"
@@ -238,8 +297,7 @@ paths:
       tags:
         - model
       summary: Delete a model.
-      description: |
-        Delete a model from the controller.
+      description: Delete a model from the controller.
       operationId: deleteModel
       parameters:
         - $ref: "#/components/parameters/Model"
@@ -269,7 +327,7 @@ paths:
         - $ref: "#/components/parameters/Model"
       responses:
         "200":
-          description: List of model access controls
+          description: List of model access controls.
           content:
             application/json:
               schema:
@@ -305,13 +363,106 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
+  /model{model}/application/{application}:
+    get:
+      tags:
+        - application
+      description: Returns application information.
+      operationId: getApplication
+      parameters:
+        - $ref: "#/components/parameters/Model"
+        - $ref: "#/components/parameters/Application"
+      responses:
+        "200":
+          description: Detailed information about the requested application.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Application"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+    delete:
+      tags:
+        - application
+      description: Removes a given application.
+      operationId: deleteApplication
+      parameters:
+        - $ref: "#/components/parameters/Model"
+        - $ref: "#/components/parameters/Application"
+        - $ref: "#/components/parameters/DestroyStorage"
+        - $ref: "#/components/parameters/Force"
+        - $ref: "#/components/parameters/MaxWait"
+        - $ref: "#/components/parameters/DryRun"
+      responses:
+        "200":
+          $ref: "#/components/responses/EmptySyncResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /model/{model}/application/{application}/refresh:
+    patch:
+      tags:
+        - application
+      description: Resets the charm for a given for the application.
+      operationId: refreshApplication
+      parameters:
+        - $ref: "#/components/parameters/Model"
+        - $ref: "#/components/parameters/Application"
+        - $ref: "#/components/parameters/Force"
+        - $ref: "#/components/parameters/DryRun"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationSubstitute'
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/EmptySyncResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /model/{model}/application/{application}/resources/{resource}:
+    post:
+      tags:
+        - application
+      description: Uploads a resource for an application.
+      operationId: uploadResource
+      parameters:
+        - $ref: "#/components/parameters/Model"
+        - $ref: "#/components/parameters/Application"
+        - $ref: "#/components/parameters/Resource"
+        - $ref: "#/components/parameters/Force"
+        - $ref: "#/components/parameters/DryRun"
+      requestBody:
+        content:
+          application/octet-stream: {}
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/EntityCreated"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
   /model/{model}/credential:
     patch:
       tags:
         - model
       summary: Change the credential related to the model.
-      description: |
-        Update the underlying cloud credential that's associated with the model.
+      description: Update the underlying cloud credential that's associated with the model.
       operationId: updateModelCredential
       parameters:
         - $ref: "#/components/parameters/Model"
@@ -359,7 +510,12 @@ paths:
       tags:
         - model
       summary: List models
-      description: "Returns the models that the specified user has access to in the current server.\n\nController admins (superuser) can list models for any user. \n\nOther users can only ask about their own models.\n"
+      description: |
+        Returns the models that the specified user has access to in the current server.
+
+        Controller admins (superuser) can list models for any user.
+
+        Other users can only ask about their own models.
       operationId: listModels
       parameters:
         - $ref: "#/components/parameters/All"
@@ -405,8 +561,7 @@ paths:
       tags:
         - model
       summary: List model defaults.
-      description: |
-        Returns the model defaults for the specified clouds.
+      description: Returns the model defaults for the specified clouds.
       operationId: listModelDefaults
       parameters:
         - name: clouds
@@ -474,7 +629,6 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  
   /user/{user}:
     get:
       tags:
@@ -567,6 +721,149 @@ paths:
           $ref: "#/components/responses/InternalServerError"
 components:
   schemas:
+    IntegrateArgs:
+      type: object
+      properties:
+        provider:
+          $ref: '#/components/schemas/Integrator'
+        requirer:
+          $ref: '#/components/schemas/Integrator'
+      additionalProperties: false
+      required:
+        - provider
+        - requirer
+    Application:
+      type: object
+      description: Information about a given application.
+      properties:
+        charm:
+          type: string
+        base:
+          $ref: '#/components/schemas/Base'
+        channel:
+          $ref: '#/components/schemas/CharmChannel'
+        revision:
+          type: integer
+        constraints:
+          $ref: '#/components/schemas/Constraints'
+        endpoint-bindings:
+          type: object
+          additionalProperties:
+            type: string
+        exposed:
+          type: boolean
+        exposed-endpoints:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ExposedEndpoint'
+        resources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Resource'
+        principal:
+          type: boolean
+      additionalProperties: false
+      required:
+        - tag
+        - principal
+        - exposed
+        - remote
+    ApplicationSubstitute:
+      type: object
+      properties:
+        application:
+          type: string
+        charm-origin:
+          $ref: '#/components/schemas/CharmOrigin'
+        charm-name:
+          type: string
+        config-settings:
+          type: object
+          additionalProperties:
+            type: string
+        config-settings-yaml:
+          type: string
+        resources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Resource'
+        storage-constraints:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/StorageConstraints'
+      additionalProperties: false
+      required:
+        - application
+        - charm-name
+    Architecture:
+      type: string
+      enum:
+        - amd64
+        - arm64
+        - i386
+        - riscv64
+    Base:
+      type: object
+      properties:
+        channel:
+          type: string
+        name:
+          type: string
+      additionalProperties: false
+      required:
+        - name
+        - channel
+    CharmChannel:
+      type: object
+      properties:
+        track:
+          type: string
+        risk:
+          type: string
+          enum:
+            - stable
+            - candidate
+            - beta
+            - edge
+        branch:
+          type: string
+    CharmOrigin:
+      type: object
+      properties:
+        architecture:
+          $ref: '#/components/schemas/Architecture'
+        base:
+          $ref: '#/components/schemas/Base'
+        channel:
+          $ref: '#/components/schemas/CharmChannel'
+        hash:
+          description: The hash of the charm in CharmHub located by this origin.
+          type: string
+        id:
+          type: string
+        instance-key:
+          description: |
+            A unique string associated with the application.
+
+            Create with the charmhub.CreateInstanceKey method.
+          type: string
+        revision:
+          type: integer
+        source:
+          type: string
+          enum:
+            - local
+            - charm-hub
+        type:
+          type: string
+          enum:
+            - charm
+            - bundle
+      additionalProperties: false
+      required:
+        - source
+        - type
+        - id
     Cloud:
       type: object
       properties:
@@ -722,13 +1019,145 @@ components:
       additionalProperties: false
       required:
         - permissions
+    Constraints:
+      description: |
+        Describes a user's requirements of the hardware on which units of an application will run.
+
+        Constraints are used to choose an existing machine onto which a unit will be deployed,
+        or to provision a new machine if no existing one satisfies the requirements.
+      type: object
+      properties:
+        allocate-public-ip:
+          type: boolean
+        architecture:
+          description: Indicates that a machine must run the named architecture.
+          $ref: '#/components/schemas/Architecture'
+        container:
+          description: Indicates that a machine must be the specified container type.
+          $ref: '#/components/schemas/ContainerType'
+        cores:
+          description: Indicates that a machine must have at least that number of effective cores available.
+          type: integer
+        cpu-power:
+          description: |
+            Indicates that a machine must have at least that amount of CPU power available,
+            where 100 CpuPower is considered to be equivalent to 1 Amazon ECU (or, roughly, a single 2007-era Xeon).
+          type: integer
+        image-id:
+          description: |
+            Indicates that a machine must use the specified image.
+
+            This is provider specific, and for the moment is only implemented on MAAS clouds.
+          type: string
+        instance-role:
+          description: |
+            Indicates that the specified role/profile for the given cloud should be used.
+
+            Only valid for clouds which support instance roles. Currently only for AWS with instance-profiles.
+          type: string
+        instance-type:
+          description: |
+            Indicates that the specified cloud instance type be used.
+
+            Only valid for clouds which support instance types.
+          type: string
+        mem:
+          description: Indicates that a machine must have at least that many megabytes of RAM.
+          type: integer
+        root-disk:
+          description: Indicates that a machine must have at least that many megabytes of disk space available in the root disk.
+          type: integer
+        root-disk-source:
+          description: |
+            Determines what storage the root disk should be allocated from.
+
+            This will be provider specific - in the case of vSphere it identifies the datastore the root disk file should be created in.
+          type: string
+        spaces:
+          description: |
+            Holds a list of juju network spaces that should be available (or not) on the machine.
+
+            Positive and negative values are accepted, and the difference is the latter have a "^" prefix to the name.
+          type: array
+          items:
+            type: string
+        tags:
+          description: Indicates tags that the machine must have applied to it.
+          type: array
+          items:
+            type: string
+        virt-type:
+          description: |
+            Indicates that a machine must run the named virtual type.
+
+            Only valid for clouds with multi-hypervisor support.
+          type: string
+        zones:
+          description: Holds a list of availability zones limiting where the machine can be located.
+          type: array
+          items:
+            type: string
+      additionalProperties: false
+    ContainerType:
+      type: string
+      enum:
+        - none
+        - lxd
+        - kvm
+    DeployArgs:
+      type: object
+      properties:
+        model:
+          type: string
+        application-name:
+          type: string
+        attach-storage:
+          type: array
+          items:
+            type: string
+        charm-name:
+          type: string
+        config-yaml:
+          type: string
+        constraints:
+          $ref: '#/components/schemas/Constraints'
+        devices:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Constraints'
+        placement:
+          type: array
+          items:
+            $ref: '#/components/schemas/Placement'
+        storage:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Constraints'
+        base:
+          $ref: '#/components/schemas/Base'
+        channel:
+          $ref: '#/components/schemas/CharmChannel'
+        endpoint-bindings:
+          type: object
+          additionalProperties:
+            type: string
+        resources:
+          type: object
+          additionalProperties:
+            type: string
+        revision:
+          type: integer
+      additionalProperties: false
+      required:
+        - charm-name
+        - model
     Error:
       type: object
       properties:
         error:
           type: string
           example: Bad request.
-        error_code:
+        error-code:
           type: integer
           example: 400
         type:
@@ -739,11 +1168,36 @@ components:
         - error
         - error_code
         - type
+    Integrator:
+      description: An entity describing one end of an integration.
+      type: object
+      properties:
+        model:
+          type: string
+        application:
+          type: string
+        endpoint:
+          type: string
+      required:
+        - model
+        - application
+    ExposedEndpoint:
+      type: object
+      properties:
+        expose-to-cidrs:
+          type: array
+          items:
+            type: string
+        expose-to-spaces:
+          type: array
+          items:
+            type: string
+      additionalProperties: false
     MachineHardware:
       type: object
       properties:
-        arch:
-          type: string
+        architecture:
+          $ref: '#/components/schemas/Architecture'
         availability-zone:
           type: string
         cores:
@@ -1133,6 +1587,22 @@ components:
       description: Represents a volume within the model
       allOf:
         - $ref: "#/components/schemas/ModelStorageAttributes"
+    Placement:
+      description: Defines a placement directive, which has a scope and a value that is scope-specific.
+      type: object
+      properties:
+        directive:
+          description: Scope-specific placement directive.
+          type: string
+        scope:
+          description: Can be a container type or a machine scope (#).
+          oneOf:
+            - $ref: '#/components/schemas/ContainerType'
+            - const: "#"
+      additionalProperties: false
+      required:
+        - scope
+        - directive
     RegionDefaults:
       type: object
       properties:
@@ -1145,6 +1615,21 @@ components:
       required:
         - region-name
         - value
+    Resource:
+      type: object
+      properties:
+        name:
+          type: string
+        id:
+          type: string
+        type:
+          type: string
+          enum:
+            - file
+            - oci-image
+        descriptor:
+          description: Path or image url set when resource is created.
+          type: string
     SecretBackend:
       type: object
       properties:
@@ -1162,6 +1647,29 @@ components:
         - name
         - backend-type
         - config
+    StorageConstraints:
+      type: object
+      properties:
+        count:
+          type: integer
+        pool:
+          type: string
+        size:
+          type: integer
+      additionalProperties: false
+    Success:
+      type: object
+      properties:
+        status:
+          type: string
+          example: Success.
+        status_code:
+          type: integer
+          example: 200
+        type:
+          type: string
+          example: sync
+      additionalProperties: false
     SupportedFeature:
       type: object
       properties:
@@ -1211,13 +1719,13 @@ components:
           enum:
             - login
             - superuser
-        createdBy:
+        created-by:
           type: string
-          description: Identifier of user that created this user
-        createdAt:
+          description: Identifier of user that created this user.
+        created-at:
           type: string
           format: date-time
-        lastConnection:
+        last-connection:
           type: string
           format: date-time
       additionalProperties: false
@@ -1255,6 +1763,13 @@ components:
         enum:
           - "true"
           - "false"
+    Application:
+      in: path
+      name: application
+      required: true
+      description: The name of a deployed application.
+      schema:
+        type: string
     Cloud:
       in: path
       name: cloud
@@ -1274,17 +1789,22 @@ components:
       description: Return detailed information about requested entity.
       required: false
       schema:
-        type: string
-        default: "false"
-        enum:
-          - "true"
-          - "false"
+        type: boolean
+        default: false
+    DryRun:
+      in: query
+      name: dry-run
+      required: false
+      schema:
+        type: boolean
+        default: false
     Force:
       in: query
       name: force
       required: false
       schema:
         type: boolean
+        default: false
     MaxWait:
       in: query
       name: max-wait
@@ -1298,12 +1818,32 @@ components:
       description: The name of a model in the controller.
       schema:
         type: string
+    Resource:
+      in: path
+      name: resource
+      required: true
+      description: The name of a resource for an application.
+      schema:
+        type: string
+    Scale:
+      in: query
+      name: num-units
+      required: false
+      schema:
+        type: integer
     Timeout:
       in: query
       name: timeout
       required: false
       schema:
         type: integer
+    Trust:
+      in: query
+      name: trust
+      required: false
+      schema:
+        type: boolean
+        default: false
     User:
       in: path
       name: user
@@ -1330,31 +1870,13 @@ components:
       content:
         application/json:
           schema:
-            properties:
-              status:
-                example: Success
-                type: string
-              status_code:
-                example: 200
-                type: integer
-              type:
-                example: sync
-                type: string
+            $ref: '#/components/schemas/Success'
     EntityCreated:
-      description: Entity created response
+      description: Entity created response.
       content:
         application/json:
           schema:
-            properties:
-              status:
-                example: Success
-                type: string
-              status_code:
-                example: 200
-                type: integer
-              type:
-                example: sync
-                type: string
+            $ref: '#/components/schemas/Success'
       headers:
         Location:
           schema:
