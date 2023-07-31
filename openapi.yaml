@@ -634,6 +634,28 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
+  /subnet/{subnet}:
+    get:
+      tags:
+        - subnet
+      description: |
+        Returns details of the specified subnet.
+      operationId: getSubnet
+      parameters:
+        - $ref: "#/components/parameters/Subnet"
+      responses:
+        "200":
+          description: Details of the requested subnet.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Subnet"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
   /subnets:
     get:
       tags:
@@ -1990,6 +2012,13 @@ components:
       name: space
       required: false
       description: The name of a Juju Space.
+      schema:
+        type: string
+    Subnet:
+      in: path
+      name: subnet
+      required: true
+      description: The ID of a Juju Subnet.
       schema:
         type: string
     Timeout:
