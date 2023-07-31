@@ -1220,13 +1220,16 @@ components:
       properties:
         error:
           type: string
-          example: Bad request.
+          examples:
+            - Bad request.
         error-code:
           type: integer
-          example: 400
+          examples:
+            - 400
         type:
           type: string
-          example: error
+          examples:
+            - error
       additionalProperties: false
       required:
         - error
@@ -1794,13 +1797,16 @@ components:
       properties:
         status:
           type: string
-          example: Success.
+          examples:
+            - Success.
         status_code:
           type: integer
-          example: 200
+          examples:
+            - 200
         type:
           type: string
-          example: sync
+          examples:
+            - sync
       additionalProperties: false
     SupportedFeature:
       type: object
