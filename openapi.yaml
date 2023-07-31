@@ -1867,23 +1867,23 @@ components:
     Version:
       type: object
       properties:
-        Build:
+        build:
           type: integer
-        Major:
+        major:
           type: integer
-        Minor:
+        minor:
           type: integer
-        Patch:
+        patch:
           type: integer
-        Tag:
+        tag:
           type: string
       additionalProperties: false
       required:
-        - Major
-        - Minor
-        - Tag
-        - Patch
-        - Build
+        - major
+        - minor
+        - tag
+        - patch
+        - build
   parameters:
     All:
       in: query
