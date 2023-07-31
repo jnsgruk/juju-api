@@ -1230,7 +1230,7 @@ components:
       additionalProperties: false
       required:
         - error
-        - error_code
+        - error-code
         - type
     ExposedEndpoint:
       type: object
