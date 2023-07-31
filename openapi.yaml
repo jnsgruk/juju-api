@@ -49,6 +49,11 @@ tags:
     externalDocs:
       description: Find out more about Juju models.
       url: https://juju.is/docs/olm/manage-models
+  - name: subnet
+    description: Manage Juju subnets
+    externalDocs:
+      description: Find out more about Juju subnets.
+      url: https://juju.is/docs/olm/manage-subnets
   - name: user
     description: Manage Juju users
     externalDocs:
@@ -629,6 +634,49 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
+  /subnets:
+    get:
+      tags:
+        - subnet
+      summary: Get subnets.
+      description: |
+        Returns all subnets that match the specified filters.
+      operationId: listSubnets
+      parameters:
+        - $ref: "#/components/parameters/CIDRs"
+        - $ref: "#/components/parameters/Space"
+        - $ref: "#/components/parameters/AvailabilityZone"
+      responses:
+        "200":
+          description: List of subnets.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SubnetList"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  # TODO: Should this really just be GET /clouds, where clouds each return their zones?
+  /subnets/zones:
+    get:
+      tags:
+        - subnet
+      summary: Get all known availability zones.
+      description: |
+        Returns all known availability zones across all known clouds.
+      operationId: listAvailabilityZones
+      responses:
+        "200":
+          description: List of availability zones.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AvailabilityZoneList"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
   /user/{user}:
     get:
       tags:
@@ -791,6 +839,31 @@ components:
         - arm64
         - i386
         - riscv64
+    AvailabilityZone:
+      type: object
+      properties:
+        available:
+          type: boolean
+        error:
+          $ref: "#/components/schemas/Error"
+        name:
+          type: string
+      additionalProperties: false
+      required:
+        - name
+        - available
+    AvailabilityZoneList:
+      type: object
+      properties:
+        availability-zones:
+          description: List of availability zones.
+          type: array
+          items:
+            oneOf:
+              - $ref: "#/components/schemas/AvailabilityZone"
+      additionalProperties: false
+      required:
+        - availability-zones
     Base:
       type: object
       properties:
@@ -1657,6 +1730,64 @@ components:
         size:
           type: integer
       additionalProperties: false
+    Subnet:
+      type: object
+      properties:
+        cidr:
+          description: CIDR of the subnet in IPv4 or IPv6 notation.
+          type: string
+        id:
+          description: Unique identifier for the subnet.
+          type: string
+        provider-id:
+          description: Provider-specific subnet ID (if applicable).
+          type: string
+        provider-network-id:
+          description: ID of the network containing this subnet from the provider's perspective.
+          type: string
+        provider-space-id:
+          description: ID of the space containing this subnet from the provider's perspective.
+          type: string
+        space:
+          description: The Juju network space this subnet is associated with.
+          type: string
+        status:
+          description: Describes the lifecycle stage of the subnet.
+          type: string
+          enum:
+            - alive
+            - dying
+            - dead
+        vlan-tag:
+          description: Between 1 and 4094 for VLANs; 0 for normal networks. IEEE 802.1Q standard.
+          type: integer
+          minimum: 0
+          maximum: 4094
+        zones:
+          description: One or more Availability Zones this subnet is associated with.
+          type: array
+          items:
+            $ref: "#/components/schemas/AvailabilityZone"
+      additionalProperties: false
+      required:
+        - cidr
+        - id
+        - space
+        - status
+        - vlan-tag
+        - zones
+    SubnetList:
+      type: object
+      properties:
+        subnets:
+          description: List of subnets.
+          type: array
+          items:
+            oneOf:
+              - $ref: "#/components/schemas/Subnet"
+      additionalProperties: false
+      required:
+        - subnets
     Success:
       type: object
       properties:
@@ -1770,6 +1901,22 @@ components:
       description: The name of a deployed application.
       schema:
         type: string
+    AvailabilityZone:
+      in: query
+      name: az
+      required: false
+      description: The name of an Availability Zone.
+      schema:
+        type: string
+    CIDRs:
+      in: query
+      name: cidrs
+      required: false
+      description: List of CIDRs used to filter subnets.
+      schema:
+        type: array
+        items:
+          type: string
     Cloud:
       in: path
       name: cloud
@@ -1831,6 +1978,13 @@ components:
       required: false
       schema:
         type: integer
+    Space:
+      in: query
+      name: space
+      required: false
+      description: The name of a Juju Space.
+      schema:
+        type: string
     Timeout:
       in: query
       name: timeout
