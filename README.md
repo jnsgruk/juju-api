@@ -77,7 +77,7 @@ This table tracks progress through the redesign of the Juju client API:
 | Application          | CharmRelations                  |                                                          |
 | Application          | Consume                         |                                                          |
 | Application          | Deploy                          |                                                          |
-| Application          | DeployFromRepository            | `POST /deploy?dry-run=false&trust=false`                 |
+| Application          | DeployFromRepository            | `POST /deploy`                                           |
 | Application          | DestroyApplication              | `DELETE /model/{model}/application/{application}`        |
 | Application          | DestroyConsumedApplications     |                                                          |
 | Application          | DestroyRelation                 |                                                          |
