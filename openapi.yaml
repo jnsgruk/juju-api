@@ -805,10 +805,9 @@ components:
           type: boolean
       additionalProperties: false
       required:
-        - tag
+        - charm
         - principal
         - exposed
-        - remote
     ApplicationSubstitute:
       type: object
       properties:
