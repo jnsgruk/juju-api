@@ -191,7 +191,7 @@ paths:
               $ref: "#/components/schemas/CloudDetail"
         required: true
       responses:
-        "200":
+        "201":
           $ref: "#/components/responses/EntityCreated"
         "400":
           $ref: "#/components/responses/BadRequest"
@@ -246,7 +246,7 @@ paths:
               $ref: "#/components/schemas/DeployArgs"
         required: true
       responses:
-        "200":
+        "201":
           $ref: "#/components/responses/EntityCreated"
         "400":
           $ref: "#/components/responses/BadRequest"
@@ -268,7 +268,7 @@ paths:
               $ref: "#/components/schemas/IntegrateArgs"
         required: true
       responses:
-        "200":
+        "201":
           $ref: "#/components/responses/EntityCreated"
         "400":
           $ref: "#/components/responses/BadRequest"
@@ -411,7 +411,7 @@ paths:
           application/octet-stream: {}
         required: true
       responses:
-        "200":
+        "201":
           $ref: "#/components/responses/EntityCreated"
         "400":
           $ref: "#/components/responses/BadRequest"
@@ -510,7 +510,7 @@ paths:
               $ref: "#/components/schemas/ModelCreateArgs"
         required: true
       responses:
-        "200":
+        "201":
           $ref: "#/components/responses/EntityCreated"
         "400":
           $ref: "#/components/responses/BadRequest"
@@ -785,7 +785,7 @@ paths:
               $ref: "#/components/schemas/UserArgs"
         required: true
       responses:
-        "200":
+        "201":
           $ref: "#/components/responses/EntityCreated"
         "400":
           $ref: "#/components/responses/BadRequest"
