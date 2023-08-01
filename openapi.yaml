@@ -60,7 +60,58 @@ tags:
       description: Find out more about Juju users.
       url: https://juju.is/docs/olm/manage-users
 paths:
-  /cloud/{cloud}:
+  /clouds:
+    get:
+      tags:
+        - cloud
+      summary: Get clouds that specified user has access to.
+      description: |
+        Returns clouds that the specified user has access to. Controller admins (superuser) can
+        list clouds for any user. Other users can only ask about their own clouds.
+      operationId: listClouds
+      parameters:
+        - $ref: "#/components/parameters/ShowSupported"
+        - $ref: "#/components/parameters/Detailed"
+        - $ref: "#/components/parameters/All"
+        - $ref: "#/components/parameters/UserQuery"
+      responses:
+        "200":
+          description: List of supported clouds.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CloudList"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+    post:
+      tags:
+        - cloud
+      summary: Adds a new cloud.
+      description: Adds a new cloud, different from the one managed by the controller.
+      operationId: addCloud
+      parameters:
+        - $ref: "#/components/parameters/Force"
+      requestBody:
+        description: Cloud creation parameters.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CloudDetail"
+        required: true
+      responses:
+        "201":
+          $ref: "#/components/responses/EntityCreated"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /clouds/{cloud}:
     get:
       tags:
         - cloud
@@ -101,7 +152,7 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /cloud/{cloud}/access:
+  /clouds/{cloud}/access:
     get:
       tags:
         - cloud
@@ -149,111 +200,6 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /clouds:
-    get:
-      tags:
-        - cloud
-      summary: Get clouds that specified user has access to.
-      description: |
-        Returns clouds that the specified user has access to. Controller admins (superuser) can
-        list clouds for any user. Other users can only ask about their own clouds.
-      operationId: listClouds
-      parameters:
-        - $ref: "#/components/parameters/Detailed"
-        - $ref: "#/components/parameters/All"
-        - $ref: "#/components/parameters/UserQuery"
-      responses:
-        "200":
-          description: List of supported clouds.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/CloudList"
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "500":
-          $ref: "#/components/responses/InternalServerError"
-    post:
-      tags:
-        - cloud
-      summary: Adds a new cloud.
-      description: Adds a new cloud, different from the one managed by the controller.
-      operationId: addCloud
-      parameters:
-        - $ref: "#/components/parameters/Force"
-      requestBody:
-        description: Cloud creation parameters.
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/CloudDetail"
-        required: true
-      responses:
-        "201":
-          $ref: "#/components/responses/EntityCreated"
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "500":
-          $ref: "#/components/responses/InternalServerError"
-  /clouds/supported:
-    get:
-      tags:
-        - cloud
-      summary: Get supported clouds.
-      description: |
-        Returns the definitions of all clouds supported by the controller that the logged in
-        user can see.
-      operationId: listSupportedClouds
-      responses:
-        "200":
-          description: List of supported clouds.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/CloudList"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "500":
-          $ref: "#/components/responses/InternalServerError"
-  /deploy:
-    post:
-      tags:
-        - application
-      description: |
-        Deploy an application.
-
-        Returns a simple response with a location header pointing to the deployed
-        application.
-
-        If the deployment relies upon local resources being uploaded, clients should
-        retrieve the URL in the location header send in the response in order to
-        learn the URL resources should be POSTed too after deploy (see `uploadResource`
-        operation).
-      operationId: deploy
-      parameters:
-        - $ref: "#/components/parameters/Force"
-        - $ref: "#/components/parameters/DryRun"
-        - $ref: "#/components/parameters/Trust"
-        - $ref: "#/components/parameters/Scale"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/DeployArgs"
-        required: true
-      responses:
-        "201":
-          $ref: "#/components/responses/EntityCreated"
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "500":
-          $ref: "#/components/responses/InternalServerError"
   /integrate:
     post:
       tags:
@@ -276,249 +222,7 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /model/{model}:
-    get:
-      tags:
-        - model
-      summary: Get a specific model.
-      description: Returns detailed information about a given model.
-      operationId: getModel
-      parameters:
-        - $ref: "#/components/parameters/Model"
-      responses:
-        "200":
-          description: Detailed information about the requested model.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ModelDetail"
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "500":
-          $ref: "#/components/responses/InternalServerError"
-    delete:
-      tags:
-        - model
-      summary: Delete a model.
-      description: Delete a model from the controller.
-      operationId: deleteModel
-      parameters:
-        - $ref: "#/components/parameters/Model"
-        - $ref: "#/components/parameters/DestroyStorage"
-        - $ref: "#/components/parameters/Force"
-        - $ref: "#/components/parameters/MaxWait"
-        - $ref: "#/components/parameters/Timeout"
-      responses:
-        "200":
-          $ref: "#/components/responses/EmptySyncResponse"
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "500":
-          $ref: "#/components/responses/InternalServerError"
-  /model/{model}/access:
-    get:
-      tags:
-        - model
-      summary: List of user permissions for model.
-      description: |
-        Return a list of objects that describe the level of permissions granted over the model
-        to users on the controller.
-      operationId: getModelUserAccess
-      parameters:
-        - $ref: "#/components/parameters/Model"
-      responses:
-        "200":
-          description: List of model access controls.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ModelUserAccessList"
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "500":
-          $ref: "#/components/responses/InternalServerError"
-    patch:
-      tags:
-        - model
-      summary: Change the model access granted to users.
-      description: |
-        Update the level of model access that is granted to specific users.
-      operationId: updateModelUserAccess
-      parameters:
-        - $ref: "#/components/parameters/Model"
-      requestBody:
-        description: An object describing the changes to model access controls.
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ModelUserAccessUpdateList"
-        required: true
-      responses:
-        "200":
-          $ref: "#/components/responses/EmptySyncResponse"
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "500":
-          $ref: "#/components/responses/InternalServerError"
-  /model/{model}/application/{application}/refresh:
-    patch:
-      tags:
-        - application
-      description: Resets the charm for a given for the application.
-      operationId: refreshApplication
-      parameters:
-        - $ref: "#/components/parameters/Model"
-        - $ref: "#/components/parameters/Application"
-        - $ref: "#/components/parameters/Force"
-        - $ref: "#/components/parameters/DryRun"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ApplicationSubstitute"
-        required: true
-      responses:
-        "200":
-          $ref: "#/components/responses/EmptySyncResponse"
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "500":
-          $ref: "#/components/responses/InternalServerError"
-  /model/{model}/application/{application}/resources/{resource}:
-    post:
-      tags:
-        - application
-      description: Uploads a resource for an application.
-      operationId: uploadResource
-      parameters:
-        - $ref: "#/components/parameters/Model"
-        - $ref: "#/components/parameters/Application"
-        - $ref: "#/components/parameters/Resource"
-        - $ref: "#/components/parameters/Force"
-        - $ref: "#/components/parameters/DryRun"
-      requestBody:
-        content:
-          application/octet-stream: {}
-        required: true
-      responses:
-        "201":
-          $ref: "#/components/responses/EntityCreated"
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "500":
-          $ref: "#/components/responses/InternalServerError"
-  /model/{model}/credential:
-    patch:
-      tags:
-        - model
-      summary: Change the credential related to the model.
-      description: Update the underlying cloud credential that's associated with the model.
-      operationId: updateModelCredential
-      parameters:
-        - $ref: "#/components/parameters/Model"
-      requestBody:
-        description: An object containing the identifier of the new cloud credential.
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ModelCredential"
-        required: true
-      responses:
-        "200":
-          $ref: "#/components/responses/EmptySyncResponse"
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "500":
-          $ref: "#/components/responses/InternalServerError"
-  /model/{model}/status:
-    get:
-      tags:
-        - model
-      summary: Get the status of a specific model.
-      description: |
-        Returns status information about a model, such as applications deployed and machines.
-      operationId: getModelStatus
-      parameters:
-        - $ref: "#/components/parameters/Model"
-      responses:
-        "200":
-          description: Status information about the requested model.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ModelStatus"
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "500":
-          $ref: "#/components/responses/InternalServerError"
-  /models:
-    get:
-      tags:
-        - model
-      summary: List models
-      description: |
-        Returns the models that the specified user has access to in the current server.
-
-        Controller admins (superuser) can list models for any user.
-
-        Other users can only ask about their own models.
-      operationId: listModels
-      parameters:
-        - $ref: "#/components/parameters/All"
-        - $ref: "#/components/parameters/Detailed"
-        - $ref: "#/components/parameters/UserQuery"
-      responses:
-        "200":
-          description: List of models the specified user has access to.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ModelList"
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "500":
-          $ref: "#/components/responses/InternalServerError"
-    post:
-      tags:
-        - model
-      summary: Create a new model
-      description: Creates a new model using the account and model config specified in the args.
-      operationId: createModel
-      requestBody:
-        description: Model creation parameters.
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ModelCreateArgs"
-        required: true
-      responses:
-        "201":
-          $ref: "#/components/responses/EntityCreated"
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "500":
-          $ref: "#/components/responses/InternalServerError"
-  /models/defaults:
+  /model-defaults:
     get:
       tags:
         - model
@@ -591,7 +295,150 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /model{model}/application/{application}:
+  /models:
+    get:
+      tags:
+        - model
+      summary: List models
+      description: |
+        Returns the models that the specified user has access to in the current server.
+
+        Controller admins (superuser) can list models for any user.
+
+        Other users can only ask about their own models.
+      operationId: listModels
+      parameters:
+        - $ref: "#/components/parameters/All"
+        - $ref: "#/components/parameters/Detailed"
+        - $ref: "#/components/parameters/UserQuery"
+      responses:
+        "200":
+          description: List of models the specified user has access to.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ModelList"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+    post:
+      tags:
+        - model
+      summary: Create a new model
+      description: Creates a new model using the account and model config specified in the args.
+      operationId: createModel
+      requestBody:
+        description: Model creation parameters.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ModelCreateArgs"
+        required: true
+      responses:
+        "201":
+          $ref: "#/components/responses/EntityCreated"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /models/{model}:
+    get:
+      tags:
+        - model
+      summary: Get a specific model.
+      description: Returns detailed information about a given model.
+      operationId: getModel
+      parameters:
+        - $ref: "#/components/parameters/Model"
+      responses:
+        "200":
+          description: Detailed information about the requested model.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ModelDetail"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+    delete:
+      tags:
+        - model
+      summary: Delete a model.
+      description: Delete a model from the controller.
+      operationId: deleteModel
+      parameters:
+        - $ref: "#/components/parameters/Model"
+        - $ref: "#/components/parameters/DestroyStorage"
+        - $ref: "#/components/parameters/Force"
+        - $ref: "#/components/parameters/MaxWait"
+        - $ref: "#/components/parameters/Timeout"
+      responses:
+        "200":
+          $ref: "#/components/responses/EmptySyncResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /models/{model}/access:
+    get:
+      tags:
+        - model
+      summary: List of user permissions for model.
+      description: |
+        Return a list of objects that describe the level of permissions granted over the model
+        to users on the controller.
+      operationId: getModelUserAccess
+      parameters:
+        - $ref: "#/components/parameters/Model"
+      responses:
+        "200":
+          description: List of model access controls.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ModelUserAccessList"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+    patch:
+      tags:
+        - model
+      summary: Change the model access granted to users.
+      description: |
+        Update the level of model access that is granted to specific users.
+      operationId: updateModelUserAccess
+      parameters:
+        - $ref: "#/components/parameters/Model"
+      requestBody:
+        description: An object describing the changes to model access controls.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ModelUserAccessUpdateList"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/EmptySyncResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /models/{model}/applications/{application}:
     get:
       tags:
         - application
@@ -634,22 +481,133 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /subnet/{subnet}:
-    get:
+  /models/{model}/applications/{application}/refresh:
+    patch:
       tags:
-        - subnet
-      description: |
-        Returns details of the specified subnet.
-      operationId: getSubnet
+        - application
+      description: Resets the charm for a given for the application.
+      operationId: refreshApplication
       parameters:
-        - $ref: "#/components/parameters/Subnet"
+        - $ref: "#/components/parameters/Model"
+        - $ref: "#/components/parameters/Application"
+        - $ref: "#/components/parameters/Force"
+        - $ref: "#/components/parameters/DryRun"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ApplicationSubstitute"
+        required: true
       responses:
         "200":
-          description: Details of the requested subnet.
+          $ref: "#/components/responses/EmptySyncResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /models/{model}/applications/{application}/resources/{resource}:
+    post:
+      tags:
+        - application
+      description: Uploads a resource for an application.
+      operationId: uploadResource
+      parameters:
+        - $ref: "#/components/parameters/Model"
+        - $ref: "#/components/parameters/Application"
+        - $ref: "#/components/parameters/Resource"
+        - $ref: "#/components/parameters/Force"
+        - $ref: "#/components/parameters/DryRun"
+      requestBody:
+        content:
+          application/octet-stream: {}
+        required: true
+      responses:
+        "201":
+          $ref: "#/components/responses/EntityCreated"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /models/{model}/credential:
+    patch:
+      tags:
+        - model
+      summary: Change the credential related to the model.
+      description: Update the underlying cloud credential that's associated with the model.
+      operationId: updateModelCredential
+      parameters:
+        - $ref: "#/components/parameters/Model"
+      requestBody:
+        description: An object containing the identifier of the new cloud credential.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ModelCredential"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/EmptySyncResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /models/{model}/deploy:
+    post:
+      tags:
+        - application
+      description: |
+        Deploy an application.
+
+        Returns a simple response with a location header pointing to the deployed
+        application.
+
+        If the deployment relies upon local resources being uploaded, clients should
+        retrieve the URL in the location header send in the response in order to
+        learn the URL resources should be POSTed too after deploy (see `uploadResource`
+        operation).
+      operationId: deploy
+      parameters:
+        - $ref: "#/components/parameters/Model"
+        - $ref: "#/components/parameters/Force"
+        - $ref: "#/components/parameters/DryRun"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeployArgs"
+        required: true
+      responses:
+        "201":
+          $ref: "#/components/responses/EntityCreated"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /models/{model}/status:
+    get:
+      tags:
+        - model
+      summary: Get the status of a specific model.
+      description: |
+        Returns status information about a model, such as applications deployed and machines.
+      operationId: getModelStatus
+      parameters:
+        - $ref: "#/components/parameters/Model"
+      responses:
+        "200":
+          description: Status information about the requested model.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Subnet"
+                $ref: "#/components/schemas/ModelStatus"
         "400":
           $ref: "#/components/responses/BadRequest"
         "403":
@@ -703,7 +661,52 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /user/{user}:
+  /subnets/{subnet}:
+    get:
+      tags:
+        - subnet
+      description: |
+        Returns details of the specified subnet.
+      operationId: getSubnet
+      parameters:
+        - $ref: "#/components/parameters/Subnet"
+      responses:
+        "200":
+          description: Details of the requested subnet.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Subnet"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /users:
+    post:
+      tags:
+        - user
+      summary: Adds a new user.
+      description: Adds a new user to the controller.
+      operationId: addUser
+      requestBody:
+        description: User creation parameters.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserArgs"
+        required: true
+      responses:
+        "201":
+          $ref: "#/components/responses/EntityCreated"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /users/{user}:
     get:
       tags:
         - user
@@ -764,29 +767,6 @@ paths:
       responses:
         "200":
           $ref: "#/components/responses/EmptySyncResponse"
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "500":
-          $ref: "#/components/responses/InternalServerError"
-  /users:
-    post:
-      tags:
-        - user
-      summary: Adds a new user.
-      description: Adds a new user to the controller.
-      operationId: addUser
-      requestBody:
-        description: User creation parameters.
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/UserArgs"
-        required: true
-      responses:
-        "201":
-          $ref: "#/components/responses/EntityCreated"
         "400":
           $ref: "#/components/responses/BadRequest"
         "403":
@@ -1193,8 +1173,6 @@ components:
     DeployArgs:
       type: object
       properties:
-        model:
-          type: string
         application-name:
           type: string
         attach-storage:
@@ -1215,10 +1193,16 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/Placement"
+        scale:
+          type: integer
+          default: 1
         storage:
           type: object
           additionalProperties:
             $ref: "#/components/schemas/Constraints"
+        trust:
+          type: boolean
+          default: false
         base:
           $ref: "#/components/schemas/Base"
         channel:
@@ -1236,7 +1220,6 @@ components:
       additionalProperties: false
       required:
         - charm-name
-        - model
     Error:
       type: object
       properties:
@@ -2001,12 +1984,17 @@ components:
       description: The name of a resource for an application.
       schema:
         type: string
-    Scale:
+    ShowSupported:
       in: query
-      name: num-units
+      name: show-supported
+      description: Show all supported clouds on the controller, not just those already in use.
       required: false
       schema:
-        type: integer
+        type: string
+        default: "false"
+        enum:
+          - "true"
+          - "false"
     Space:
       in: query
       name: space
@@ -2027,13 +2015,6 @@ components:
       required: false
       schema:
         type: integer
-    Trust:
-      in: query
-      name: trust
-      required: false
-      schema:
-        type: boolean
-        default: false
     User:
       in: path
       name: user
