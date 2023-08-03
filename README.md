@@ -232,13 +232,13 @@ This table tracks progress through the redesign of the Juju client API:
 | SecretBackends       | RemoveSecretBackends            |                                                            |
 | SecretBackends       | UpdateSecretBackends            |                                                            |
 | Secrets              | ListSecrets                     |                                                            |
-| Spaces               | CreateSpaces                    |                                                            |
-| Spaces               | ListSpaces                      |                                                            |
-| Spaces               | MoveSubnets                     |                                                            |
-| Spaces               | ReloadSpaces                    |                                                            |
-| Spaces               | RemoveSpace                     |                                                            |
-| Spaces               | RenameSpace                     |                                                            |
-| Spaces               | ShowSpace                       |                                                            |
+| Spaces               | CreateSpaces                    | `POST /spaces`                                             |
+| Spaces               | ListSpaces                      | `GET /spaces`                                              |
+| Spaces               | MoveSubnets                     | `PATCH /spaces/{space}`                                    |
+| Spaces               | ReloadSpaces                    | `GET /spaces?reload=true`                                  |
+| Spaces               | RemoveSpace                     | `DELETE /spaces/{space}`                                   |
+| Spaces               | RenameSpace                     | `PATCH /spaces/{space}`                                    |
+| Spaces               | ShowSpace                       | `GET /spaces/{space}`                                      |
 | Storage              | AddToUnit                       |                                                            |
 | Storage              | Attach                          |                                                            |
 | Storage              | CreatePool                      |                                                            |

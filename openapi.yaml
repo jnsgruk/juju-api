@@ -49,6 +49,11 @@ tags:
     externalDocs:
       description: Find out more about Juju models.
       url: https://juju.is/docs/olm/manage-models
+  - name: space
+    description: Manage Juju spaces
+    externalDocs:
+      description: Find out more about Juju spaces.
+      url: https://juju.is/docs/olm/manage-spaces
   - name: subnet
     description: Manage Juju subnets
     externalDocs:
@@ -614,6 +619,119 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
+  /spaces:
+    get:
+      tags:
+        - space
+      summary: Get spaces.
+      description: |
+        Returns all the available spaces and their associated subnets.
+      operationId: listSpaces
+      parameters:
+        - $ref: "#/components/parameters/ReloadSpaces"
+      responses:
+        "200":
+          description: List of spaces.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SpaceList"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+    post:
+      tags:
+        - space
+      summary: Adds a new space.
+      description: |
+        Creates a new Juju network space, optionally associating the specified subnets with it.
+      operationId: addSpace
+      requestBody:
+        description: Space creation parameters.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SpaceCreateArgs"
+        required: true
+      responses:
+        "201":
+          $ref: "#/components/responses/EntityCreated"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /spaces/{space}:
+    get:
+      tags:
+        - space
+      description: |
+        Returns details of the specified space.
+      operationId: getSpace
+      parameters:
+        - $ref: "#/components/parameters/DryRun"
+        - $ref: "#/components/parameters/Force"
+        - $ref: "#/components/parameters/Space"
+      responses:
+        "200":
+          description: Details of the requested space.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Space"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+    delete:
+      tags:
+        - space
+      summary: Delete a space.
+      description: |
+        Permanently removes a space from the current controller.
+      operationId: deleteSpace
+      parameters:
+        - $ref: "#/components/parameters/Space"
+      responses:
+        "200":
+          $ref: "#/components/responses/EmptySyncResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+    patch:
+      tags:
+        - space
+      summary: Updates a space.
+      description: |
+        Updates a given space including name and subnets.
+      operationId: updateSpace
+      parameters:
+        - $ref: "#/components/parameters/Space"
+      requestBody:
+        description: Space update parameters.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SpaceUpdateArgs"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/EmptySyncResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
   /subnets:
     get:
       tags:
@@ -624,7 +742,7 @@ paths:
       operationId: listSubnets
       parameters:
         - $ref: "#/components/parameters/CIDRs"
-        - $ref: "#/components/parameters/Space"
+        - $ref: "#/components/parameters/SpaceQuery"
         - $ref: "#/components/parameters/AvailabilityZone"
       responses:
         "200":
@@ -1730,6 +1848,73 @@ components:
         - name
         - backend-type
         - config
+    Space:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Internal ID of the space.
+        name:
+          type: string
+          description: Unique name of the space.
+        subnets:
+          type: array
+          items:
+            $ref: "#/components/schemas/Subnet"
+          description: A list of subnets in this space.
+        applications:
+          type: array
+          items:
+            type: string
+          description: A list of application names associated with this space.
+        machine-count:
+          type: integer
+          description: Number of machines associated with this space.
+        error:
+          $ref: "#/components/schemas/Error"
+      additionalProperties: false
+      required:
+        - id
+        - name
+        - subnets
+    SpaceCreateArgs:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Unique name of the space.
+        cidrs:
+          type: array
+          items:
+            type: string
+          default: []
+          description: A list of CIDRs that are in the space.
+      additionalProperties: false
+      required:
+        - name
+    SpaceList:
+      type: object
+      properties:
+        spaces:
+          description: List of spaces.
+          type: array
+          items:
+            $ref: "#/components/schemas/Space"
+      additionalProperties: false
+      required:
+        - spaces
+    SpaceUpdateArgs:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Unique name of the space.
+        cidrs:
+          type: array
+          items:
+            type: string
+          description: A list of CIDRs that are in the space.
+      additionalProperties: false
     StorageConstraints:
       type: object
       properties:
@@ -1977,6 +2162,17 @@ components:
       description: The name of a model in the controller.
       schema:
         type: string
+    ReloadSpaces:
+      in: query
+      name: reload
+      required: false
+      description: Refresh spaces from the substrate.
+      schema:
+        type: string
+        default: "false"
+        enum:
+          - "true"
+          - "false"
     Resource:
       in: path
       name: resource
@@ -1996,6 +2192,13 @@ components:
           - "true"
           - "false"
     Space:
+      in: path
+      name: space
+      required: true
+      description: The name of a Juju Space.
+      schema:
+        type: string
+    SpaceQuery:
       in: query
       name: space
       required: false
