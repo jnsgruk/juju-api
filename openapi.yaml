@@ -419,7 +419,7 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /models/{model}/applications/{application}:
+  /models/{model}/apps/{app}:
     get:
       tags:
         - application
@@ -462,7 +462,7 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /models/{model}/applications/{application}/refresh:
+  /models/{model}/apps/{app}/refresh:
     patch:
       tags:
         - application
@@ -488,7 +488,7 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /models/{model}/applications/{application}/resources/{resource}:
+  /models/{model}/apps/{app}/resources/{resource}:
     post:
       tags:
         - application
@@ -2048,7 +2048,7 @@ components:
           - "false"
     Application:
       in: path
-      name: application
+      name: app
       required: true
       description: The name of a deployed application.
       schema:
