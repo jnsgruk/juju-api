@@ -203,7 +203,7 @@ This table tracks progress through the redesign of the Juju client API:
 | ModelGeneration      | ListCommits                     |                                                            |
 | ModelGeneration      | ShowCommit                      |                                                            |
 | ModelGeneration      | TrackBranch                     |                                                            |
-| ModelManager         | ChangeModelCredential           | `PATCH /models/{model}/credential`                         |
+| ModelManager         | ChangeModelCredential           | `PATCH /models/{model}`                                    |
 | ModelManager         | CreateModel                     | `POST /models`                                             |
 | ModelManager         | DestroyModels                   | `DELETE /models/{model}`                                   |
 | ModelManager         | DumpModels                      | `GET /models?detailed=true&all=true`                       |
@@ -213,7 +213,7 @@ This table tracks progress through the redesign of the Juju client API:
 | ModelManager         | ModelDefaultsForClouds          | `GET /model-defaults`                                      |
 | ModelManager         | ModelInfo                       | `GET /models/{model}`                                      |
 | ModelManager         | ModelStatus                     | `GET /models/{model}/status`                               |
-| ModelManager         | ModifyModelAccess               | `PATCH /models/{model}/access`                             |
+| ModelManager         | ModifyModelAccess               | `PATCH /models/{model}`                                    |
 | ModelManager         | SetModelDefaults                | `PATCH /model-defaults`                                    |
 | ModelManager         | UnsetModelDefaults              | `PATCH /model-defaults`                                    |
 | ModelUpgrader        | AbortModelUpgrade               |                                                            |

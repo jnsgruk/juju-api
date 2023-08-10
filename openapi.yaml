@@ -394,45 +394,21 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /models/{model}/access:
-    get:
-      tags:
-        - model
-      summary: List of user permissions for model.
-      description: |
-        Return a list of objects that describe the level of permissions granted over the model
-        to users on the controller.
-      operationId: getModelUserAccess
-      parameters:
-        - $ref: "#/components/parameters/Model"
-      responses:
-        "200":
-          description: List of model access controls.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ModelUserAccessList"
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "500":
-          $ref: "#/components/responses/InternalServerError"
     patch:
       tags:
         - model
-      summary: Change the model access granted to users.
+      summary: Change the model.
       description: |
-        Update the level of model access that is granted to specific users.
-      operationId: updateModelUserAccess
+        Update various attributes of the model including user access, config and credentials.
+      operationId: updateModel
       parameters:
         - $ref: "#/components/parameters/Model"
       requestBody:
-        description: An object describing the changes to model access controls.
+        description: An object describing the changes to model.
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ModelUserAccessUpdateList"
+              $ref: "#/components/schemas/ModelUpdate"
         required: true
       responses:
         "200":
@@ -531,31 +507,6 @@ paths:
       responses:
         "201":
           $ref: "#/components/responses/EntityCreated"
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "500":
-          $ref: "#/components/responses/InternalServerError"
-  /models/{model}/credential:
-    patch:
-      tags:
-        - model
-      summary: Change the credential related to the model.
-      description: Update the underlying cloud credential that's associated with the model.
-      operationId: updateModelCredential
-      parameters:
-        - $ref: "#/components/parameters/Model"
-      requestBody:
-        description: An object containing the identifier of the new cloud credential.
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ModelCredential"
-        required: true
-      responses:
-        "200":
-          $ref: "#/components/responses/EmptySyncResponse"
         "400":
           $ref: "#/components/responses/BadRequest"
         "403":
@@ -1510,15 +1461,6 @@ components:
       required:
         - name
         - owner
-    ModelCredential:
-      type: object
-      properties:
-        cloud-credential:
-          description: Identifier of the cloud credential.
-          type: string
-      additionalProperties: false
-      required:
-        - cloud-credential
     ModelDefaults:
       description: Model defaults for a given cloud.
       type: object
@@ -1719,6 +1661,16 @@ components:
       additionalProperties: false
       required:
         - id
+    ModelUpdate:
+      type: object
+      properties:
+        cloud-credential:
+          description: Identifier of the cloud credential.
+          type: string
+        user-access:
+          description: List of model user access updates
+          $ref: "#/components/schemas/ModelUserAccessUpdateList"
+      additionalProperties: false
     ModelUser:
       type: object
       allOf:
@@ -1747,17 +1699,6 @@ components:
       required:
         - access
         - user
-    ModelUserAccessList:
-      type: object
-      properties:
-        permissions:
-          description: List of granted permissions to the model.
-          type: array
-          items:
-            $ref: "#/components/schemas/ModelUserAccess"
-      additionalProperties: false
-      required:
-        - permissions
     ModelUserAccessUpdate:
       type: object
       allOf:
