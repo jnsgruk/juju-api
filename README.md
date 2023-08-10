@@ -187,14 +187,14 @@ This table tracks progress through the redesign of the Juju client API:
 | MachineManager       | WatchUpgradeSeriesNotifications |                                                            |
 | MetricsDebug         | GetMetrics                      |                                                            |
 | MetricsDebug         | SetMeterStatus                  |                                                            |
-| ModelConfig          | GetModelConstraints             |                                                            |
-| ModelConfig          | ModelGet                        |                                                            |
-| ModelConfig          | ModelSet                        |                                                            |
-| ModelConfig          | ModelUnset                      |                                                            |
-| ModelConfig          | SLALevel                        |                                                            |
+| ModelConfig          | GetModelConstraints             | `GET /models/{model}`                                      |
+| ModelConfig          | ModelGet                        | `GET /models/{model}`                                      |
+| ModelConfig          | ModelSet                        | `PATCH /models/{model}`                                    |
+| ModelConfig          | ModelUnset                      | `PATCH /models/{model}`                                    |
+| ModelConfig          | SLALevel                        | N/A                                                        |
 | ModelConfig          | Sequences                       |                                                            |
-| ModelConfig          | SetModelConstraints             |                                                            |
-| ModelConfig          | SetSLALevel                     |                                                            |
+| ModelConfig          | SetModelConstraints             | `PATCH /models/{model}`                                    |
+| ModelConfig          | SetSLALevel                     | N/A                                                        |
 | ModelGeneration      | AbortBranch                     |                                                            |
 | ModelGeneration      | AddBranch                       |                                                            |
 | ModelGeneration      | BranchInfo                      |                                                            |

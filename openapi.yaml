@@ -1391,6 +1391,13 @@ components:
         cloud:
           description: Identifier for the model's cloud.
           type: string
+        config:
+          description: The model configuration.
+          type: object
+          additionalProperties: true
+        constraints:
+          description: Constraints applied to the model.
+          $ref: "#/components/schemas/Constraints"
         controller-uuid:
           type: string
         counts:
@@ -1668,8 +1675,15 @@ components:
           description: Identifier of the cloud credential.
           type: string
         user-access:
-          description: List of model user access updates
+          description: List of model user access updates.
           $ref: "#/components/schemas/ModelUserAccessUpdateList"
+        config:
+          description: Model configuration keys to update.
+          type: object
+          additionalProperties: true
+        constraints:
+          description: Model constraints to update.
+          $ref: "#/components/schemas/Constraints"
       additionalProperties: false
     ModelUser:
       type: object
