@@ -157,44 +157,20 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
-  /clouds/{cloud}/access:
-    get:
-      tags:
-        - cloud
-      summary: List of user permissions for cloud.
-      description: |
-        Return a list of objects that describe the level of permissions granted over the cloud
-        to users on the controller.
-      operationId: getCloudUserAccess
-      parameters:
-        - $ref: "#/components/parameters/Cloud"
-      responses:
-        "200":
-          description: List of cloud access controls
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/CloudUserAccessList"
-        "400":
-          $ref: "#/components/responses/BadRequest"
-        "403":
-          $ref: "#/components/responses/Forbidden"
-        "500":
-          $ref: "#/components/responses/InternalServerError"
     patch:
       tags:
         - cloud
-      summary: Change the cloud access granted to users.
-      description: Update the level of cloud access that is granted to specific users.
-      operationId: updateCloudUserAccess
+      summary: Update a cloud.
+      description: Update a clouds.
+      operationId: updateCloud
       parameters:
         - $ref: "#/components/parameters/Cloud"
       requestBody:
-        description: An object describing the changes to cloud access controls.
+        description: An object describing the changes to the cloud.
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CloudUserAccessUpdateList"
+              $ref: "#/components/schemas/CloudUpdate"
         required: true
       responses:
         "200":
@@ -1104,6 +1080,17 @@ components:
       additionalProperties: false
       required:
         - name
+    CloudUpdate:
+      type: object
+      properties:
+        permissions:
+          description: List of cloud access updates.
+          type: array
+          items:
+            $ref: "#/components/schemas/CloudUserAccessUpdate"
+      additionalProperties: false
+      required:
+        - permissions
     CloudUser:
       type: object
       allOf:
@@ -1131,17 +1118,6 @@ components:
       required:
         - access
         - user
-    CloudUserAccessList:
-      type: object
-      properties:
-        permissions:
-          description: List of granted permissions to the cloud.
-          type: array
-          items:
-            $ref: "#/components/schemas/CloudUserAccess"
-      additionalProperties: false
-      required:
-        - permissions
     CloudUserAccessUpdate:
       type: object
       allOf:
@@ -1157,17 +1133,6 @@ components:
           required:
             - action
       additionalProperties: false
-    CloudUserAccessUpdateList:
-      type: object
-      properties:
-        permissions:
-          description: List of cloud access updates.
-          type: array
-          items:
-            $ref: "#/components/schemas/CloudUserAccessUpdate"
-      additionalProperties: false
-      required:
-        - permissions
     Constraints:
       description: |
         Describes a user's requirements of the hardware on which units of an application will run.
