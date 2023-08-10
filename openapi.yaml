@@ -209,7 +209,7 @@ paths:
     post:
       tags:
         - application
-      summary: Integrates two applications.
+      summary: Integrate two applications.
       description: Integrates applications using specified endpoints and returns the relation info.
       operationId: integrate
       requestBody:
@@ -304,7 +304,7 @@ paths:
     get:
       tags:
         - model
-      summary: List models
+      summary: List models.
       description: |
         Returns the models that the specified user has access to in the current server.
 
@@ -332,7 +332,7 @@ paths:
     post:
       tags:
         - model
-      summary: Create a new model
+      summary: Create a new model.
       description: Creates a new model using the account and model config specified in the args.
       operationId: createModel
       requestBody:
@@ -397,7 +397,7 @@ paths:
     patch:
       tags:
         - model
-      summary: Change the model.
+      summary: Update the model.
       description: |
         Update various attributes of the model including user access, config and credentials.
       operationId: updateModel
@@ -423,7 +423,9 @@ paths:
     get:
       tags:
         - application
-      description: Returns application information.
+      summary: Get information about an application.
+      description: |
+        Get detailed information about a specific application that's deployed within the model.
       operationId: getApplication
       parameters:
         - $ref: "#/components/parameters/Model"
@@ -444,7 +446,8 @@ paths:
     delete:
       tags:
         - application
-      description: Removes a given application.
+      summary: Remote an application.
+      description: Removes the given application from the model.
       operationId: deleteApplication
       parameters:
         - $ref: "#/components/parameters/Model"
@@ -462,11 +465,14 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
+  # TODO: Should this just be at PATCH /models/{model}/apps/{app}?
   /models/{model}/apps/{app}/refresh:
     patch:
       tags:
         - application
-      description: Resets the charm for a given for the application.
+      summary: Refresh the charm for an application.
+      description: |
+        Refresh an application to a given charm, revision or track.
       operationId: refreshApplication
       parameters:
         - $ref: "#/components/parameters/Model"
@@ -492,7 +498,13 @@ paths:
     post:
       tags:
         - application
-      description: Uploads a resource for an application.
+      summary: Upload a resource for an application.
+      description: |
+        Upload a resource for a specific application.
+
+        If a resource is required at deploy time, the resource IDs required can be found by
+        GETing the model and looking for the `resources` field, and any resource that have the
+        property `pending-upload` set to `true`.
       operationId: uploadResource
       parameters:
         - $ref: "#/components/parameters/Model"
@@ -517,8 +529,9 @@ paths:
     post:
       tags:
         - application
+      summary: Deploy an application into the model.
       description: |
-        Deploy an application.
+        Deploy an application into the model.
 
         Returns a simple response with a location header pointing to the deployed
         application.
@@ -734,6 +747,7 @@ paths:
     get:
       tags:
         - subnet
+      summary: Get a specific subnet.
       description: |
         Returns details of the specified subnet.
       operationId: getSubnet
@@ -1783,6 +1797,12 @@ components:
           enum:
             - file
             - oci-image
+        pending-upload:
+          description: |
+            True if the deployment of an application is blocked pending the upload of this
+            resource.
+          type: boolean
+          default: false
         descriptor:
           description: Path or image url set when resource is created.
           type: string
