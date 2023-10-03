@@ -422,9 +422,9 @@ paths:
     patch:
       tags:
         - application
-      summary: Update the model.
+      summary: Update the application.
       description: |
-        Update various attributes of the application including config, constraints, exposure etc.
+        Update various attributes of the application including config, constraints, exposure, etc.
 
         To unset an application config or constraint, it's value should be set to 'null'.
       operationId: updateApplication
@@ -523,6 +523,36 @@ paths:
       responses:
         "201":
           $ref: "#/components/responses/EntityCreated"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /models/{model}/apps/{app}/scale:
+    patch:
+      tags:
+        - application
+      summary: Scale an application.
+      description: |
+        Scale an application up or down.
+      operationId: scaleApplication
+      parameters:
+        - $ref: "#/components/parameters/Model"
+        - $ref: "#/components/parameters/Application"
+          # The following are applicable only when scaling an application down
+        - $ref: "#/components/parameters/DestroyStorage"
+        - $ref: "#/components/parameters/Force"
+        - $ref: "#/components/parameters/MaxWait"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ApplicationScale"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/EmptySyncResponse"
         "400":
           $ref: "#/components/responses/BadRequest"
         "403":
@@ -925,6 +955,31 @@ components:
       required:
         - application
         - charm-name
+    ApplicationScale:
+      type: object
+      properties:
+        attach-storage:
+          description: "Define a list storage volumes that should be attached to new units. \n\nStorage volumes are specified as a list. If there are `n` new units being added, this\nproperty is either omitted completely, or contains `n` items. Units that do not require\nstorage to be attached should have a `null` entry. For example, if adding 3 new units\nwhere 2 require storage and 1 does not: `[\"storage-1\", null, \"storage-2\"]`.\n"
+          type: array
+          items:
+            type: string
+        placement:
+          description: |
+            Placement directive for new units to be added to the application.
+
+            Placement directives are specified as a list. If there are `n` units to be added
+            there can be `n` placement directives. If there are multiple units being added where
+            some require a placement directive, and others do not, represent the placement for the
+            units that don't require it with `null` - for example: `["lxd:7", null, "lxd:9"]`.
+          type: array
+          items:
+            $ref: "#/components/schemas/Placement"
+        scale:
+          type: integer
+          description: The target number of units for the application.
+      additionalProperties: false
+      required:
+        - scale
     ApplicationUpdate:
       type: object
       properties:
@@ -933,14 +988,18 @@ components:
           additionalProperties: true
         config-yaml:
           type: string
+        constraints:
+          $ref: "#/components/schemas/Constraints"
+        endpoint-bindings:
+          type: object
+          additionalProperties:
+            type: string
         exposed:
           type: boolean
         exposed-endpoints:
           type: object
           additionalProperties:
             $ref: "#/components/schemas/ExposedEndpoint"
-        constraints:
-          $ref: "#/components/schemas/Constraints"
       additionalProperties: false
     Architecture:
       type: string

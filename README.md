@@ -71,7 +71,7 @@ This table tracks progress through the redesign of the Juju client API:
 | Annotations          | Get                             |                                            |
 | Annotations          | Set                             |                                            |
 | Application          | AddRelation                     | `POST /integrate`                          |
-| Application          | AddUnits                        |                                            |
+| Application          | AddUnits                        | `PATCH /models/{model}/apps/{app}/scale`   |
 | Application          | ApplicationsInfo                | `GET /models/{model}/apps/{app}`           |
 | Application          | CharmConfig                     | `GET /models/{model}/apps/{app}`           |
 | Application          | CharmRelations                  |                                            |
@@ -81,7 +81,7 @@ This table tracks progress through the redesign of the Juju client API:
 | Application          | DestroyApplication              | `DELETE /models/{model}/apps/{app}`        |
 | Application          | DestroyConsumedApplications     |                                            |
 | Application          | DestroyRelation                 |                                            |
-| Application          | DestroyUnit                     |                                            |
+| Application          | DestroyUnit                     | `PATCH /models/{model}/apps/{app}/scale`   |
 | Application          | Expose                          | `PATCH /models/{model}/apps/{app}`         |
 | Application          | Get                             | `GET /models/{model}/apps/{app}`           |
 | Application          | GetConfig                       | `GET /models/{model}/apps/{app}`           |
@@ -89,7 +89,7 @@ This table tracks progress through the redesign of the Juju client API:
 | Application          | Leader                          |                                            |
 | Application          | MergeBindings                   |                                            |
 | Application          | ResolveUnitErrors               |                                            |
-| Application          | ScaleApplications               |                                            |
+| Application          | ScaleApplications               | `PATCH /models/{model}/apps/{app}/scale`   |
 | Application          | SetCharm                        | `PATCH /models/{model}/apps/{app}/refresh` |
 | Application          | SetConfigs                      | `PATCH /models/{model}/apps/{app}`         |
 | Application          | SetConstraints                  | `PATCH /models/{model}/apps/{app}`         |
