@@ -1229,6 +1229,9 @@ components:
             type: string
         charm-name:
           type: string
+        config:
+          type: object
+          additionalProperties: true
         config-yaml:
           type: string
         constraints:

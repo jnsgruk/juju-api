@@ -76,7 +76,7 @@ This table tracks progress through the redesign of the Juju client API:
 | Application          | CharmConfig                     |                                            |
 | Application          | CharmRelations                  |                                            |
 | Application          | Consume                         |                                            |
-| Application          | Deploy                          |                                            |
+| Application          | Deploy                          | `POST /models/{model}/deploy`              |
 | Application          | DeployFromRepository            | `POST /models/{model}/deploy`              |
 | Application          | DestroyApplication              | `DELETE /models/{model}/apps/{app}`        |
 | Application          | DestroyConsumedApplications     |                                            |
