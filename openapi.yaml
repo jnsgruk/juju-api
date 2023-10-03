@@ -419,6 +419,34 @@ paths:
           $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
+    patch:
+      tags:
+        - application
+      summary: Update the model.
+      description: |
+        Update various attributes of the application including config, constraints, exposure etc.
+
+        To unset an application config or constraint, it's value should be set to 'null'.
+      operationId: updateApplication
+      parameters:
+        - $ref: "#/components/parameters/Model"
+        - $ref: "#/components/parameters/Application"
+      requestBody:
+        description: An object describing the changes to the application.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ApplicationUpdate"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/EmptySyncResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
     delete:
       tags:
         - application
@@ -459,7 +487,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ApplicationSubstitute"
+              $ref: "#/components/schemas/ApplicationRefresh"
         required: true
       responses:
         "200":
@@ -848,6 +876,9 @@ components:
           type: integer
         constraints:
           $ref: "#/components/schemas/Constraints"
+        config:
+          type: object
+          additionalProperties: true
         endpoint-bindings:
           type: object
           additionalProperties:
@@ -869,20 +900,18 @@ components:
         - charm
         - principal
         - exposed
-    ApplicationSubstitute:
+    ApplicationRefresh:
       type: object
       properties:
-        application:
-          type: string
         charm-origin:
           $ref: "#/components/schemas/CharmOrigin"
         charm-name:
           type: string
-        config-settings:
+        config:
           type: object
           additionalProperties:
             type: string
-        config-settings-yaml:
+        config-yaml:
           type: string
         resources:
           type: array
@@ -896,6 +925,23 @@ components:
       required:
         - application
         - charm-name
+    ApplicationUpdate:
+      type: object
+      properties:
+        config:
+          type: object
+          additionalProperties: true
+        config-yaml:
+          type: string
+        exposed:
+          type: boolean
+        exposed-endpoints:
+          type: object
+          additionalProperties:
+            $ref: "#/components/schemas/ExposedEndpoint"
+        constraints:
+          $ref: "#/components/schemas/Constraints"
+      additionalProperties: false
     Architecture:
       type: string
       enum:
@@ -1480,7 +1526,7 @@ components:
       type: object
       description: |
         An object representing the model defaults to update. Keys represent the model defaults to
-        set, and values represent the desired values. The 'unset' a model default, its value
+        set, and values represent the desired values. To 'unset' a model default, its value
         should be set to `null`.
       additionalProperties: false
     ModelDetail:

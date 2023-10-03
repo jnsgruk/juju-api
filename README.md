@@ -73,7 +73,7 @@ This table tracks progress through the redesign of the Juju client API:
 | Application          | AddRelation                     | `POST /integrate`                          |
 | Application          | AddUnits                        |                                            |
 | Application          | ApplicationsInfo                | `GET /models/{model}/apps/{app}`           |
-| Application          | CharmConfig                     |                                            |
+| Application          | CharmConfig                     | `GET /models/{model}/apps/{app}`           |
 | Application          | CharmRelations                  |                                            |
 | Application          | Consume                         |                                            |
 | Application          | Deploy                          | `POST /models/{model}/deploy`              |
@@ -82,23 +82,23 @@ This table tracks progress through the redesign of the Juju client API:
 | Application          | DestroyConsumedApplications     |                                            |
 | Application          | DestroyRelation                 |                                            |
 | Application          | DestroyUnit                     |                                            |
-| Application          | Expose                          |                                            |
-| Application          | Get                             |                                            |
-| Application          | GetConfig                       |                                            |
-| Application          | GetConstraints                  |                                            |
+| Application          | Expose                          | `PATCH /models/{model}/apps/{app}`         |
+| Application          | Get                             | `GET /models/{model}/apps/{app}`           |
+| Application          | GetConfig                       | `GET /models/{model}/apps/{app}`           |
+| Application          | GetConstraints                  | `GET /models/{model}/apps/{app}`           |
 | Application          | Leader                          |                                            |
 | Application          | MergeBindings                   |                                            |
 | Application          | ResolveUnitErrors               |                                            |
 | Application          | ScaleApplications               |                                            |
 | Application          | SetCharm                        | `PATCH /models/{model}/apps/{app}/refresh` |
-| Application          | SetConfigs                      |                                            |
-| Application          | SetConstraints                  |                                            |
+| Application          | SetConfigs                      | `PATCH /models/{model}/apps/{app}`         |
+| Application          | SetConstraints                  | `PATCH /models/{model}/apps/{app}`         |
 | Application          | SetMetricCredentials            |                                            |
 | Application          | SetRelationsSuspended           |                                            |
-| Application          | Unexpose                        |                                            |
+| Application          | Unexpose                        | `PATCH /models/{model}/apps/{app}`         |
 | Application          | UnitsInfo                       |                                            |
-| Application          | UnsetApplicationsConfig         |                                            |
-| Application          | UpdateApplicationBase           |                                            |
+| Application          | UnsetApplicationsConfig         | `PATCH /models/{model}/apps/{app}`         |
+| Application          | UpdateApplicationBase           | `PATCH /models/{model}/apps/{app}/refresh` |
 | ApplicationOffers    | ApplicationOffers               |                                            |
 | ApplicationOffers    | DestroyOffers                   |                                            |
 | ApplicationOffers    | FindApplicationOffers           |                                            |
