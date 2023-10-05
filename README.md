@@ -227,10 +227,10 @@ This table tracks progress through the redesign of the Juju client API:
 | SSHClient            | Proxy                           |                                            |
 | SSHClient            | PublicAddress                   |                                            |
 | SSHClient            | PublicKeys                      |                                            |
-| SecretBackends       | AddSecretBackends               |                                            |
-| SecretBackends       | ListSecretBackends              |                                            |
-| SecretBackends       | RemoveSecretBackends            |                                            |
-| SecretBackends       | UpdateSecretBackends            |                                            |
+| SecretBackends       | AddSecretBackends               | `POST /secret-backends`                    |
+| SecretBackends       | ListSecretBackends              | `GET /secret-backends`                     |
+| SecretBackends       | RemoveSecretBackends            | `DELETE /secret-backends/{secret-backend}` |
+| SecretBackends       | UpdateSecretBackends            | `PATCH /secret-backends/{secret-backend}`  |
 | Secrets              | ListSecrets                     | `GET /secrets`                             |
 | Spaces               | CreateSpaces                    | `POST /spaces`                             |
 | Spaces               | ListSpaces                      | `GET /spaces`                              |
