@@ -54,11 +54,6 @@ tags:
     externalDocs:
       description: Find out more about Juju secrets.
       url: https://juju.is/docs/olm/manage-secrets
-  - name: secret-backend
-    description: Manage Juju secret backends.
-    externalDocs:
-      description: Find out more about Juju secret backends.
-      url: https://juju.is/docs/olm/manage-secret-backends
   - name: space
     description: Manage Juju spaces
     externalDocs:
@@ -630,7 +625,7 @@ paths:
   /secret-backends:
     get:
       tags:
-        - secret-backend
+        - secret
       summary: Get secrets backends.
       description: |
         Returns all the available secret backends.
@@ -653,7 +648,7 @@ paths:
           $ref: "#/components/responses/InternalServerError"
     post:
       tags:
-        - secret-backend
+        - secret
       summary: Create a new secret backend.
       description: |
         Create a new secret backend for the controller.
@@ -678,7 +673,7 @@ paths:
   /secret-backends/{secret-backend}:
     get:
       tags:
-        - secret-backend
+        - secret
       description: |
         Returns details of the specified secret backend.
       operationId: getSecretBackend
@@ -699,7 +694,7 @@ paths:
           $ref: "#/components/responses/InternalServerError"
     delete:
       tags:
-        - secret-backend
+        - secret
       summary: Delete a secret backend.
       description: |
         Permanently removes a secret backend from the controller.
@@ -718,7 +713,7 @@ paths:
           $ref: "#/components/responses/InternalServerError"
     patch:
       tags:
-        - secret-backend
+        - secret
       summary: Updates a secret backend.
       description: |
         Updates a given secret backend.
