@@ -49,6 +49,11 @@ tags:
     externalDocs:
       description: Find out more about Juju models.
       url: https://juju.is/docs/olm/manage-models
+  - name: secret
+    description: Manage Juju secrets
+    externalDocs:
+      description: Find out more about Juju secrets.
+      url: https://juju.is/docs/olm/manage-secrets
   - name: space
     description: Manage Juju spaces
     externalDocs:
@@ -611,6 +616,30 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ModelStatus"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /secrets:
+    get:
+      tags:
+        - secret
+      summary: Get secrets.
+      description: |
+        Returns all the available secrets.
+      operationId: listSecrets
+      parameters:
+        - $ref: "#/components/parameters/SecretsFilter"
+        - $ref: "#/components/parameters/ShowSecrets"
+      responses:
+        "200":
+          description: List of secrets.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SecretList"
         "400":
           $ref: "#/components/responses/BadRequest"
         "403":
@@ -1879,6 +1908,59 @@ components:
         descriptor:
           description: Path or image url set when resource is created.
           type: string
+    Secret:
+      type: object
+      properties:
+        created-at:
+          type: string
+          format: date-time
+        description:
+          type: string
+        label:
+          type: string
+        expires-at:
+          type: string
+          format: date-time
+        latest-revision:
+          type: integer
+        rotates-at:
+          type: string
+          format: date-time
+        owner:
+          type: string
+        revisions:
+          type: array
+          items:
+            - $ref: "#/components/schemas/SecretRevision"
+        rotate-policy:
+          type: string
+          enum:
+            - Never
+            - Hourly
+            - Daily
+            - Weekly
+            - Monthly
+            - Quarterly
+            - Yearly
+        updated-at:
+          type: string
+          format: date-time
+        uri:
+          type: string
+        value:
+          type: object
+          additionalProperties: true
+        version:
+          type: integer
+      additionalProperties: false
+      required:
+        - created-at
+        - latest-revision
+        - owner
+        - revisions
+        - updated-at
+        - uri
+        - version
     SecretBackend:
       type: object
       properties:
@@ -1896,6 +1978,50 @@ components:
         - name
         - backend-type
         - config
+    SecretList:
+      type: object
+      properties:
+        secrets:
+          description: List of secrets.
+          type: array
+          items:
+            $ref: "#/components/schemas/Secret"
+      additionalProperties: false
+      required:
+        - spaces
+    SecretRevision:
+      type: object
+      properties:
+        backend-name:
+          type: string
+        created-at:
+          type: string
+          format: date-time
+        expires-at:
+          type: string
+          format: date-time
+        revision:
+          type: int
+        updated-at:
+          type: string
+          format: date-time
+        value-ref:
+          $ref: "#/components/schemas/SecretValueRef"
+      additionalProperties: false
+      required:
+        - revision
+    SecretValueRef:
+      type: object
+      properties:
+        # TODO: Should these be strings or ints?
+        backend-id:
+          type: string
+        revision-id:
+          type: string
+      additionalProperties: false
+      required:
+        - backend-id
+        - revision-id
     Space:
       type: object
       properties:
@@ -2228,6 +2354,24 @@ components:
       description: The name of a resource for an application.
       schema:
         type: string
+    SecretsFilter:
+      in: query
+      name: filter
+      description: Filter secrets returned.
+      required: false
+      schema:
+        type: string
+    ShowSecrets:
+      in: query
+      name: show-secrets
+      description: Reveal secret values in response.
+      required: false
+      schema:
+        type: string
+        default: "false"
+        enum:
+          - "true"
+          - "false"
     ShowSupported:
       in: query
       name: show-supported

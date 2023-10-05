@@ -231,7 +231,7 @@ This table tracks progress through the redesign of the Juju client API:
 | SecretBackends       | ListSecretBackends              |                                            |
 | SecretBackends       | RemoveSecretBackends            |                                            |
 | SecretBackends       | UpdateSecretBackends            |                                            |
-| Secrets              | ListSecrets                     |                                            |
+| Secrets              | ListSecrets                     | `GET /secrets`                             |
 | Spaces               | CreateSpaces                    | `POST /spaces`                             |
 | Spaces               | ListSpaces                      | `GET /spaces`                              |
 | Spaces               | MoveSubnets                     | `PATCH /spaces/{space}`                    |
