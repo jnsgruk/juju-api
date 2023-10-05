@@ -1935,13 +1935,13 @@ components:
         rotate-policy:
           type: string
           enum:
-            - Never
-            - Hourly
-            - Daily
-            - Weekly
-            - Monthly
-            - Quarterly
-            - Yearly
+            - never
+            - hourly
+            - daily
+            - weekly
+            - monthly
+            - quarterly
+            - yearly
         updated-at:
           type: string
           format: date-time
