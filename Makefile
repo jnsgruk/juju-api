@@ -13,6 +13,16 @@ serve:
 		caddy:latest \
 		caddy file-server --listen=:8080 --root=/srv
 
+.PHONY: mock
+mock:
+## mock: Run a mock server based on the OpenAPI definition
+	docker run \
+		--rm \
+		--init \
+		-p 4010:4010 \
+		-v ${PWD}:/srv \
+		stoplight/prism:4 \
+		mock -h 0.0.0.0 "/srv/openapi.yaml"
 
 .PHONY: lint
 lint:
