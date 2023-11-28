@@ -20,17 +20,14 @@ cd juju-api
 make serve
 ```
 
-You can now see the newly designed spec at https://localhost:4567/ and the generated spec at
-https://localhost:4567/generated.html
+You can now see the newly designed spec at http://localhost:8080/ and the generated spec at
+http://localhost:8080/generated
 
 ## Updating the schemas/sites
 
 ```shell
 # Generate a naive OpenAPI spec from the Juju client facade schema
 python3 tools/convert-juju-facade -i schemas/client-schemas.json -o schemas/generated.yaml
-
-# Generate MD from the new, and the generated OpenAPI specs
-make generate
 ```
 
 ## Generating Juju schema files

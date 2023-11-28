@@ -4,19 +4,15 @@ help:
 	@sed -n 's/^##//p' ${MAKEFILE_LIST} | column -t -s ':' |  sed -e 's/^/ /'
 
 .PHONY: serve
-serve: generate
-## serve: Build the sites and serve them locally on port 4567 using Docker.
+serve:
+## serve: Serve the sites locally on port 8080 using Docker.
 	docker run \
 		--rm \
-		-v ${CURDIR}/build:/srv/slate/build \
-		-v ${CURDIR}/site:/srv/slate/source \
-		-p4567:4567 \
-		slatedocs/slate \
-		serve
+		-p 8080:8080 \
+		-v ${PWD}:/srv \
+		caddy:latest \
+		caddy file-server --listen=:8080 --root=/srv
 
-.PHONY: generate
-generate: generate-spec generate-converted-spec
-## generate: Generate the Markdown file for both the new and old Juju API specs.
 
 .PHONY: lint
 lint:
@@ -33,26 +29,3 @@ format:
 	yq -i 'sort_keys(.components.parameters)' openapi.yaml
 	yq -i 'sort_keys(.paths)' openapi.yaml
 
-.PHONY: build
-build: generate
-## build: Build the sites using Docker.
-	docker run \
-		--rm \
-		-v ${CURDIR}/build:/srv/slate/build \
-		-v ${CURDIR}/site:/srv/slate/source \
-		slatedocs/slate \
-		build
-
-.PHONY: generate-spec
-generate-spec: 
-	npx widdershins \
-		-e ${CURDIR}/.widdershins.yaml \
-		${CURDIR}/openapi.yaml \
-		-o ${CURDIR}/site/index.html.md
-
-.PHONY: generate-converted-spec
-generate-converted-spec: 
-	npx widdershins \
-		-e ${CURDIR}/.widdershins.yaml \
-		${CURDIR}/schemas/generated.yaml \
-		-o ${CURDIR}/site/generated.html.md

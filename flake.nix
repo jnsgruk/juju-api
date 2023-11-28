@@ -24,6 +24,7 @@
             NIX_CONFIG = "experimental-features = nix-command flakes";
             nativeBuildInputs = with pkgs; [
               nodejs
+              caddy
             ];
             shellHook = ''
               export PATH="$PWD/node_modules/.bin/:$PATH"

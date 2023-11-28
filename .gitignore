@@ -1,9 +1,5 @@
-build/
 node_modules/
 venv/
 
 shell.nix 
 
-# Make sure we don't commit these, we'll just generate them in CI
-site/index.html.md
-site/generated.html.md
